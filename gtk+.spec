@@ -37,9 +37,7 @@ BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
 
-%define		_prefix		/usr/X11R6
 %define		_infodir	/usr/share/info
-%define		_mandir		/usr/X11R6/man
 %define		_sysconfdir	%{_datadir}
 
 %description
