@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	6
+Release:	7
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -244,13 +244,13 @@ rm -rf $RPM_BUILD_ROOT
 %lang(vi) %{_sysconfdir}/gtk/gtkrc.vi*
 %lang(yi) %{_sysconfdir}/gtk/gtkrc.yi
 %lang(zh) %{_sysconfdir}/gtk/gtkrc.zh*
-%lang(be,bg) %{_sysconfdir}/gtk/gtkrc.cp1251
+%lang(be,bg,mk,ru,sr,uk) %{_sysconfdir}/gtk/gtkrc.cp1251
 %lang(he,yi) %{_sysconfdir}/gtk/gtkrc.cp1255
-%lang(cs,hr,hu,pl,ro,sk,sl,sq) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
-%lang(bg,mk,ru,sp,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
-%lang(lt,lv,mi) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
-%lang(cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
-%lang(et) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
+%lang(cs,hr,hu,pl,ro,sk,sl,sq,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
+%lang(bg,mk,ru,sp,sr,uk) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
+%lang(et,lt,lv) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
+%lang(br,cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
+%{_sysconfdir}/gtk/gtkrc.iso-8859-15
 
 %dir %{_libdir}/gtk
 %dir %{_libdir}/gtk/themes
