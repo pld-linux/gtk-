@@ -8,12 +8,13 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.4
-Release:	2
+Release:	3
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
 Patch0:		gtk+-info.patch
+Patch1:		gtk+-iso-8859-2_font.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib = %{version}
@@ -106,8 +107,9 @@ Gtk+ static libraries.
 Biblioteki statyczne Gtk+
 
 %prep
-%setup -q
-%patch -p1
+%setup  -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
