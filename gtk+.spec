@@ -8,7 +8,7 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.8
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -17,9 +17,9 @@ Patch0:		gtk+-info.patch
 Patch1:		gtk+-ahiguti.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
-Requires:	glib = %{version}
+Requires:	glib >= %{version}
 Requires:	iconv
-BuildRequires:	glib-devel = %{version}
+BuildRequires:	glib-devel >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -82,7 +82,7 @@ Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
-Requires:	glib-devel = %{version}
+Requires:	glib-devel >= %{version}
 Requires:	autoconf >= 2.13
 Requires:	automake >= 1.4
 Requires:	libtool  >= 1.3.2
