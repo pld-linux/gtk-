@@ -7,20 +7,21 @@ Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
-Version:	1.2.8
+Version:	1.3.1
 Release:	3
 License:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
-Patch0:		gtk+-info.patch
-Patch1:		gtk+-ahiguti.patch
+#Patch0:	%{name}-info.patch
+#Patch1:	%{name}-ahiguti.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	gettext-devel
+BuildRequires:	pango-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -60,8 +61,8 @@ Libreria X scritta per GIMP. Viene usata da diversi programmi.
 Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp zawiera
 funkcje do tworzenia graficznego interfrjsu uzytkownika pod X Window.
 By³a tworzona z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+
-jest napiane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
-(czê¶æ Gtk+) jest warsw± po¶redni± pomiêdzy Xlib i reszt± toolkit
+jest napisane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
+(czê¶æ Gtk+) jest warstw± po¶redni± pomiêdzy Xlib a w³a¶ciwym Gtk
 zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na
 piksel). Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego
 rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
@@ -113,17 +114,18 @@ Gtk+ static libraries.
 Biblioteki statyczne Gtk+
 
 %prep
-%setup  -q
-%patch0 -p1
-%patch1 -p1
+%setup -q
+#%patch0 -p1
+#%patch1 -p1
 
 %build
 gettextize --copy --force
 LDFLAGS="-s"; export LDFLAGS
 %configure \
-	--enable-debug=no \
 	--enable-shm \
-	--with-xinput=xfree
+	--with-xinput=xfree \
+	#--enable-debug=no \
+
 
 %{__make} m4datadir=/usr/share/aclocal
 
@@ -137,7 +139,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 
-gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	AUTHORS ChangeLog NEWS README TODO
 
 %find_lang %{name}
@@ -157,57 +159,52 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-
-%lang(bg) %{_sysconfdir}/gtk/gtkrc.bg*
-%lang(cs) %{_sysconfdir}/gtk/gtkrc.cs
-%lang(cy) %{_sysconfdir}/gtk/gtkrc.cy
-%lang(el) %{_sysconfdir}/gtk/gtkrc.el
-%lang(eo) %{_sysconfdir}/gtk/gtkrc.eo
-%lang(et) %{_sysconfdir}/gtk/gtkrc.et
-%lang(ga) %{_sysconfdir}/gtk/gtkrc.ga
-%lang(he) %{_sysconfdir}/gtk/gtkrc.he
-%lang(hr) %{_sysconfdir}/gtk/gtkrc.hr
-%lang(hu) %{_sysconfdir}/gtk/gtkrc.hu
-%lang(hy) %{_sysconfdir}/gtk/gtkrc.hy
-%lang(ja) %{_sysconfdir}/gtk/gtkrc.ja
-%lang(ka) %{_sysconfdir}/gtk/gtkrc.ka*
-%lang(ko) %{_sysconfdir}/gtk/gtkrc.ko
-%lang(lt) %{_sysconfdir}/gtk/gtkrc.lt
-%lang(mk) %{_sysconfdir}/gtk/gtkrc.mk
-%lang(pl) %{_sysconfdir}/gtk/gtkrc.pl
-%lang(ro) %{_sysconfdir}/gtk/gtkrc.ro
-%lang(ru) %{_sysconfdir}/gtk/gtkrc.ru*
-%lang(sk) %{_sysconfdir}/gtk/gtkrc.sk
-%lang(sl) %{_sysconfdir}/gtk/gtkrc.sl
-%lang(sq) %{_sysconfdir}/gtk/gtkrc.sq
-%lang(sr) %{_sysconfdir}/gtk/gtkrc.sr
-%lang(th) %{_sysconfdir}/gtk/gtkrc.th
-%lang(tr) %{_sysconfdir}/gtk/gtkrc.tr
-%lang(uk) %{_sysconfdir}/gtk/gtkrc.uk
-%lang(vi) %{_sysconfdir}/gtk/gtkrc.vi*
-%lang(zh) %{_sysconfdir}/gtk/gtkrc.zh*
-%lang(cs,hr,hu,pl,ro,sk,sl,sq) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
-%lang(bg,mk,ru,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
-%lang(lt) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
-%lang(cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
-%lang(et) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
-
+%lang(bg) %{_sysconfdir}/gtk-2.0/gtkrc.bg*
+%lang(cs) %{_sysconfdir}/gtk-2.0/gtkrc.cs
+%lang(cy) %{_sysconfdir}/gtk-2.0/gtkrc.cy
+%lang(el) %{_sysconfdir}/gtk-2.0/gtkrc.el
+%lang(eo) %{_sysconfdir}/gtk-2.0/gtkrc.eo
+%lang(et) %{_sysconfdir}/gtk-2.0/gtkrc.et
+%lang(ga) %{_sysconfdir}/gtk-2.0/gtkrc.ga
+%lang(he) %{_sysconfdir}/gtk-2.0/gtkrc.he
+%lang(hr) %{_sysconfdir}/gtk-2.0/gtkrc.hr
+%lang(hu) %{_sysconfdir}/gtk-2.0/gtkrc.hu
+%lang(hy) %{_sysconfdir}/gtk-2.0/gtkrc.hy
+%lang(ja) %{_sysconfdir}/gtk-2.0/gtkrc.ja
+%lang(ka) %{_sysconfdir}/gtk-2.0/gtkrc.ka*
+%lang(ko) %{_sysconfdir}/gtk-2.0/gtkrc.ko
+%lang(lt) %{_sysconfdir}/gtk-2.0/gtkrc.lt
+%lang(mk) %{_sysconfdir}/gtk-2.0/gtkrc.mk
+%lang(pl) %{_sysconfdir}/gtk-2.0/gtkrc.pl
+%lang(ro) %{_sysconfdir}/gtk-2.0/gtkrc.ro
+%lang(ru) %{_sysconfdir}/gtk-2.0/gtkrc.ru*
+%lang(sk) %{_sysconfdir}/gtk-2.0/gtkrc.sk
+%lang(sl) %{_sysconfdir}/gtk-2.0/gtkrc.sl
+%lang(sq) %{_sysconfdir}/gtk-2.0/gtkrc.sq
+%lang(sr) %{_sysconfdir}/gtk-2.0/gtkrc.sr
+%lang(th) %{_sysconfdir}/gtk-2.0/gtkrc.th
+%lang(tr) %{_sysconfdir}/gtk-2.0/gtkrc.tr
+%lang(uk) %{_sysconfdir}/gtk-2.0/gtkrc.uk
+%lang(vi) %{_sysconfdir}/gtk-2.0/gtkrc.vi*
+%lang(zh) %{_sysconfdir}/gtk-2.0/gtkrc.zh*
+%lang(cs,hr,hu,pl,ro,sk,sl,sq) %{_sysconfdir}/gtk-2.0/gtkrc.iso-8859-2
+%lang(bg,mk,ru,sr) %{_sysconfdir}/gtk-2.0/gtkrc.iso-8859-5
+%lang(lt) %{_sysconfdir}/gtk-2.0/gtkrc.iso-8859-13
+%lang(cy,ga) %{_sysconfdir}/gtk-2.0/gtkrc.iso-8859-14
+%lang(et) %{_sysconfdir}/gtk-2.0/gtkrc.iso-8859-15
 %dir %{_libdir}/gtk/themes
 %dir %{_libdir}/gtk/themes/engines
-%dir %{_datadir}/themes
-
-%{_datadir}/themes/Default
+%dir %{_sysconfdir}/themes
+%{_sysconfdir}/themes/Default
 
 %files devel
 %defattr(644,root,root,755)
 %doc *.gz
-
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
-
 %{_includedir}/*
-%{_infodir}/*info*gz
+#%{_infodir}/*info*gz
 /usr/share/aclocal/*.m4
 
 %{_mandir}/man1/gtk-config.1*
