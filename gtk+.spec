@@ -2,7 +2,7 @@ Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
 Version:	1.2.3
-Release:	1
+Release:	2
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -13,10 +13,10 @@ Icon:		gtk+.gif
 Requires:	glib = %{version}
 BuildPrereq:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
-Obsoletes:	gtk
 
 %define _prefix  /usr/X11R6
 %define _infodir /usr/share/info
+%define _mandir  /usr/X11R6/man
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
@@ -37,7 +37,7 @@ zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na piksel).
 Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek
 s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
-%package devel
+%package	devel
 Summary:	Gtk+ header files and development documentation
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Group:		X11/Development/Libraries
@@ -47,8 +47,7 @@ Requires:	%{name} = %{version}
 Requires:	glib-devel = %{version}
 Requires:	autoconf >= 2.13
 Requires:	automake >= 1.4
-Requires:	libtool  >= 1.2d
-Obsoletes:	gtk-devel
+Requires:	libtool  >= 1.3.2
 
 %description devel
 Header files and development documentation for the Gtk+ libraries.
@@ -56,7 +55,7 @@ Header files and development documentation for the Gtk+ libraries.
 %description -l pl devel
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 
-%package static
+%package	static
 Summary:	Gtk+ static libraries
 Summary(pl):	Biblioteki statyczne Gtk+
 Group:		X11/Development/Libraries
@@ -71,10 +70,10 @@ Biblioteki statyczne Gtk+
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -p1
 
 %build
-autoconf
+aclocal && autoconf
 CFLAGS="$RPM_OPT_FLAGS"; export CFLAGS
 LDFLAGS="-s"; export LDFLAGS
 %configure \
@@ -82,7 +81,8 @@ LDFLAGS="-s"; export LDFLAGS
 	--infodir=%{_infodir} \
 	--sysconfdir=/etc/X11 \
 	--enable-debug=no \
-	--enable-shm
+	--enable-shm \
+	--mandir=%{_mandir}
 
 make m4datadir=%{_datadir}/aclocal
 
@@ -93,7 +93,7 @@ make install \
 	m4datadir=/usr/share/aclocal \
 	gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
 
-strip $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 
 gzip -9n $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
 	AUTHORS ChangeLog NEWS README TODO
