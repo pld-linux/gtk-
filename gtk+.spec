@@ -104,8 +104,11 @@ fi
 %attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
 /usr/X11R6/share/themes
 
+%lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
+%lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/gtk+.mo
 %lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
+%lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/gtk+.mo
 %lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
 %lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/gtk+.mo
 %lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/gtk+.mo
@@ -130,7 +133,8 @@ fi
 
 %changelog
 * Tue Jan 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  []
+  [1.1.13-1]
+- more locales (cs, es, it),
 - added "Requires: autoconf >= 2.13, automake >= 1.4, libtool >= 1.2d"
   for devel subpackage.
 
