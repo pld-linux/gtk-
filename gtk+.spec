@@ -23,7 +23,7 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 %define		_prefix		/usr/X11R6
 %define		_infodir	/usr/share/info
 %define		_mandir		/usr/X11R6/man
-%define		_sysconfdir	/etc/X11
+%define		_sysconfdir	%{_datadir}
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
@@ -149,16 +149,39 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755) 
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
+%lang(bg) %{_sysconfdir}/gtk/gtkrc.bg*
 %lang(cs) %{_sysconfdir}/gtk/gtkrc.cs
+%lang(cy) %{_sysconfdir}/gtk/gtkrc.cy
+%lang(el) %{_sysconfdir}/gtk/gtkrc.el
+%lang(eo) %{_sysconfdir}/gtk/gtkrc.eo
+%lang(et) %{_sysconfdir}/gtk/gtkrc.et
+%lang(ga) %{_sysconfdir}/gtk/gtkrc.ga
+%lang(he) %{_sysconfdir}/gtk/gtkrc.he
 %lang(hr) %{_sysconfdir}/gtk/gtkrc.hr
 %lang(hu) %{_sysconfdir}/gtk/gtkrc.hu
+%lang(hy) %{_sysconfdir}/gtk/gtkrc.hy
 %lang(ja) %{_sysconfdir}/gtk/gtkrc.ja
+%lang(ka) %{_sysconfdir}/gtk/gtkrc.ka*
 %lang(ko) %{_sysconfdir}/gtk/gtkrc.ko
+%lang(lt) %{_sysconfdir}/gtk/gtkrc.lt
+%lang(mk) %{_sysconfdir}/gtk/gtkrc.mk
 %lang(pl) %{_sysconfdir}/gtk/gtkrc.pl
-%lang(ru) %{_sysconfdir}/gtk/gtkrc.ru
+%lang(ro) %{_sysconfdir}/gtk/gtkrc.ro
+%lang(ru) %{_sysconfdir}/gtk/gtkrc.ru*
 %lang(sk) %{_sysconfdir}/gtk/gtkrc.sk
 %lang(sl) %{_sysconfdir}/gtk/gtkrc.sl
-%lang(cs,hr,hu,pl,sk,sl) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
+%lang(sq) %{_sysconfdir}/gtk/gtkrc.sq
+%lang(sr) %{_sysconfdir}/gtk/gtkrc.sr
+%lang(th) %{_sysconfdir}/gtk/gtkrc.th
+%lang(tr) %{_sysconfdir}/gtk/gtkrc.tr
+%lang(uk) %{_sysconfdir}/gtk/gtkrc.uk
+%lang(vi) %{_sysconfdir}/gtk/gtkrc.vi*
+%lang(zh) %{_sysconfdir}/gtk/gtkrc.zh*
+%lang(cs,hr,hu,pl,ro,sk,sl,sq) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
+%lang(bg,mk,ru,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
+%lang(lt) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
+%lang(cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
+%lang(et) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
 
 %dir %{_libdir}/gtk/themes
 %dir %{_libdir}/gtk/themes/engines
