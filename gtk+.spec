@@ -1,7 +1,7 @@
 Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
@@ -73,6 +73,7 @@ Biblioteki statyczne Gtk+
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure --prefix=/usr/X11R6 \
 	--infodir=/usr/info \
+	--sysconfdir=/etc/X11 \
 	--enable-debug=no \
 	--enable-shm
 
@@ -86,9 +87,9 @@ make install \
 	gnulocaledir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
-gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*}
 
-bzip2 -9 AUTHORS ChangeLog NEWS README TODO
+gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*} \
+	AUTHORS ChangeLog NEWS README TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -110,6 +111,10 @@ fi
 %defattr(644,root,root,755) 
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
+%lang(ja) /etc/X11/gtk/gtkrc.ja
+%lang(ko) /etc/X11/gtk/gtkrc.ko
+%lang(ru) /etc/X11/gtk/gtkrc.ru
+
 /usr/X11R6/share/themes
 
 %lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
@@ -128,7 +133,7 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%doc {AUTHORS,ChangeLog,NEWS,README,TODO}.bz2
+%doc *.gz
 
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
 %attr(755,root,root) /usr/X11R6/bin/*
@@ -143,6 +148,11 @@ fi
 %attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %changelog
+* Thu Mar 25 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.2.1-1]
+- gzipping %doc,
+- added --sysconfdir=/etc/X11/gtk to ./configure parameters.
+
 * Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.2.0-1]
 - changed Grouop to X11/Development/Libraries in devel, static,
