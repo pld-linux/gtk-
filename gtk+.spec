@@ -81,7 +81,6 @@ Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
-Prereq:		/usr/sbin/fix-info-dir
 Requires:	%{name} = %{version}
 Requires:	glib-devel = %{version}
 Requires:	autoconf >= 2.13
@@ -148,10 +147,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun devel
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files -f %{name}.lang
 %defattr(644,root,root,755) 
