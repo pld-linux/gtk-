@@ -44,12 +44,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
 
 %description
-Gtk+, which stands for the Gimp ToolKit, is a library for creating
+GTK+, which stands for the Gimp ToolKit, is a library for creating
 graphical user interfaces for the X Window System. It is designed to
-be small, efficient, and flexible. Gtk+ is written in C with a very
-object-oriented approach. Gdk (part of Gtk+) is a drawing toolkit
+be small, efficient, and flexible. GTK+ is written in C with a very
+object-oriented approach. Gdk (part of GTK+) is a drawing toolkit
 which provides a thin layer over Xlib to help automate things like
-dealing with different color depths, and Gtk is a widget set for
+dealing with different color depths, and GTK is a widget set for
 creating user interfaces.
 
 %description -l cs
@@ -72,13 +72,13 @@ käytetään nyt myös useissa muissakin ohjelmissa.
 Libreria X scritta per GIMP. Viene usata da diversi programmi.
 
 %description -l pl
-Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp, zawiera
+GTK+, która to biblioteka sta³a siê podstaw± programu Gimp, zawiera
 funkcje do tworzenia graficznego interfejsu u¿ytkownika pod X Window.
-By³a tworzona z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+
+By³a tworzona z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. GTK+
 jest napisane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
-(czê¶æ Gtk+) jest warstw± po¶redni± pomiêdzy Xlib i reszt± toolkitu
+(czê¶æ GTK+) jest warstw± po¶redni± pomiêdzy Xlib i reszt± toolkitu
 zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na
-piksel). Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego
+piksel). GTK (druga czê¶æ GTK+) jest natomiast ju¿ zbiorem ró¿nego
 rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
 %description -l pt_BR
@@ -90,7 +90,7 @@ Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka
 programlarca da kullanýlmaktadýr.
 
 %package devel
-Summary:	Gtk+ header files and development documentation
+Summary:	GTK+ header files and development documentation
 Summary(cs):	Sada nástrojù GIMP a kreslící kit GIMP
 Summary(da):	GIMP Toolkit og GIMP Tegnings-værktøj
 Summary(de):	GIMP Toolkit und GIMP Drawing Kit
@@ -98,15 +98,15 @@ Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
 Summary(fi):	Gimp-työkalukokoelma ja Gimp-piirtotyökalut
 Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
 Summary(it):	GIMP Toolkit and GIMP Drawing Kit
-Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+
+Summary(pl):	Pliki nag³ówkowe i dokumentacja do GTK+
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	glib-devel >= %{version}
-# Every program using gtk+ should get a list of libraries to link with by
+# Every program using GTK+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
-# this call, so they are required by every program compiled with gtk+.
+# this call, so they are required by every program compiled with GTK+.
 Requires:	XFree86-devel
 Requires:	glib-devel
 Obsoletes:	libgtk+1.2-devel
@@ -130,7 +130,7 @@ color; y GTK es un conjunto de widgets para crear interfaces de
 usuario.
 
 %description devel -l pl
-Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
+Pliki nag³ówkowe i dokumentacja do bibliotek GTK+.
 
 %description devel -l pt_BR
 Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
@@ -140,9 +140,9 @@ automatizar coisas como o uso de diferentes profundidades de cor; e
 GTK é um conjunto de widgets para criar interfaces de usuário.
 
 %package static
-Summary:	Gtk+ static libraries
+Summary:	GTK+ static libraries
 Summary(es):	Bibliotecas estáticas del GIMP
-Summary(pl):	Biblioteki statyczne Gtk+
+Summary(pl):	Biblioteki statyczne GTK+
 Summary(pt_BR):	Bibliotecas estáticas do GIMP
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -156,7 +156,7 @@ Bibliotecas estáticas del GIMP, que están disponibles como bibliotecas
 públicas.
 
 %description static -l pl
-Biblioteki statyczne Gtk+.
+Biblioteki statyczne GTK+.
 
 %description static -l pt_BR
 Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas
