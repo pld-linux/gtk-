@@ -1,12 +1,12 @@
 Summary:   The Gimp Toolkit
 Name:      gtk+
-Version:   1.1.2
+Version:   1.1.3
 Release:   1
 Copyright: LGPL
 Group:     X11/Libraries
 Source:    ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
 URL:       http://www.gtk.org/
-Requires:  glib >= 1.1.3
+Requires:  glib >= 1.1.4
 BuildRoot: /tmp/%{name}-%{version}-root
 Obsoletes: gtk
 
