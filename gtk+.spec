@@ -102,7 +102,7 @@ Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 Requires:	glib-devel >= %{version}
 # Every program using gtk+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
@@ -145,7 +145,7 @@ Summary(es):	Bibliotecas estáticas del GIMP
 Summary(pl):	Biblioteki statyczne Gtk+
 Summary(pt_BR):	Bibliotecas estáticas do GIMP
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 Static libraries for the GIMP's X libraries, which are available as
