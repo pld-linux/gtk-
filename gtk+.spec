@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(es):	Conjunto de herramientas Gimp
 Name:		gtk+
 Version:	1.2.10
-Release:	4
+Release:	5
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -188,11 +188,12 @@ Biblioteki statyczne Gtk+
 
 %build
 rm -f missing
-#libtoolize --copy --force
+#ibtoolize --copy --force
 gettextize --copy --force
-aclocal
+#aclocal
 #autoconf
 #automake -a -c
+cp -f /usr/share/automake/config.* .
 %configure2_13 \
 	--enable-debug=no \
 	--enable-shm \
