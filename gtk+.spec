@@ -8,11 +8,11 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.8
-Release:	2
+Release:	3
 License:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
-Source:		ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
 Patch0:		gtk+-info.patch
 Patch1:		gtk+-ahiguti.patch
 URL:		http://www.gtk.org/
@@ -29,12 +29,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating
-graphical user interfaces for the X Window System. It is designed to be
-small, efficient, and flexible. Gtk+ is written in C with a very
-object-oriented approach. Gdk (part of Gtk+) is a drawing toolkit which
-provides a thin layer over Xlib to help automate things like dealing with
-different color depths, and Gtk is a widget set for creating user
-interfaces.
+graphical user interfaces for the X Window System. It is designed to
+be small, efficient, and flexible. Gtk+ is written in C with a very
+object-oriented approach. Gdk (part of Gtk+) is a drawing toolkit
+which provides a thin layer over Xlib to help automate things like
+dealing with different color depths, and Gtk is a widget set for
+creating user interfaces.
 
 %description -l cs
 Knihovny X pùvodnì psané pro GIMP, které nyní pou¾ívá také øada jiných
@@ -49,25 +49,25 @@ Die X-Libraries, die ursprünglich für GIMP geschrieben wurden und
 mittlerweile für eine ganze Reihe anderer Programme benutzt werden.
 
 %description -l fr
-X-kirjastot, jotka alunperin kirjoitettiin GIMP:lle, mutta joita käytetään
-nyt myös useissa muissakin ohjelmissa.
+X-kirjastot, jotka alunperin kirjoitettiin GIMP:lle, mutta joita
+käytetään nyt myös useissa muissakin ohjelmissa.
 
 %description -l it
 Libreria X scritta per GIMP. Viene usata da diversi programmi.
 
 %description -l pl
-Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp zawiera funkcje
-do tworzenia graficznego interfrjsu uzytkownika pod X Window. By³a tworzona
-z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+ jest napiane w C z
-podej¶ciem zorientowanym bardzo obiektowo. Gdk (czê¶æ Gtk+) jest warsw±
-po¶redni± pomiêdzy Xlib i reszt± toolkit zapewniaj±c± pracê niezale¿nie od
-g³êbi koloru (ilo¶ci bitów na piksel). Gtk (druga czê¶æ Gtk+) jest
-natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek s³u¿±cych do tworzenia
-interfejsu u¿ytkownika.
+Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp zawiera
+funkcje do tworzenia graficznego interfrjsu uzytkownika pod X Window.
+By³a tworzona z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+
+jest napiane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
+(czê¶æ Gtk+) jest warsw± po¶redni± pomiêdzy Xlib i reszt± toolkit
+zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na
+piksel). Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego
+rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
 %description -l tr
-Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka programlarca
-da kullanýlmaktadýr.
+Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka
+programlarca da kullanýlmaktadýr.
 
 %package devel
 Summary:	Gtk+ header files and development documentation
@@ -131,12 +131,11 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	m4datadir=/usr/share/aclocal \
-	gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
+	m4datadir=/usr/share/aclocal
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 
-gzip -9n $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
+gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
 	AUTHORS ChangeLog NEWS README TODO
 
 %find_lang %{name}
@@ -154,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files -f %{name}.lang
-%defattr(644,root,root,755) 
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %lang(bg) %{_sysconfdir}/gtk/gtkrc.bg*
