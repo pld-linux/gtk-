@@ -1,7 +1,7 @@
 Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
-Version:	1.1.16
+Version:	1.2.0
 Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
@@ -12,6 +12,7 @@ URL:		http://www.gtk.org/
 Requires:	glib = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 Obsoletes:	gtk
+Conflicts:	glibc <= 2.0.7
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
@@ -35,8 +36,8 @@ s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 %package devel
 Summary:	Gtk+ header files and development documentation
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
-Group:		X11/Libraries/Development
-Group(pl):	X11/Biblioteki/Programowanie
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Programowanie
 PreReq:		/sbin/install-info
 Requires:	%{name} = %{version}
 Requires:	glib-devel = %{version}
@@ -54,8 +55,8 @@ Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 %package static
 Summary:	Gtk+ static libraries
 Summary(pl):	Biblioteki statyczne Gtk+
-Group:		X11/Libraries/Development
-Group(pl):	X11/Biblioteki/Programowanie
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Programowanie
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -142,6 +143,12 @@ fi
 %attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %changelog
+* Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.2.0-1]
+- changed Grouop to X11/Development/Libraries in devel, static,
+- added "Conflicts: glibc <= 2.0.7" for prevent install
+  with proper version glibc.
+
 * Wed Feb 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.16-1]
 - more locales (ru),
