@@ -179,7 +179,6 @@ rm -f missing aclocal.m4 acinclude.m4
 %{__autoconf}
 %{__automake}
 #cp -f /usr/share/automake/config.* .
-mv -f po/Makevars.template po/Makevars
 %configure \
 	--enable-debug=no \
 	--enable-shm \
