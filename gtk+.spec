@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	10
+Release:	11
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -28,16 +28,17 @@ Patch4:		%{name}-focus.patch
 Patch5:		%{name}-am_fix.patch
 Patch6:		%{name}-ac_fix.patch
 Patch7:		%{name}-localenames.patch
+Patch8:		%{name}-link.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
-Requires:	glib >= %{version}
-Requires:	iconv
 BuildRequires:	XFree86-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1.7
 BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
-BuildRequires:	libtool
+BuildRequires:	libtool >= 1.4.2-9
+Requires:	glib >= %{version}
+Requires:	iconv
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
 
@@ -172,6 +173,7 @@ públicas.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 mv -f po/{sp,sr@cyrillic}.po
 mv -f po/{zh_CN.GB2312,zh_CN}.po
