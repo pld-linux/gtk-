@@ -9,7 +9,7 @@ diff -Nru gtk+-1.1.11/docs/gdk.texi gtk+-1.1.11.new/docs/gdk.texi
 +@dircategory Libraries:
  @direntry
 -* GDK: (gdk).		The General Drawing Kit
-+* GDK: (gdk)				The General Drawing Kit
++* GDK: (gdk).				The General Drawing Kit
  @end direntry
  
  @node Top, Copying, (dir), (dir)
@@ -24,7 +24,7 @@ diff -Nru gtk+-1.1.11/docs/gtk.texi gtk+-1.1.11.new/docs/gtk.texi
 +@dircategory Libraries:
  @direntry
 -* GTK: (gtk).		The GIMP Toolkit
-+* GTK: (gtk)				The GIMP Toolkit
++* GTK: (gtk).				The GIMP Toolkit
  @end direntry
  
  @node Top, Copying, (dir), (dir)
