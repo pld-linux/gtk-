@@ -38,10 +38,11 @@ BuildRequires:	automake >= 1.7
 BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool >= 1.4.2-9
+BuildRequires:	texinfo
 Requires:	glib >= %{version}
 Requires:	iconv
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 GTK+, which stands for the Gimp ToolKit, is a library for creating
