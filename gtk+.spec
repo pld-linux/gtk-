@@ -20,6 +20,7 @@ Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
 BuildRequires:	glib-devel >= %{version}
+BuildRequires:	gettext-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -117,6 +118,7 @@ Biblioteki statyczne Gtk+
 %patch1 -p1
 
 %build
+gettextize --copy --force
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-debug=no \
