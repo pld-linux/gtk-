@@ -7,18 +7,19 @@ Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
-Version:	1.3.1
+Version:	1.3.2
 Release:	3
 License:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
-Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gtk.org/pub/gtk/v1.3/%{name}-%{version}.tar.gz
 #Patch0:	%{name}-info.patch
 #Patch1:	%{name}-ahiguti.patch
 URL:		http://www.gtk.org/
-Icon:		gtk+.xpm
+#Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
+Prereq:		pango
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	gettext-devel
 BuildRequires:	pango-devel
