@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	15
+Release:	16
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -180,6 +180,7 @@ mv -f po/{sr,sr@Latn}.po
 mv -f po/{sp,sr}.po
 mv -f po/{zh_CN.GB2312,zh_CN}.po
 mv -f po/{zh_TW.Big5,zh_TW}.po
+rm -f po/{no,sp,sr,zh*}.gmo
 
 mkdir gtk-doc
 tar xzf %{SOURCE1} -C gtk-doc
