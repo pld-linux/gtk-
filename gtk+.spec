@@ -22,6 +22,8 @@ Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-strip.patch
 Patch3:		%{name}-pkgconfig.patch
 Patch4:		%{name}-focus.patch
+Patch5:		%{name}-am_fix.patch
+Patch6:		%{name}-ac_fix.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -166,16 +168,19 @@ públicas.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 %build
-rm -f missing
-#ibtoolize --copy --force
+rm -f missing aclocal.m4 acinclude.m4
+%{__libtoolize}
 %{__gettextize}
-#aclocal
-#autoconf
-#automake -a -c
-cp -f /usr/share/automake/config.* .
-%configure2_13 \
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+#cp -f /usr/share/automake/config.* .
+mv -f po/Makevars.template po/Makevars
+%configure \
 	--enable-debug=no \
 	--enable-shm \
 	--with-xinput=xfree
@@ -261,7 +266,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO gtk/*.html gdk/*.html
+%doc AUTHORS ChangeLog NEWS README TODO 
+#%doc gtk gdk - somebody fix
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
