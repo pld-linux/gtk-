@@ -2,13 +2,14 @@ Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
 Version:	1.2.2
-Release:	1
+Release:	2
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
 Patch0:		gtk+-info.patch
 URL:		http://www.gtk.org/
+Icon:		gtk+.gif
 Requires:	glib = %{version}
 BuildPrereq:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -70,6 +71,7 @@ Biblioteki statyczne Gtk+
 %patch0 -p1
 
 %build
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--prefix=/usr/X11R6 \
@@ -89,7 +91,7 @@ make install \
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
-gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*} \
+gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/share/man/man1/*} \
 	AUTHORS ChangeLog NEWS README TODO
 
 %clean
@@ -99,13 +101,13 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/sbin/install-info /usr/info/gdk.info.gz /etc/info-dir
-/sbin/install-info /usr/info/gtk.info.gz /etc/info-dir
+/sbin/install-info /usr/share/info/gdk.info.gz /etc/info-dir
+/sbin/install-info /usr/share/info/gtk.info.gz /etc/info-dir
 
 %preun devel
 if [ "$1" = "0" ]; then
-	/sbin/install-info --delete /usr/info/gdk.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/gtk.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/share/info/gdk.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/share/info/gtk.info.gz /etc/info-dir
 fi
 
 %files
@@ -141,16 +143,21 @@ fi
 %attr(755,root,root) /usr/X11R6/bin/*
 
 /usr/X11R6/include/*
-/usr/info/*info*gz
+/usr/share/info/*info*gz
 /usr/share/aclocal/*.m4
 
-/usr/X11R6/man/man1/gtk-config.1.gz
+/usr/X11R6/share/man/man1/gtk-config.1.gz
 
 %files static
 %defattr(644,root,root,755)
 /usr/X11R6/lib/lib*.a
 
 %changelog
+* Mon May 10 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.2.2-2]
+- now package is FHS 2.0 compiliat,
+- added package icon.
+
 * Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.2.2-1]
 - removed Conflicts: glibc <= 2.0.7 (not neccessary now),
