@@ -199,6 +199,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
 %lang(et) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
 
+%dir %{_libdir}/gtk
 %dir %{_libdir}/gtk/themes
 %dir %{_libdir}/gtk/themes/engines
 %dir %{_datadir}/themes
