@@ -1,7 +1,7 @@
 Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
-Version:	1.1.14
+Version:	1.1.15
 Release:	1d
 Copyright:	LGPL
 Group:		X11/Libraries
@@ -85,10 +85,9 @@ make install \
 	gnulocaledir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
-gzip -9n $RPM_BUILD_ROOT/usr/info/*info*
+gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*}
 
 bzip2 -9 AUTHORS ChangeLog NEWS README TODO
-bzip2 -9 $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -108,7 +107,7 @@ fi
 
 %files
 %defattr(644,root,root,755) 
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*
 
 /usr/X11R6/share/themes
 
@@ -136,11 +135,10 @@ fi
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
 
-%attr(644,root, man) /usr/X11R6/man/man1/gtk-config.1.bz2
+%attr(644,root, man) /usr/X11R6/man/man1/gtk-config.1.gz
 
 %files static
-%attr(644,root,root,755) 
-
+%defattr(644,root,root,755) 
 /usr/X11R6/lib/lib*a
 
 %changelog
