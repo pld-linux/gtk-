@@ -87,6 +87,11 @@ Requires:	glib-devel = %{version}
 Requires:	autoconf >= 2.13
 Requires:	automake >= 1.4
 Requires:	libtool  >= 1.3.2
+# Every program using gtk+ should get a list of libraries to link with by
+# executing `gtk-config --libs`. All libraries listed below are returned by
+# this call, so they are required by every program compiled with gtk+.
+Requires:	XFree86-devel
+Requires:	glib-devel
 
 %description devel
 Header files and development documentation for the Gtk+ libraries.
