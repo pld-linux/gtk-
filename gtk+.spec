@@ -54,9 +54,9 @@ nyt myös useissa muissakin ohjelmissa.
 Libreria X scritta per GIMP. Viene usata da diversi programmi.
 
 %description -l pl
-Gtk+, któtra to biblioteka sta³a siê podstaw± programu Gimp zawiera funkcje
+Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp zawiera funkcje
 do tworzenia graficznego interfrjsu uzytkownika pod X Window. By³a tworzona
-z za³o¿eniem ¿eby bya ma³a, efektywna i wygodna. Gtk+ jest napiane w C z
+z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+ jest napiane w C z
 podej¶ciem zorientowanym bardzo obiektowo.
 Gdk (czê¶æ Gtk+) jest warsw± po¶redni± pomiêdzy Xlib i reszt± toolkit
 zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na piksel).
