@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	12
+Release:	13
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -41,8 +41,6 @@ Requires:	glib >= %{version}
 Requires:	iconv
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
-
-%define		_sysconfdir	%{_datadir}
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating
