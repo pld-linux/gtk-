@@ -1,0 +1,1545 @@
+diff -urN -X ../diff-ignore gtk+/gtk/gtkbutton.c gtk+-themefix/gtk/gtkbutton.c
+--- gtk+/gtk/gtkbutton.c	Wed May  5 23:13:39 1999
++++ gtk+-themefix/gtk/gtkbutton.c	Sun Nov 19 15:07:45 2000
+@@ -32,8 +32,6 @@
+ 
+ 
+ #define CHILD_SPACING     1
+-#define DEFAULT_LEFT_POS  4
+-#define DEFAULT_TOP_POS   4
+ #define DEFAULT_SPACING   7
+ 
+ 
+@@ -417,17 +415,26 @@
+ }
+ 
+ static void
++gtk_button_get_props (GtkButton *button,
++		      gint      *default_spacing)
++{
++  GtkWidget *widget =  GTK_WIDGET (button);
++  
++  if (default_spacing)
++    *default_spacing = gtk_style_get_prop_experimental (widget->style,
++							"GtkButton::default_spacing",
++							DEFAULT_SPACING);
++}
++	
++static void
+ gtk_button_size_request (GtkWidget      *widget,
+ 			 GtkRequisition *requisition)
+ {
+-  GtkButton *button;
+-
+-  g_return_if_fail (widget != NULL);
+-  g_return_if_fail (GTK_IS_BUTTON (widget));
+-  g_return_if_fail (requisition != NULL);
+-
+-  button = GTK_BUTTON (widget);
++  GtkButton *button = GTK_BUTTON (widget);
++  gint default_spacing;
+ 
++  gtk_button_get_props (button, &default_spacing);
++  
+   requisition->width = (GTK_CONTAINER (widget)->border_width + CHILD_SPACING +
+ 			GTK_WIDGET (widget)->style->klass->xthickness) * 2;
+   requisition->height = (GTK_CONTAINER (widget)->border_width + CHILD_SPACING +
+@@ -436,9 +443,9 @@
+   if (GTK_WIDGET_CAN_DEFAULT (widget))
+     {
+       requisition->width += (GTK_WIDGET (widget)->style->klass->xthickness * 2 +
+-			     DEFAULT_SPACING);
++			     default_spacing);
+       requisition->height += (GTK_WIDGET (widget)->style->klass->ythickness * 2 +
+-			      DEFAULT_SPACING);
++			      default_spacing);
+     }
+ 
+   if (GTK_BIN (button)->child && GTK_WIDGET_VISIBLE (GTK_BIN (button)->child))
+@@ -456,16 +463,17 @@
+ gtk_button_size_allocate (GtkWidget     *widget,
+ 			  GtkAllocation *allocation)
+ {
+-  GtkButton *button;
++  GtkButton *button = GTK_BUTTON (widget);
+   GtkAllocation child_allocation;
+-  gint border_width;
+ 
+-  g_return_if_fail (widget != NULL);
+-  g_return_if_fail (GTK_IS_BUTTON (widget));
+-  g_return_if_fail (allocation != NULL);
++  gint border_width = GTK_CONTAINER (widget)->border_width;
++  gint xthickness = GTK_WIDGET (widget)->style->klass->xthickness;
++  gint ythickness = GTK_WIDGET (widget)->style->klass->ythickness;
++  gint default_spacing;
+ 
++  gtk_button_get_props (button, &default_spacing);
++  
+   widget->allocation = *allocation;
+-  border_width = GTK_CONTAINER (widget)->border_width;
+ 
+   if (GTK_WIDGET_REALIZED (widget))
+     gdk_window_move_resize (widget->window,
+@@ -474,12 +482,10 @@
+ 			    widget->allocation.width - border_width * 2,
+ 			    widget->allocation.height - border_width * 2);
+ 
+-  button = GTK_BUTTON (widget);
+-
+   if (GTK_BIN (button)->child && GTK_WIDGET_VISIBLE (GTK_BIN (button)->child))
+     {
+-      child_allocation.x = (CHILD_SPACING + GTK_WIDGET (widget)->style->klass->xthickness);
+-      child_allocation.y = (CHILD_SPACING + GTK_WIDGET (widget)->style->klass->ythickness);
++      child_allocation.x = (CHILD_SPACING + xthickness);
++      child_allocation.y = (CHILD_SPACING + ythickness);
+ 
+       child_allocation.width = MAX (1, (gint)widget->allocation.width - child_allocation.x * 2 -
+ 	                         border_width * 2);
+@@ -489,13 +495,13 @@
+       if (GTK_WIDGET_CAN_DEFAULT (button))
+ 	{
+ 	  child_allocation.x += (GTK_WIDGET (widget)->style->klass->xthickness +
+-				 DEFAULT_LEFT_POS);
++				(1 + default_spacing) / 2);
+ 	  child_allocation.y += (GTK_WIDGET (widget)->style->klass->ythickness +
+-				 DEFAULT_TOP_POS);
++				 (1 + default_spacing) / 2);
+ 	  child_allocation.width =  MAX (1, (gint)child_allocation.width -
+-					 (gint)(GTK_WIDGET (widget)->style->klass->xthickness * 2 + DEFAULT_SPACING));
++					 (gint)(GTK_WIDGET (widget)->style->klass->xthickness * 2 + default_spacing));
+ 	  child_allocation.height = MAX (1, (gint)child_allocation.height -
+-					 (gint)(GTK_WIDGET (widget)->style->klass->xthickness * 2 + DEFAULT_SPACING));
++					 (gint)(GTK_WIDGET (widget)->style->klass->xthickness * 2 + default_spacing));
+ 	}
+ 
+       gtk_widget_size_allocate (GTK_BIN (button)->child, &child_allocation);
+@@ -536,10 +542,13 @@
+   GtkShadowType shadow_type;
+   gint width, height;
+   gint x, y;
++  gint default_spacing;
+    
+   if (GTK_WIDGET_DRAWABLE (widget))
+     {
+       button = GTK_BUTTON (widget);
++
++      gtk_button_get_props (button, &default_spacing);
+ 	
+       x = 0;
+       y = 0;
+@@ -562,10 +571,10 @@
+ 	{
+ 	  x += widget->style->klass->xthickness;
+ 	  y += widget->style->klass->ythickness;
+-	  width -= 2 * x + DEFAULT_SPACING;
+-	  height -= 2 * y + DEFAULT_SPACING;
+-	  x += DEFAULT_LEFT_POS;
+-	  y += DEFAULT_TOP_POS;
++	  width -= 2 * x + default_spacing;
++	  height -= 2 * y + default_spacing;
++	  x += (1 + default_spacing) / 2;
++	  y += (1 + default_spacing) / 2;
+ 	}
+        
+       if (GTK_WIDGET_HAS_FOCUS (widget))
+diff -urN -X ../diff-ignore gtk+/gtk/gtkcheckbutton.c gtk+-themefix/gtk/gtkcheckbutton.c
+--- gtk+/gtk/gtkcheckbutton.c	Wed Feb 24 02:33:54 1999
++++ gtk+-themefix/gtk/gtkcheckbutton.c	Sun Nov 19 15:07:45 2000
+@@ -211,12 +211,31 @@
+ 			       widget->allocation.height - 2 * border_width);
+ }
+ 
++void
++_gtk_check_button_get_props (GtkCheckButton *check_button,
++			     gint           *indicator_size,
++			     gint           *indicator_spacing)
++{
++  GtkWidget *widget =  GTK_WIDGET (check_button);
++  
++  if (indicator_size)
++    *indicator_size = gtk_style_get_prop_experimental (widget->style,
++						       "GtkCheckButton::indicator_size",
++						       CHECK_BUTTON_CLASS (widget)->indicator_size);
++  if (indicator_spacing)
++    *indicator_spacing = gtk_style_get_prop_experimental (widget->style,
++							  "GtkCheckButton::indicator_spacing",
++							  CHECK_BUTTON_CLASS (widget)->indicator_spacing);
++}
++
+ static void
+ gtk_check_button_size_request (GtkWidget      *widget,
+ 			       GtkRequisition *requisition)
+ {
+   GtkToggleButton *toggle_button;
+   gint temp;
++  gint indicator_size;
++  gint indicator_spacing;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_CHECK_BUTTON (widget));
+@@ -229,11 +248,13 @@
+   
+   if (toggle_button->draw_indicator)
+     {
+-      requisition->width += (CHECK_BUTTON_CLASS (widget)->indicator_size +
+-			     CHECK_BUTTON_CLASS (widget)->indicator_spacing * 3 + 2);
++      _gtk_check_button_get_props (GTK_CHECK_BUTTON (widget),
++				   &indicator_size, &indicator_spacing);
++						    
++      requisition->width += (indicator_size +
++			     indicator_spacing * 3 + 2);
+       
+-      temp = (CHECK_BUTTON_CLASS (widget)->indicator_size +
+-	      CHECK_BUTTON_CLASS (widget)->indicator_spacing * 2);
++      temp = indicator_size + indicator_spacing * 2;
+       requisition->height = MAX (requisition->height, temp) + 2;
+     }
+ }
+@@ -246,6 +267,8 @@
+   GtkToggleButton *toggle_button;
+   GtkButton *button;
+   GtkAllocation child_allocation;
++  gint indicator_size;
++  gint indicator_spacing;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_CHECK_BUTTON (widget));
+@@ -256,6 +279,8 @@
+ 
+   if (toggle_button->draw_indicator)
+     {
++      _gtk_check_button_get_props (check_button, &indicator_size, &indicator_spacing);
++						    
+       widget->allocation = *allocation;
+       if (GTK_WIDGET_REALIZED (widget))
+ 	gdk_window_move_resize (toggle_button->event_window,
+@@ -267,15 +292,15 @@
+       if (GTK_BIN (button)->child && GTK_WIDGET_VISIBLE (GTK_BIN (button)->child))
+ 	{
+ 	  child_allocation.x = (GTK_CONTAINER (widget)->border_width +
+-				CHECK_BUTTON_CLASS (widget)->indicator_size +
+-				CHECK_BUTTON_CLASS (widget)->indicator_spacing * 3 + 1 +
++				indicator_size +
++				indicator_spacing * 3 + 1 +
+ 				widget->allocation.x);
+ 	  child_allocation.y = GTK_CONTAINER (widget)->border_width + 1 +
+ 	    widget->allocation.y;
+ 	  child_allocation.width = MAX (1, allocation->width - 
+ 					(GTK_CONTAINER (widget)->border_width +
+-					 CHECK_BUTTON_CLASS (widget)->indicator_size +
+-					 CHECK_BUTTON_CLASS (widget)->indicator_spacing * 3 + 1)  -
++					 +
++					 indicator_spacing * 3 + 1)  -
+ 					GTK_CONTAINER (widget)->border_width - 1);
+ 	  child_allocation.height = MAX (1, allocation->height - (GTK_CONTAINER (widget)->border_width + 1) * 2);
+ 	  
+@@ -355,6 +380,8 @@
+   GdkRectangle new_area;
+   gint width, height;
+   gint x, y;
++  gint indicator_size;
++  gint indicator_spacing;
+   GdkWindow *window;
+   
+   g_return_if_fail (check_button != NULL);
+@@ -367,6 +394,8 @@
+     {
+       window = widget->window;
+       
++      _gtk_check_button_get_props (check_button, &indicator_size, &indicator_spacing);
++						    
+       state_type = GTK_WIDGET_STATE (widget);
+       if (state_type != GTK_STATE_NORMAL &&
+ 	  state_type != GTK_STATE_PRELIGHT)
+@@ -387,10 +416,10 @@
+ 				new_area.width, new_area.height);
+ 	}
+       
+-      x = widget->allocation.x + CHECK_BUTTON_CLASS (widget)->indicator_spacing + GTK_CONTAINER (widget)->border_width;
+-      y = widget->allocation.y + (widget->allocation.height - CHECK_BUTTON_CLASS (widget)->indicator_size) / 2;
+-      width = CHECK_BUTTON_CLASS (widget)->indicator_size;
+-      height = CHECK_BUTTON_CLASS (widget)->indicator_size;
++      x = widget->allocation.x + indicator_spacing + GTK_CONTAINER (widget)->border_width;
++      y = widget->allocation.y + (widget->allocation.height - indicator_size) / 2;
++      width = indicator_size;
++      height = indicator_size;
+       
+       if (GTK_TOGGLE_BUTTON (widget)->active)
+ 	{
+diff -urN -X ../diff-ignore gtk+/gtk/gtkcheckbutton.h gtk+-themefix/gtk/gtkcheckbutton.h
+--- gtk+/gtk/gtkcheckbutton.h	Wed Feb 24 02:33:55 1999
++++ gtk+-themefix/gtk/gtkcheckbutton.h	Sun Nov 19 15:07:45 2000
+@@ -68,6 +68,9 @@
+ GtkWidget* gtk_check_button_new            (void);
+ GtkWidget* gtk_check_button_new_with_label (const gchar *label);
+ 
++void _gtk_check_button_get_props (GtkCheckButton *check_button,
++				  gint           *indicator_size,
++				  gint           *indicator_spacing);
+ 
+ #ifdef __cplusplus
+ }
+diff -urN -X ../diff-ignore gtk+/gtk/gtkcheckmenuitem.c gtk+-themefix/gtk/gtkcheckmenuitem.c
+--- gtk+/gtk/gtkcheckmenuitem.c	Wed Jun  9 05:07:22 1999
++++ gtk+-themefix/gtk/gtkcheckmenuitem.c	Mon Nov 20 19:01:29 2000
+@@ -155,8 +155,10 @@
+ {
+   g_return_if_fail (menu_item != NULL);
+   g_return_if_fail (GTK_IS_CHECK_MENU_ITEM (menu_item));
+-  
++
++#if 0
+   menu_item->always_show_toggle = always != FALSE;
++#endif  
+ }
+ 
+ void
+@@ -169,7 +171,7 @@
+ gtk_check_menu_item_init (GtkCheckMenuItem *check_menu_item)
+ {
+   check_menu_item->active = FALSE;
+-  check_menu_item->always_show_toggle = FALSE;
++  check_menu_item->always_show_toggle = TRUE;
+ }
+ 
+ static void
+diff -urN -X ../diff-ignore gtk+/gtk/gtkhscale.c gtk+-themefix/gtk/gtkhscale.c
+--- gtk+/gtk/gtkhscale.c	Wed Dec 29 22:57:47 1999
++++ gtk+-themefix/gtk/gtkhscale.c	Sun Nov 19 15:54:18 2000
+@@ -197,12 +197,15 @@
+   GdkWindowAttr attributes;
+   gint attributes_mask;
+   gint x, y, w, h;
++  gint slider_width;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_HSCALE (widget));
+   
+   GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+   range = GTK_RANGE (widget);
++
++  _gtk_range_get_props (range, &slider_width, NULL, NULL, NULL);
+   
+   widget->window = gtk_widget_get_parent_window (widget);
+   gdk_window_ref (widget->window);
+@@ -230,7 +233,7 @@
+   range->trough = gdk_window_new (widget->window, &attributes, attributes_mask);
+   
+   attributes.width = SCALE_CLASS (range)->slider_length;
+-  attributes.height = RANGE_CLASS (range)->slider_width;
++  attributes.height = slider_width;
+   attributes.event_mask |= (GDK_BUTTON_MOTION_MASK |
+                             GDK_POINTER_MOTION_HINT_MASK);
+   
+@@ -315,17 +318,20 @@
+ {
+   GtkScale *scale;
+   gint value_width;
++  gint slider_width;
++  gint trough_border;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_HSCALE (widget));
+   g_return_if_fail (requisition != NULL);
+   
+   scale = GTK_SCALE (widget);
++
++  _gtk_range_get_props (GTK_RANGE (scale),
++			&slider_width, &trough_border, NULL, NULL);
+   
+-  requisition->width = (SCALE_CLASS (scale)->slider_length +
+-                        widget->style->klass->xthickness) * 2;
+-  requisition->height = (RANGE_CLASS (scale)->slider_width +
+-                         widget->style->klass->ythickness * 2);
++  requisition->width = (SCALE_CLASS (scale)->slider_length + trough_border) * 2;
++  requisition->height = (slider_width + trough_border * 2);
+   
+   if (scale->draw_value)
+     {
+@@ -384,6 +390,8 @@
+ {
+   GtkWidget *widget;
+   GtkScale *scale;
++  gint slider_width;
++  gint trough_border;
+   
+   g_return_if_fail (hscale != NULL);
+   g_return_if_fail (GTK_IS_HSCALE (hscale));
+@@ -391,10 +399,12 @@
+   
+   widget = GTK_WIDGET (hscale);
+   scale = GTK_SCALE (hscale);
+-  
++
++  _gtk_range_get_props (GTK_RANGE (scale),
++			&slider_width, &trough_border, NULL, NULL);
++
+   *w = widget->allocation.width;
+-  *h = (RANGE_CLASS (scale)->slider_width +
+-        widget->style->klass->ythickness * 2);
++  *h = (slider_width + trough_border * 2);
+   
+   if (scale->draw_value)
+     {
+diff -urN -X ../diff-ignore gtk+/gtk/gtkhscrollbar.c gtk+-themefix/gtk/gtkhscrollbar.c
+--- gtk+/gtk/gtkhscrollbar.c	Wed Feb 24 02:34:56 1999
++++ gtk+-themefix/gtk/gtkhscrollbar.c	Sun Nov 19 15:31:02 2000
+@@ -47,6 +47,8 @@
+                                              GtkArg             *arg,
+                                              guint               arg_id);
+ static void gtk_hscrollbar_realize          (GtkWidget          *widget);
++static void gtk_hscrollbar_size_request     (GtkWidget          *widget,
++                                             GtkRequisition     *requisition);
+ static void gtk_hscrollbar_size_allocate    (GtkWidget          *widget,
+                                              GtkAllocation      *allocation);
+ static void gtk_hscrollbar_draw_step_forw   (GtkRange           *range);
+@@ -104,6 +106,7 @@
+   object_class->get_arg = gtk_hscrollbar_get_arg;
+   
+   widget_class->realize = gtk_hscrollbar_realize;
++  widget_class->size_request = gtk_hscrollbar_size_request;
+   widget_class->size_allocate = gtk_hscrollbar_size_allocate;
+   
+   range_class->draw_step_forw = gtk_hscrollbar_draw_step_forw;
+@@ -156,18 +159,6 @@
+ static void
+ gtk_hscrollbar_init (GtkHScrollbar *hscrollbar)
+ {
+-  GtkWidget *widget;
+-  GtkRequisition *requisition;
+-  
+-  widget = GTK_WIDGET (hscrollbar);
+-  requisition = &widget->requisition;
+-  
+-  requisition->width = (RANGE_CLASS (widget)->min_slider_size +
+-                        RANGE_CLASS (widget)->stepper_size +
+-                        RANGE_CLASS (widget)->stepper_slider_spacing +
+-                        widget->style->klass->xthickness) * 2;
+-  requisition->height = (RANGE_CLASS (widget)->slider_width +
+-                         widget->style->klass->ythickness * 2);
+ }
+ 
+ GtkWidget*
+@@ -189,6 +180,9 @@
+   GtkRange *range;
+   GdkWindowAttr attributes;
+   gint attributes_mask;
++  gint slider_width;
++  gint trough_border;
++  gint stepper_size;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_HSCROLLBAR (widget));
+@@ -196,6 +190,9 @@
+   GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+   range = GTK_RANGE (widget);
+   
++  _gtk_range_get_props (range, &slider_width, &trough_border,
++			&stepper_size, NULL);
++
+   attributes.x = widget->allocation.x;
+   attributes.y = widget->allocation.y + (widget->allocation.height - widget->requisition.height) / 2;
+   attributes.width = widget->allocation.width;
+@@ -217,23 +214,23 @@
+   range->trough = widget->window;
+   gdk_window_ref (range->trough);
+   
+-  attributes.x = widget->style->klass->xthickness;
+-  attributes.y = widget->style->klass->ythickness;
+-  attributes.width = RANGE_CLASS (widget)->stepper_size;
+-  attributes.height = RANGE_CLASS (widget)->stepper_size;
++  attributes.x = trough_border;
++  attributes.y = trough_border;
++  attributes.width = stepper_size;
++  attributes.height = stepper_size;
+   
+   range->step_back = gdk_window_new (range->trough, &attributes, attributes_mask);
+   
+   attributes.x = (widget->allocation.width -
+-                  widget->style->klass->xthickness -
+-                  RANGE_CLASS (widget)->stepper_size);
++                  trough_border -
++                  stepper_size);
+   
+   range->step_forw = gdk_window_new (range->trough, &attributes, attributes_mask);
+   
+   attributes.x = 0;
+-  attributes.y = widget->style->klass->ythickness;
++  attributes.y = trough_border;
+   attributes.width = RANGE_CLASS (widget)->min_slider_size;
+-  attributes.height = RANGE_CLASS (widget)->slider_width;
++  attributes.height = slider_width;
+   attributes.event_mask |= (GDK_BUTTON_MOTION_MASK |
+                             GDK_POINTER_MOTION_HINT_MASK);
+   
+@@ -260,10 +257,35 @@
+ }
+ 
+ static void
++gtk_hscrollbar_size_request (GtkWidget      *widget,
++			     GtkRequisition *requisition)
++{
++  gint slider_width;
++  gint trough_border;
++  gint stepper_size;
++  gint stepper_spacing;
++  
++  GtkRange *range = GTK_RANGE (widget);
++
++  _gtk_range_get_props (range, &slider_width, &trough_border, 
++			&stepper_size, &stepper_spacing);
++  
++  requisition->width = (RANGE_CLASS (widget)->min_slider_size +
++			stepper_size +
++			stepper_spacing +
++			trough_border) * 2;
++  requisition->height = (slider_width +
++			 trough_border * 2);
++}
++
++static void
+ gtk_hscrollbar_size_allocate (GtkWidget     *widget,
+                               GtkAllocation *allocation)
+ {
+   GtkRange *range;
++  gint slider_width;
++  gint trough_border;
++  gint stepper_size;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_HSCROLLBAR (widget));
+@@ -273,25 +295,28 @@
+   if (GTK_WIDGET_REALIZED (widget))
+     {
+       range = GTK_RANGE (widget);
+-      
++
++      _gtk_range_get_props (range, &slider_width, &trough_border,
++			    &stepper_size, NULL);
++        
+       gdk_window_move_resize (range->trough,
+                               allocation->x,
+                               allocation->y + (allocation->height - widget->requisition.height) / 2,
+                               allocation->width, widget->requisition.height);
+       gdk_window_move_resize (range->step_back,
+-                              widget->style->klass->xthickness,
+-                              widget->style->klass->ythickness,
+-                              RANGE_CLASS (widget)->stepper_size,
+-                              widget->requisition.height - widget->style->klass->ythickness * 2);
++                              trough_border,
++                              trough_border,
++                              stepper_size,
++                              widget->requisition.height - trough_border * 2);
+       gdk_window_move_resize (range->step_forw,
+-                              allocation->width - widget->style->klass->xthickness -
+-                              RANGE_CLASS (widget)->stepper_size,
+-                              widget->style->klass->ythickness,
+-                              RANGE_CLASS (widget)->stepper_size,
+-                              widget->requisition.height - widget->style->klass->ythickness * 2);
++                              allocation->width - trough_border -
++                              stepper_size,
++                              trough_border,
++                              stepper_size,
++                              widget->requisition.height - trough_border * 2);
+       gdk_window_resize (range->slider,
+                          RANGE_CLASS (widget)->min_slider_size,
+-                         widget->requisition.height - widget->style->klass->ythickness * 2);
++                         widget->requisition.height - trough_border * 2);
+       
+       gtk_range_slider_update (GTK_RANGE (widget));
+     }
+@@ -384,15 +409,18 @@
+   gint step_forw_x;
+   gint slider_width;
+   gint slider_height;
++  gint stepper_spacing;
+   gint left, right;
+   gint width;
+   
+   g_return_if_fail (hscrollbar != NULL);
+   g_return_if_fail (GTK_IS_HSCROLLBAR (hscrollbar));
+-  
++
+   if (GTK_WIDGET_REALIZED (hscrollbar))
+     {
+       range = GTK_RANGE (hscrollbar);
++
++      _gtk_range_get_props (range, NULL, NULL, NULL, &stepper_spacing);
+       
+       gdk_window_get_size (range->step_back, &step_back_width, NULL);
+       gdk_window_get_position (range->step_back, &step_back_x, NULL);
+@@ -400,8 +428,8 @@
+       
+       left = (step_back_x +
+               step_back_width +
+-              RANGE_CLASS (hscrollbar)->stepper_slider_spacing);
+-      right = step_forw_x - RANGE_CLASS (hscrollbar)->stepper_slider_spacing;
++              stepper_spacing);
++      right = step_forw_x - stepper_spacing;
+       width = right - left;
+       
+       if ((range->adjustment->page_size > 0) &&
+diff -urN -X ../diff-ignore gtk+/gtk/gtkoptionmenu.c gtk+-themefix/gtk/gtkoptionmenu.c
+--- gtk+/gtk/gtkoptionmenu.c	Sat Nov 18 11:51:45 2000
++++ gtk+-themefix/gtk/gtkoptionmenu.c	Mon Nov 20 16:43:51 2000
+@@ -35,10 +35,27 @@
+ #define CHILD_RIGHT_SPACING       1
+ #define CHILD_TOP_SPACING         1
+ #define CHILD_BOTTOM_SPACING      1
+-#define OPTION_INDICATOR_WIDTH    12
+-#define OPTION_INDICATOR_HEIGHT   8
+-#define OPTION_INDICATOR_SPACING  2
+ 
++typedef struct _GtkOptionMenuProps GtkOptionMenuProps;
++
++struct _GtkOptionMenuProps
++{
++  gint indicator_width;
++  gint indicator_height;
++  gint indicator_left_spacing;
++  gint indicator_right_spacing;
++  gint indicator_top_spacing;
++  gint indicator_bottom_spacing;
++};
++
++static GtkOptionMenuProps default_props = {
++  12,				/* width */
++  8,				/* height */
++  3,				/* left_spacing */
++  7,				/* right_spacing */
++  2,				/* top_spacing */
++  2,				/* bottom_spacing */
++};
+ 
+ static void gtk_option_menu_class_init      (GtkOptionMenuClass *klass);
+ static void gtk_option_menu_init            (GtkOptionMenu      *option_menu);
+@@ -262,10 +279,39 @@
+ }
+ 
+ static void
++gtk_option_menu_get_props (GtkOptionMenu       *option_menu,
++			   GtkOptionMenuProps  *props)
++{
++  GtkWidget *widget =  GTK_WIDGET (option_menu);
++
++  props->indicator_width = gtk_style_get_prop_experimental (widget->style,
++							    "GtkOptionMenu::indicator_width",
++							    default_props.indicator_width);
++
++  props->indicator_height = gtk_style_get_prop_experimental (widget->style,
++							     "GtkOptionMenu::indicator_height",
++							     default_props.indicator_height);
++
++  props->indicator_top_spacing = gtk_style_get_prop_experimental (widget->style,
++								  "GtkOptionMenu::indicator_top_spacing",
++								  default_props.indicator_top_spacing);
++  props->indicator_bottom_spacing = gtk_style_get_prop_experimental (widget->style,
++								     "GtkOptionMenu::indicator_bottom_spacing",
++								     default_props.indicator_bottom_spacing);
++  props->indicator_left_spacing = gtk_style_get_prop_experimental (widget->style,
++							       "GtkOptionMenu::indicator_left_spacing",
++							       default_props.indicator_left_spacing);
++  props->indicator_right_spacing = gtk_style_get_prop_experimental (widget->style,
++								    "GtkOptionMenu::indicator_right_spacing",
++								    default_props.indicator_right_spacing);
++}
++
++static void
+ gtk_option_menu_size_request (GtkWidget      *widget,
+ 			      GtkRequisition *requisition)
+ {
+   GtkOptionMenu *option_menu;
++  GtkOptionMenuProps props;
+   gint tmp;
+ 
+   g_return_if_fail (widget != NULL);
+@@ -274,11 +320,13 @@
+ 
+   option_menu = GTK_OPTION_MENU (widget);
+ 
++  gtk_option_menu_get_props (option_menu, &props);
++
+   requisition->width = ((GTK_CONTAINER (widget)->border_width +
+ 			 GTK_WIDGET (widget)->style->klass->xthickness) * 2 +
+ 			option_menu->width +
+-			OPTION_INDICATOR_WIDTH +
+-			OPTION_INDICATOR_SPACING * 5 +
++			props.indicator_width +
++			props.indicator_left_spacing + props.indicator_right_spacing +
+ 			CHILD_LEFT_SPACING + CHILD_RIGHT_SPACING + 2);
+   requisition->height = ((GTK_CONTAINER (widget)->border_width +
+ 			  GTK_WIDGET (widget)->style->klass->ythickness) * 2 +
+@@ -286,7 +334,7 @@
+ 			 CHILD_TOP_SPACING + CHILD_BOTTOM_SPACING + 2);
+ 
+   tmp = (requisition->height - option_menu->height +
+-	 OPTION_INDICATOR_HEIGHT + OPTION_INDICATOR_SPACING * 2);
++	 props.indicator_height + props.indicator_top_spacing + props.indicator_bottom_spacing);
+   requisition->height = MAX (requisition->height, tmp);
+ }
+ 
+@@ -296,11 +344,14 @@
+ {
+   GtkWidget *child;
+   GtkAllocation child_allocation;
+-
++  GtkOptionMenuProps props;
++    
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_OPTION_MENU (widget));
+   g_return_if_fail (allocation != NULL);
+ 
++  gtk_option_menu_get_props (GTK_OPTION_MENU (widget), &props);
++
+   widget->allocation = *allocation;
+   if (GTK_WIDGET_REALIZED (widget))
+     gdk_window_move_resize (widget->window,
+@@ -315,12 +366,12 @@
+       child_allocation.y = (GTK_CONTAINER (widget)->border_width +
+ 			    GTK_WIDGET (widget)->style->klass->ythickness) + 1;
+       child_allocation.width = MAX (1, (gint)allocation->width - child_allocation.x * 2 -
+-				    OPTION_INDICATOR_WIDTH - OPTION_INDICATOR_SPACING * 5 -
++				    props.indicator_width - props.indicator_left_spacing - props.indicator_right_spacing -
+ 				    CHILD_LEFT_SPACING - CHILD_RIGHT_SPACING - 2);
+       child_allocation.height = MAX (1, (gint)allocation->height - child_allocation.y * 2 -
+ 				     CHILD_TOP_SPACING - CHILD_BOTTOM_SPACING - 2);
+       child_allocation.x += CHILD_LEFT_SPACING;
+-      child_allocation.y += CHILD_RIGHT_SPACING;
++      child_allocation.y += CHILD_TOP_SPACING;
+ 
+       gtk_widget_size_allocate (child, &child_allocation);
+     }
+@@ -331,6 +382,7 @@
+ 		       GdkRectangle *area)
+ {
+   GdkRectangle button_area;
++  GtkOptionMenuProps props;
+ 
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_OPTION_MENU (widget));
+@@ -338,6 +390,8 @@
+ 
+   if (GTK_WIDGET_DRAWABLE (widget))
+     {
++      gtk_option_menu_get_props (GTK_OPTION_MENU (widget), &props);
++
+       button_area.x = GTK_CONTAINER (widget)->border_width + 1;
+       button_area.y = GTK_CONTAINER (widget)->border_width + 1;
+       button_area.width = widget->allocation.width - button_area.x * 2;
+@@ -359,10 +413,11 @@
+       gtk_paint_tab (widget->style, widget->window,
+ 		     GTK_WIDGET_STATE (widget), GTK_SHADOW_OUT,
+ 		     area, widget, "optionmenutab",
+-		     button_area.x + button_area.width - button_area.x -
+-		     OPTION_INDICATOR_WIDTH - OPTION_INDICATOR_SPACING * 4,
+-		     button_area.y + (button_area.height - OPTION_INDICATOR_HEIGHT) / 2,
+-		     OPTION_INDICATOR_WIDTH, OPTION_INDICATOR_HEIGHT);
++		     button_area.x + button_area.width - 
++		     props.indicator_width - props.indicator_right_spacing -
++		     widget->style->klass->xthickness,
++		     button_area.y + (button_area.height - props.indicator_height) / 2,
++		     props.indicator_width, props.indicator_height);
+       
+       if (GTK_WIDGET_HAS_FOCUS (widget))
+ 	gtk_paint_focus (widget->style, widget->window,
+diff -urN -X ../diff-ignore gtk+/gtk/gtkradiobutton.c gtk+-themefix/gtk/gtkradiobutton.c
+--- gtk+/gtk/gtkradiobutton.c	Wed Feb 24 02:35:57 1999
++++ gtk+-themefix/gtk/gtkradiobutton.c	Sun Nov 19 15:07:47 2000
+@@ -379,6 +379,7 @@
+   GdkRectangle new_area;
+   gint width, height;
+   gint x, y;
++  gint indicator_size, indicator_spacing;
+ 
+   g_return_if_fail (check_button != NULL);
+   g_return_if_fail (GTK_IS_RADIO_BUTTON (check_button));
+@@ -394,6 +395,8 @@
+ 	  (state_type != GTK_STATE_PRELIGHT))
+ 	state_type = GTK_STATE_NORMAL;
+ 
++      _gtk_check_button_get_props (check_button, &indicator_size, &indicator_spacing);
++
+       restrict_area.x = widget->allocation.x + GTK_CONTAINER (widget)->border_width;
+       restrict_area.y = widget->allocation.y + GTK_CONTAINER (widget)->border_width;
+       restrict_area.width = widget->allocation.width - ( 2 * GTK_CONTAINER (widget)->border_width);
+@@ -409,11 +412,8 @@
+ 				new_area.width, new_area.height);
+ 	}
+       
+-      x = widget->allocation.x + CHECK_BUTTON_CLASS (widget)->indicator_spacing + GTK_CONTAINER (widget)->border_width;
+-      y = widget->allocation.y + (widget->allocation.height - CHECK_BUTTON_CLASS (widget)->indicator_size) / 2;
+-      width = CHECK_BUTTON_CLASS (widget)->indicator_size;
+-      height = CHECK_BUTTON_CLASS (widget)->indicator_size;
+-      
++      x = widget->allocation.x + indicator_spacing + GTK_CONTAINER (widget)->border_width;
++      y = widget->allocation.y + (widget->allocation.height - indicator_size) / 2;
+       if (GTK_TOGGLE_BUTTON (widget)->active)
+ 	shadow_type = GTK_SHADOW_IN;
+       else
+@@ -422,6 +422,6 @@
+       gtk_paint_option (widget->style, widget->window,
+ 			GTK_WIDGET_STATE (widget), shadow_type,
+ 			area, widget, "radiobutton",
+-			x, y, width, height);
++			x, y, indicator_size, indicator_size);
+     }
+ }
+diff -urN -X ../diff-ignore gtk+/gtk/gtkrange.c gtk+-themefix/gtk/gtkrange.c
+--- gtk+/gtk/gtkrange.c	Wed Feb 24 02:36:01 1999
++++ gtk+-themefix/gtk/gtkrange.c	Mon Nov 20 16:42:01 2000
+@@ -395,10 +395,13 @@
+   gint left;
+   gint right;
+   gint x;
++  gint trough_border;
+ 
+   g_return_if_fail (range != NULL);
+   g_return_if_fail (GTK_IS_RANGE (range));
+ 
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, NULL);
++
+   if (GTK_WIDGET_REALIZED (range))
+     {
+       gtk_range_trough_hdims (range, &left, &right);
+@@ -424,7 +427,7 @@
+       else if (x > right)
+ 	x = right;
+ 
+-      gdk_window_move (range->slider, x, GTK_WIDGET (range)->style->klass->ythickness);
++      gdk_window_move (range->slider, x, trough_border);
+     }
+ }
+ 
+@@ -434,10 +437,13 @@
+   gint top;
+   gint bottom;
+   gint y;
++  gint trough_border;
+ 
+   g_return_if_fail (range != NULL);
+   g_return_if_fail (GTK_IS_RANGE (range));
+ 
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, NULL);
++
+   if (GTK_WIDGET_REALIZED (range))
+     {
+       gtk_range_trough_vdims (range, &top, &bottom);
+@@ -463,7 +469,7 @@
+       else if (y > bottom)
+ 	y = bottom;
+ 
+-      gdk_window_move (range->slider, GTK_WIDGET (range)->style->klass->xthickness, y);
++      gdk_window_move (range->slider, trough_border, y);
+     }
+ }
+ 
+@@ -473,7 +479,7 @@
+ 				 gint      y,
+ 				 gfloat	  *jump_perc)
+ {
+-  gint ythickness;
++  gint trough_border;
+   gint trough_width;
+   gint trough_height;
+   gint slider_x;
+@@ -483,17 +489,17 @@
+   g_return_val_if_fail (range != NULL, GTK_TROUGH_NONE);
+   g_return_val_if_fail (GTK_IS_RANGE (range), GTK_TROUGH_NONE);
+ 
+-  ythickness = GTK_WIDGET (range)->style->klass->ythickness;
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, NULL);
+ 
+   gtk_range_trough_hdims (range, &left, &right);
+   gdk_window_get_size (range->slider, &slider_length, NULL);
+   right += slider_length;
+ 	      
+-  if ((x > left) && (y > ythickness))
++  if ((x > left) && (y > trough_border))
+     {
+       gdk_window_get_size (range->trough, &trough_width, &trough_height);
+ 
+-      if ((x < right) && (y < (trough_height - ythickness)))
++      if ((x < right) && (y < (trough_height - trough_border)))
+ 	{
+ 	  if (jump_perc)
+ 	    {
+@@ -519,27 +525,27 @@
+ 				 gint      y,
+ 				 gfloat   *jump_perc)
+ {
+-  gint xthickness;
+   gint trough_width;
+   gint trough_height;
+   gint slider_y;
+   gint top, bottom;
+   gint slider_length;
++  gint trough_border;
+ 
+   g_return_val_if_fail (range != NULL, GTK_TROUGH_NONE);
+   g_return_val_if_fail (GTK_IS_RANGE (range), GTK_TROUGH_NONE);
+ 
+-  xthickness = GTK_WIDGET (range)->style->klass->xthickness;
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, NULL);
+ 
+   gtk_range_trough_vdims (range, &top, &bottom);
+   gdk_window_get_size (range->slider, NULL, &slider_length);
+   bottom += slider_length;
+ 	      
+-  if ((x > xthickness) && (y > top))
++  if ((x > trough_border) && (y > top))
+     {
+       gdk_window_get_size (range->trough, &trough_width, &trough_height);
+ 
+-      if ((x < (trough_width - xthickness) && (y < bottom)))
++      if ((x < (trough_width - trough_border) && (y < bottom)))
+ 	{
+ 	  if (jump_perc)
+ 	    {
+@@ -800,6 +806,7 @@
+ 		  GdkEventExpose *event)
+ {
+   GtkRange *range;
++  gint trough_border;
+ 
+   g_return_val_if_fail (widget != NULL, FALSE);
+   g_return_val_if_fail (GTK_IS_RANGE (widget), FALSE);
+@@ -807,6 +814,8 @@
+ 
+   range = GTK_RANGE (widget);
+ 
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, NULL);
++
+   if (event->window == range->trough)
+     {
+       /* Don't redraw if we are only exposing the literal trough region.
+@@ -814,15 +823,12 @@
+        * trough-drawing handler. (Probably should really pass another
+        * argument - the redrawn area to all the drawing functions)
+        */
+-      gint xt = widget->style->klass->xthickness;
+-      gint yt = widget->style->klass->ythickness;
+-      
+-      if (!((event->area.x >= xt) &&
+-	    (event->area.y >= yt) &&
++      if (!((event->area.x >= trough_border) &&
++	    (event->area.y >= trough_border) &&
+ 	    (event->area.x + event->area.width <= 
+-	     widget->allocation.width - xt) &&
++	     widget->allocation.width - trough_border) &&
+ 	    (event->area.y + event->area.height <= 
+-	     widget->allocation.height - yt)))
++	     widget->allocation.height - trough_border)))
+ 	gtk_range_draw_trough (range);
+     }
+   else if (event->window == widget->window)
+@@ -1486,25 +1492,29 @@
+   gint tmp_width;
+   gint tleft;
+   gint tright;
++  gint stepper_spacing;
++  gint trough_border;
+ 
+   g_return_if_fail (range != NULL);
+ 
+   gdk_window_get_size (range->trough, &trough_width, NULL);
+   gdk_window_get_size (range->slider, &slider_length, NULL);
+ 
+-  tleft = GTK_WIDGET (range)->style->klass->xthickness;
+-  tright = trough_width - slider_length - GTK_WIDGET (range)->style->klass->xthickness;
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, &stepper_spacing);
++  
++  tleft = trough_border;
++  tright = trough_width - slider_length - trough_border;
+ 
+   if (range->step_back)
+     {
+       gdk_window_get_size (range->step_back, &tmp_width, NULL);
+-      tleft += (tmp_width + RANGE_CLASS (range)->stepper_slider_spacing);
++      tleft += (tmp_width + stepper_spacing);
+     }
+ 
+   if (range->step_forw)
+     {
+       gdk_window_get_size (range->step_forw, &tmp_width, NULL);
+-      tright -= (tmp_width + RANGE_CLASS (range)->stepper_slider_spacing);
++      tright -= (tmp_width + stepper_spacing);
+     }
+ 
+   if (left)
+@@ -1523,25 +1533,29 @@
+   gint tmp_height;
+   gint ttop;
+   gint tbottom;
++  gint trough_border;
++  gint stepper_spacing;
+ 
+   g_return_if_fail (range != NULL);
+ 
++  _gtk_range_get_props (range, NULL, &trough_border, NULL, &stepper_spacing);
++  
+   gdk_window_get_size (range->trough, NULL, &trough_height);
+   gdk_window_get_size (range->slider, NULL, &slider_length);
+ 
+-  ttop = GTK_WIDGET (range)->style->klass->ythickness;
+-  tbottom = trough_height - slider_length - GTK_WIDGET (range)->style->klass->ythickness;
++  ttop = trough_border;
++  tbottom = trough_height - slider_length - trough_border;
+ 
+   if (range->step_back)
+     {
+       gdk_window_get_size (range->step_back, NULL, &tmp_height);
+-      ttop += (tmp_height + RANGE_CLASS (range)->stepper_slider_spacing);
++      ttop += (tmp_height + stepper_spacing);
+     }
+ 
+   if (range->step_forw)
+     {
+       gdk_window_get_size (range->step_forw, NULL, &tmp_height);
+-      tbottom -= (tmp_height + RANGE_CLASS (range)->stepper_slider_spacing);
++      tbottom -= (tmp_height + stepper_spacing);
+     }
+ 
+   if (top)
+@@ -1587,3 +1601,32 @@
+ 	}
+     }
+ }
++
++void
++_gtk_range_get_props (GtkRange *range,
++		      gint     *slider_width,
++		      gint     *trough_border,
++		      gint     *stepper_size,
++		      gint     *stepper_spacing)
++{
++  GtkWidget *widget =  GTK_WIDGET (range);
++  
++
++  if (slider_width)
++    *slider_width = gtk_style_get_prop_experimental (widget->style,
++						     "GtkRange::slider_width",
++						     RANGE_CLASS (widget)->slider_width);
++  if (trough_border)
++    *trough_border = gtk_style_get_prop_experimental (widget->style,
++						      "GtkRange::trough_border",
++						      widget->style->klass->xthickness);
++  if (stepper_size)
++    *stepper_size = gtk_style_get_prop_experimental (widget->style,
++						     "GtkRange::stepper_size",
++						     RANGE_CLASS (widget)->stepper_size);
++  if (stepper_spacing)
++    *stepper_spacing = gtk_style_get_prop_experimental (widget->style,
++							"GtkRange::stepper_spacing",
++							RANGE_CLASS (widget)->stepper_slider_spacing);
++}
++
+diff -urN -X ../diff-ignore gtk+/gtk/gtkrange.h gtk+-themefix/gtk/gtkrange.h
+--- gtk+/gtk/gtkrange.h	Wed Feb 24 02:36:02 1999
++++ gtk+-themefix/gtk/gtkrange.h	Sun Nov 19 15:20:34 2000
+@@ -150,6 +150,11 @@
+ 						 gint           xdelta,
+ 						 gint           ydelta);
+ 
++void _gtk_range_get_props (GtkRange *range,
++			   gint     *slider_width,
++			   gint     *trough_border,
++			   gint     *stepper_size,
++			   gint     *stepper_spacing);
+ 
+ #ifdef __cplusplus
+ }
+diff -urN -X ../diff-ignore gtk+/gtk/gtkspinbutton.c gtk+-themefix/gtk/gtkspinbutton.c
+--- gtk+/gtk/gtkspinbutton.c	Thu Feb 10 16:13:41 2000
++++ gtk+-themefix/gtk/gtkspinbutton.c	Sun Nov 19 15:07:48 2000
+@@ -492,35 +492,52 @@
+     }
+ }
+ 
++static GtkShadowType
++gtk_spin_button_get_shadow_type (GtkSpinButton *spin_button)
++{
++  GtkWidget *widget = GTK_WIDGET (spin_button);
++  
++  GtkShadowType shadow_type =
++    gtk_style_get_prop_experimental (widget->style,
++				     "GtkSpinButton::shadow_type", -1);
++
++  if (shadow_type != (GtkShadowType)-1)
++    return shadow_type;
++  else
++    return spin_button->shadow_type;
++}
++
+ static void
+ gtk_spin_button_paint (GtkWidget    *widget,
+ 		       GdkRectangle *area)
+ {
+   GtkSpinButton *spin;
++  GtkShadowType shadow_type;
+ 
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_SPIN_BUTTON (widget));
+ 
+   spin = GTK_SPIN_BUTTON (widget);
++  shadow_type = gtk_spin_button_get_shadow_type (spin);
+ 
+   if (GTK_WIDGET_DRAWABLE (widget))
+     {
+-      if (spin->shadow_type != GTK_SHADOW_NONE)
++      if (shadow_type != GTK_SHADOW_NONE)
+ 	gtk_paint_box (widget->style, spin->panel,
+-		       GTK_STATE_NORMAL, spin->shadow_type,
++		       GTK_STATE_NORMAL, shadow_type,
+ 		       area, widget, "spinbutton",
+ 		       0, 0, 
+ 		       ARROW_SIZE + 2 * widget->style->klass->xthickness,
+ 		       widget->requisition.height); 
+       else
+-	 {
+-	    gdk_window_set_back_pixmap (spin->panel, NULL, TRUE);
+-	    gdk_window_clear_area (spin->panel, area->x, area->y, area->width, area->height);
+-	 }
+-       gtk_spin_button_draw_arrow (spin, GTK_ARROW_UP);
+-       gtk_spin_button_draw_arrow (spin, GTK_ARROW_DOWN);
+-
+-       GTK_WIDGET_CLASS (parent_class)->draw (widget, area);
++	{
++	  gdk_window_set_back_pixmap (spin->panel, NULL, TRUE);
++	  gdk_window_clear_area (spin->panel, area->x, area->y, area->width, area->height);
++	}
++      gtk_spin_button_draw_arrow (spin, GTK_ARROW_UP);
++      gtk_spin_button_draw_arrow (spin, GTK_ARROW_DOWN);
++      
++      GTK_WIDGET_CLASS (parent_class)->draw (widget, area);
+     }
+ }
+ 
+@@ -556,6 +573,7 @@
+ {
+   GtkStateType state_type;
+   GtkShadowType shadow_type;
++  GtkShadowType spin_shadow_type;
+   GtkWidget *widget;
+   gint x;
+   gint y;
+@@ -565,6 +583,8 @@
+   
+   widget = GTK_WIDGET (spin_button);
+ 
++  spin_shadow_type = gtk_spin_button_get_shadow_type (spin_button);
++
+   if (GTK_WIDGET_DRAWABLE (spin_button))
+     {
+       if (!spin_button->wrap &&
+@@ -597,7 +617,7 @@
+ 	}
+       if (arrow == GTK_ARROW_UP)
+ 	{
+-	  if (spin_button->shadow_type != GTK_SHADOW_NONE)
++	  if (spin_shadow_type != GTK_SHADOW_NONE)
+ 	    {
+ 	      x = widget->style->klass->xthickness;
+ 	      y = widget->style->klass->ythickness;
+@@ -616,7 +636,7 @@
+ 	}
+       else
+ 	{
+-	  if (spin_button->shadow_type != GTK_SHADOW_NONE)
++	  if (spin_shadow_type != GTK_SHADOW_NONE)
+ 	    {
+ 	      x = widget->style->klass->xthickness;
+ 	      y = widget->requisition.height / 2;
+diff -urN -X ../diff-ignore gtk+/gtk/gtkstyle.c gtk+-themefix/gtk/gtkstyle.c
+--- gtk+/gtk/gtkstyle.c	Mon Feb  7 21:09:23 2000
++++ gtk+-themefix/gtk/gtkstyle.c	Sun Nov 19 15:07:48 2000
+@@ -749,7 +749,8 @@
+   gdk_font_unref (style->font);
+   if (style->rc_style)
+     gtk_rc_style_unref (style->rc_style);
+-  
++
++  g_dataset_destroy (style);
+   g_free (style);
+ }
+ 
+@@ -3763,4 +3764,98 @@
+   g_return_if_fail (style->klass->draw_handle != NULL);
+   
+   style->klass->draw_handle (style, window, state_type, shadow_type, area, widget, detail, x, y, width, height, orientation);
++}
++
++/* Temporary GTK+-1.2.9 local patch for use only in theme engines.
++ * Simple integer geometry properties.
++ */
++typedef struct _StylePropPair StylePropPair;
++
++struct _StylePropPair
++{
++  gchar *name;
++  gint value;
++};
++
++static void
++style_prop_hash_destroy_pair (gpointer key, gpointer value, gpointer data)
++{
++  StylePropPair *pair = value;
++
++  g_free (pair->name);
++  g_free (pair);
++}
++
++static void
++style_prop_hash_destroy (gpointer data)
++{
++  GHashTable *prop_hash = data;
++
++  g_hash_table_foreach (prop_hash, style_prop_hash_destroy_pair, NULL);
++  g_hash_table_destroy (prop_hash);
++}
++
++static GHashTable *
++style_get_prop_hash (GtkStyle *style)
++{
++  static GQuark id = 0;
++  GHashTable *prop_hash;
++
++  if (!id)
++    id = g_quark_from_static_string ("gtk-style-prop-hash");
++  
++  prop_hash = g_dataset_id_get_data (style, id);
++  if (!prop_hash)
++    {
++      prop_hash = g_hash_table_new (g_str_hash, g_str_equal);
++      g_dataset_id_set_data_full (style, id, 
++				  prop_hash, style_prop_hash_destroy);
++    }
++
++  return prop_hash;
++}
++
++void 
++gtk_style_set_prop_experimental (GtkStyle    *style,
++				 const gchar *name,
++				 gint         value)
++{
++  GHashTable *prop_hash;
++  StylePropPair *pair;
++
++  g_return_if_fail (style != NULL);
++  g_return_if_fail (name != NULL);
++  
++  prop_hash = style_get_prop_hash (style);
++
++  pair = g_hash_table_lookup (prop_hash, name);
++  if (!pair)
++    {
++      pair = g_new (StylePropPair, 1);
++      pair->name = g_strdup (name);
++
++      g_hash_table_insert (prop_hash, pair->name, pair);
++    }
++  
++  pair->value = value;
++}
++
++gint
++gtk_style_get_prop_experimental (GtkStyle    *style,
++				 const gchar *name,
++				 gint         default_value)
++{
++  GHashTable *prop_hash;
++  StylePropPair *pair;
++
++  g_return_val_if_fail (style != NULL, default_value);
++  g_return_val_if_fail (name != NULL, default_value);
++  
++  prop_hash = style_get_prop_hash (style);
++  pair = g_hash_table_lookup (prop_hash, name);
++
++  if (pair)
++    return pair->value;
++  else
++    return default_value;
+ }
+diff -urN -X ../diff-ignore gtk+/gtk/gtkstyle.h gtk+-themefix/gtk/gtkstyle.h
+--- gtk+/gtk/gtkstyle.h	Wed Feb 24 02:36:28 1999
++++ gtk+-themefix/gtk/gtkstyle.h	Sun Nov 19 15:07:48 2000
+@@ -772,6 +772,16 @@
+ 			GtkOrientation orientation);
+ 
+ 
++/* Temporary GTK+-1.2.9 local patch for use only in theme engines.
++ * Simple integer geometry properties.
++ */
++void gtk_style_set_prop_experimental (GtkStyle    *style,
++				      const gchar *name,
++				      gint         value);
++gint gtk_style_get_prop_experimental (GtkStyle    *style,
++				      const gchar *name,
++				      gint         default_value);
++
+ #ifdef __cplusplus
+ }
+ #endif /* __cplusplus */
+diff -urN -X ../diff-ignore gtk+/gtk/gtkvscale.c gtk+-themefix/gtk/gtkvscale.c
+--- gtk+/gtk/gtkvscale.c	Wed Dec 29 22:57:47 1999
++++ gtk+-themefix/gtk/gtkvscale.c	Sun Nov 19 15:57:13 2000
+@@ -197,12 +197,15 @@
+   GdkWindowAttr attributes;
+   gint attributes_mask;
+   gint x, y, w, h;
++  gint slider_width;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_VSCALE (widget));
+   
+   GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+   range = GTK_RANGE (widget);
++
++  _gtk_range_get_props (range, &slider_width, NULL, NULL, NULL);
+   
+   widget->window = gtk_widget_get_parent_window (widget);
+   gdk_window_ref (widget->window);
+@@ -229,7 +232,7 @@
+   
+   range->trough = gdk_window_new (widget->window, &attributes, attributes_mask);
+   
+-  attributes.width = RANGE_CLASS (range)->slider_width;
++  attributes.width = slider_width;
+   attributes.height = SCALE_CLASS (range)->slider_length;
+   attributes.event_mask |= (GDK_BUTTON_MOTION_MASK |
+                             GDK_POINTER_MOTION_HINT_MASK);
+@@ -318,6 +321,7 @@
+ {
+   GtkScale *scale;
+   gint value_width;
++  gint slider_width, trough_border;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_VSCALE (widget));
+@@ -325,10 +329,12 @@
+   
+   scale = GTK_SCALE (widget);
+   
+-  requisition->width = (RANGE_CLASS (scale)->slider_width +
+-                        widget->style->klass->ythickness * 2);
++  _gtk_range_get_props (GTK_RANGE (scale),
++			&slider_width, &trough_border, NULL, NULL);
++  
++  requisition->width = (slider_width + trough_border * 2);
+   requisition->height = (SCALE_CLASS (scale)->slider_length +
+-                         widget->style->klass->xthickness) * 2;
++                         trough_border) * 2;
+   
+   if (scale->draw_value)
+     {
+@@ -386,6 +392,7 @@
+ {
+   GtkWidget *widget;
+   GtkScale *scale;
++  gint slider_width, trough_border;
+   
+   g_return_if_fail (vscale != NULL);
+   g_return_if_fail (GTK_IS_VSCALE (vscale));
+@@ -394,8 +401,10 @@
+   widget = GTK_WIDGET (vscale);
+   scale = GTK_SCALE (vscale);
+   
+-  *w = (RANGE_CLASS (scale)->slider_width +
+-        widget->style->klass->xthickness * 2);
++  _gtk_range_get_props (GTK_RANGE (scale),
++			&slider_width, &trough_border, NULL, NULL);
++  
++  *w = (slider_width + trough_border * 2);
+   *h = widget->allocation.height;
+   
+   if (scale->draw_value)
+diff -urN -X ../diff-ignore gtk+/gtk/gtkvscrollbar.c gtk+-themefix/gtk/gtkvscrollbar.c
+--- gtk+/gtk/gtkvscrollbar.c	Wed Feb 24 02:37:05 1999
++++ gtk+-themefix/gtk/gtkvscrollbar.c	Sun Nov 19 15:31:00 2000
+@@ -47,6 +47,8 @@
+                                              GtkArg             *arg,
+                                              guint               arg_id);
+ static void gtk_vscrollbar_realize          (GtkWidget          *widget);
++static void gtk_vscrollbar_size_request     (GtkWidget          *widget,
++                                             GtkRequisition     *requisition);
+ static void gtk_vscrollbar_size_allocate    (GtkWidget          *widget,
+                                              GtkAllocation      *allocation);
+ static void gtk_vscrollbar_draw_step_forw   (GtkRange           *range);
+@@ -104,6 +106,7 @@
+   object_class->get_arg = gtk_vscrollbar_get_arg;
+   
+   widget_class->realize = gtk_vscrollbar_realize;
++  widget_class->size_request = gtk_vscrollbar_size_request;
+   widget_class->size_allocate = gtk_vscrollbar_size_allocate;
+   
+   range_class->draw_step_forw = gtk_vscrollbar_draw_step_forw;
+@@ -156,18 +159,6 @@
+ static void
+ gtk_vscrollbar_init (GtkVScrollbar *vscrollbar)
+ {
+-  GtkWidget *widget;
+-  GtkRequisition *requisition;
+-  
+-  widget = GTK_WIDGET (vscrollbar);
+-  requisition = &widget->requisition;
+-  
+-  requisition->width = (RANGE_CLASS (widget)->slider_width +
+-                        widget->style->klass->xthickness * 2);
+-  requisition->height = (RANGE_CLASS (widget)->min_slider_size +
+-                         RANGE_CLASS (widget)->stepper_size +
+-                         RANGE_CLASS (widget)->stepper_slider_spacing +
+-                         widget->style->klass->ythickness) * 2;
+ }
+ 
+ GtkWidget*
+@@ -189,6 +180,9 @@
+   GtkRange *range;
+   GdkWindowAttr attributes;
+   gint attributes_mask;
++  gint slider_width;
++  gint stepper_size;
++  gint trough_border;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_VSCROLLBAR (widget));
+@@ -196,6 +190,9 @@
+   GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+   range = GTK_RANGE (widget);
+   
++  _gtk_range_get_props (range, &slider_width, &trough_border,
++			&stepper_size, NULL);
++
+   attributes.x = widget->allocation.x + (widget->allocation.width - widget->requisition.width) / 2;
+   attributes.y = widget->allocation.y;
+   attributes.width = widget->requisition.width;
+@@ -217,22 +214,22 @@
+   range->trough = widget->window;
+   gdk_window_ref (range->trough);
+   
+-  attributes.x = widget->style->klass->xthickness;
+-  attributes.y = widget->style->klass->ythickness;
+-  attributes.width = RANGE_CLASS (widget)->stepper_size;
+-  attributes.height = RANGE_CLASS (widget)->stepper_size;
++  attributes.x = trough_border;
++  attributes.y = trough_border;
++  attributes.width = stepper_size;
++  attributes.height = stepper_size;
+   
+   range->step_back = gdk_window_new (range->trough, &attributes, attributes_mask);
+   
+   attributes.y = (widget->allocation.height -
+-                  widget->style->klass->ythickness -
+-                  RANGE_CLASS (widget)->stepper_size);
++                  trough_border -
++                  stepper_size);
+   
+   range->step_forw = gdk_window_new (range->trough, &attributes, attributes_mask);
+   
+-  attributes.x = widget->style->klass->ythickness;
++  attributes.x = trough_border;
+   attributes.y = 0;
+-  attributes.width = RANGE_CLASS (widget)->slider_width;
++  attributes.width = slider_width;
+   attributes.height = RANGE_CLASS (widget)->min_slider_size;
+   attributes.event_mask |= (GDK_BUTTON_MOTION_MASK |
+                             GDK_POINTER_MOTION_HINT_MASK);
+@@ -260,10 +257,34 @@
+ }
+ 
+ static void
++gtk_vscrollbar_size_request (GtkWidget      *widget,
++			     GtkRequisition *requisition)
++{
++  gint slider_width;
++  gint trough_border;
++  gint stepper_size;
++  gint stepper_spacing;
++  
++  GtkRange *range = GTK_RANGE (widget);
++
++  _gtk_range_get_props (range, &slider_width, &trough_border,
++			&stepper_size, &stepper_spacing);
++  
++  requisition->width = (slider_width +
++                        trough_border * 2);
++  requisition->height = (RANGE_CLASS (widget)->min_slider_size +
++                         stepper_size +
++                         stepper_spacing +
++                         trough_border) * 2;
++}
++
++static void
+ gtk_vscrollbar_size_allocate (GtkWidget     *widget,
+                               GtkAllocation *allocation)
+ {
+   GtkRange *range;
++  gint trough_border;
++  gint stepper_size;
+   
+   g_return_if_fail (widget != NULL);
+   g_return_if_fail (GTK_IS_VSCROLLBAR (widget));
+@@ -273,24 +294,26 @@
+   if (GTK_WIDGET_REALIZED (widget))
+     {
+       range = GTK_RANGE (widget);
++
++      _gtk_range_get_props (range, NULL, &trough_border, &stepper_size, NULL);
+       
+       gdk_window_move_resize (range->trough,
+                               allocation->x + (allocation->width - widget->requisition.width) / 2,
+                               allocation->y,
+                               widget->requisition.width, allocation->height);
+       gdk_window_move_resize (range->step_back,
+-                              widget->style->klass->xthickness,
+-                              widget->style->klass->ythickness,
+-                              widget->requisition.width - widget->style->klass->xthickness * 2,
+-                              RANGE_CLASS (widget)->stepper_size);
++                              trough_border,
++                              trough_border,
++                              widget->requisition.width - trough_border * 2,
++                              stepper_size);
+       gdk_window_move_resize (range->step_forw,
+-                              widget->style->klass->xthickness,
+-                              allocation->height - widget->style->klass->ythickness -
+-                              RANGE_CLASS (widget)->stepper_size,
+-                              widget->requisition.width - widget->style->klass->xthickness * 2,
+-                              RANGE_CLASS (widget)->stepper_size);
++                              trough_border,
++                              allocation->height - trough_border -
++                              stepper_size,
++                              widget->requisition.width - trough_border * 2,
++                              stepper_size);
+       gdk_window_resize (range->slider,
+-                         widget->requisition.width - widget->style->klass->xthickness * 2,
++                         widget->requisition.width - trough_border * 2,
+                          RANGE_CLASS (range)->min_slider_size);
+       
+       gtk_range_slider_update (GTK_RANGE (widget));
+@@ -382,6 +405,7 @@
+   gint step_back_y;
+   gint step_back_height;
+   gint step_forw_y;
++  gint stepper_spacing;
+   gint slider_width;
+   gint slider_height;
+   gint top, bottom;
+@@ -394,14 +418,16 @@
+     {
+       range = GTK_RANGE (vscrollbar);
+       
++      _gtk_range_get_props (range, NULL, NULL, NULL, &stepper_spacing);
++      
+       gdk_window_get_size (range->step_back, NULL, &step_back_height);
+       gdk_window_get_position (range->step_back, NULL, &step_back_y);
+       gdk_window_get_position (range->step_forw, NULL, &step_forw_y);
+       
+       top = (step_back_y +
+              step_back_height +
+-             RANGE_CLASS (vscrollbar)->stepper_slider_spacing);
+-      bottom = step_forw_y - RANGE_CLASS (vscrollbar)->stepper_slider_spacing;
++             stepper_spacing);
++      bottom = step_forw_y - stepper_spacing;
+       height = bottom - top;
+       
+       if ((range->adjustment->page_size > 0) &&
