@@ -30,8 +30,8 @@ Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
 BuildRequires:	XFree86-devel
-BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	automake >= 1.7
 BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool
