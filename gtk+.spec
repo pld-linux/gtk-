@@ -1,8 +1,8 @@
 Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
-Version:	1.2.1
-Release:	2
+Version:	1.2.2
+Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -10,9 +10,9 @@ Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
 Patch0:		gtk+-info.patch
 URL:		http://www.gtk.org/
 Requires:	glib = %{version}
+BuildPrereq:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 Obsoletes:	gtk
-Conflicts:	glibc <= 2.0.7
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
@@ -148,6 +148,11 @@ fi
 %attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %changelog
+* Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.2.2-1]
+- removed Conflicts: glibc <= 2.0.7 (not neccessary now),
+- added "BuildPrereq: glib = %%{version}".
+
 * Thu Mar 25 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.2.1-1]
 - gzipping %doc,
