@@ -8,13 +8,14 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.8
-Release:	3
+Release:	4
 License:	LGPL
 Group:		X11/Libraries
+Group(de):	X11/Libraries
 Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
-Patch0:		gtk+-info.patch
-Patch1:		gtk+-ahiguti.patch
+Patch0:		%{name}-info.patch
+Patch1:		%{name}-ahiguti.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -81,6 +82,7 @@ Summary(it):	GIMP Toolkit and GIMP Drawing Kit
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
+Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 Requires:	glib-devel >= %{version}
@@ -103,6 +105,7 @@ Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 Summary:	Gtk+ static libraries
 Summary(pl):	Biblioteki statyczne Gtk+
 Group:		X11/Development/Libraries
+Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
@@ -119,7 +122,6 @@ Biblioteki statyczne Gtk+
 
 %build
 gettextize --copy --force
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-debug=no \
 	--enable-shm \
@@ -135,10 +137,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=/usr/share/aclocal
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
-
-gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
-	AUTHORS ChangeLog NEWS README TODO
+gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang %{name}
 
