@@ -1,7 +1,3 @@
-#
-# Conditional build:
-%bcond_with	xlibs
-#
 Summary:	The Gimp Toolkit
 Summary(cs):	Sada nástrojù pro Gimp
 Summary(de):	Der Gimp-Toolkit
@@ -36,12 +32,7 @@ Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
-%if %{with xlibs}
-BuildRequires:	libXi-devel
-BuildRequires:	libXt-devel
-%else
 BuildRequires:	XFree86-devel
-%endif
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1.7
 BuildRequires:	gettext-devel
@@ -116,12 +107,7 @@ Requires:	glib-devel >= %{version}
 # Every program using gtk+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
 # this call, so they are required by every program compiled with gtk+.
-%if %{with xlibs}
-Requires:	libXi-devel
-Requires:	libXt-devel
-%else
 Requires:	XFree86-devel
-%endif
 Requires:	glib-devel
 Obsoletes:	libgtk+1.2-devel
 Conflicts:	autoconf < 2.13
