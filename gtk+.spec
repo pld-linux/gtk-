@@ -20,6 +20,8 @@ Group(pl):	X11/Biblioteki
 Group(pt_BR):	X11/Bibliotecas
 Group(es):	X11/Bibliotecas
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
+Source1:	http://developer.gnome.org/doc/API/gdk-docs.tar.gz
+Source2:	http://developer.gnome.org/doc/API/gtk-docs.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-strip.patch
@@ -166,7 +168,7 @@ bibliotecas públicas.
 Biblioteki statyczne Gtk+
 
 %prep
-%setup  -q
+%setup  -q -a1 -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -177,13 +179,13 @@ rm -rf missing
 gettextize --copy --force
 aclocal
 #autoconf
-automake -a -c
+#automake -a -c
 %configure2_13 \
 	--enable-debug=no \
 	--enable-shm \
 	--with-xinput=xfree
 
-%{__make} m4datadir=/usr/share/aclocal
+%{__make} m4datadir=%{_aclocaldir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -266,7 +268,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
+%doc *.gz gtk/*.html gdk/*.html
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
