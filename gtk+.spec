@@ -15,8 +15,11 @@ Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
+# Source0-md5:	4d5cb2fc7fb7830e4af9747a36bfce20
 Source1:	http://developer.gnome.org/doc/API/gdk-docs.tar.gz
+# Source1-md5:	b80957f7e3148dc3b540fba0c88e51e5
 Source2:	http://developer.gnome.org/doc/API/gtk-docs.tar.gz
+# Source2-md5:	ae1d6638d1c4799a4a328f27f62aa224
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-strip.patch
