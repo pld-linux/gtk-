@@ -75,7 +75,8 @@ Biblioteki statyczne Gtk+
 
 %build
 autoconf
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+CFLAGS="$RPM_OPT_FLAGS -g"; export CFLAGS
+LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
@@ -92,7 +93,7 @@ make install \
 	m4datadir=/usr/share/aclocal \
 	gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
 
-strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
+strip $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 
 gzip -9n $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
 	AUTHORS ChangeLog NEWS README TODO
