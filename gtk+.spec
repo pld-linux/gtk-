@@ -1,7 +1,7 @@
 Summary:     The Gimp Toolkit
 Summary(pl): Gimp Toolkit
 Name:        gtk+
-Version:     1.1.12
+Version:     1.1.13
 Release:     1
 Copyright:   LGPL
 Group:       X11/Libraries
@@ -38,6 +38,7 @@ Summary(pl): Pliki nag³ówkowe i dokumentacja do Gtk+
 Group:       X11/Libraries
 Group(pl):   X11/Biblioteki
 Requires:    %{name} = %{version}, glib-devel = %{version}
+Requires:    autoconf >= 2.13, automake >= 1.4, libtool >= 1.2d
 Obsoletes:   gtk-devel
 PreReq:      /sbin/install-info
 
@@ -128,6 +129,11 @@ fi
 %attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Tue Jan 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  []
+- added "Requires: autoconf >= 2.13, automake >= 1.4, libtool >= 1.2d"
+  for devel subpackage.
+
 * Mon Jan 04 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.12-1]
 - more locales (ko).
