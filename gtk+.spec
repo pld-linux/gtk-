@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(es):	Conjunto de herramientas Gimp
 Name:		gtk+
 Version:	1.2.10
-Release:	3
+Release:	4
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -39,6 +39,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libgtk+1.2
 
 %define		_prefix		/usr/X11R6
 %define		_infodir	/usr/share/info
@@ -121,6 +122,7 @@ Requires:	libtool  >= 1.3.2
 # this call, so they are required by every program compiled with gtk+.
 Requires:	XFree86-devel
 Requires:	glib-devel
+Obsoletes:	libgtk+1.2-devel
 
 %description devel
 Libraries and header files for the GIMP's X libraries, which are
