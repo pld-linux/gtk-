@@ -8,11 +8,12 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.9
-Release:	1
+Release:	2
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
+Group(es):	X11/Bibliotecas
 Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.gtk.org:/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-info.patch
@@ -22,12 +23,12 @@ URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
-BuildRequires:	glib-devel >= %{version}
-BuildRequires:	gettext-devel
+BuildRequires:	XFree86-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	gettext-devel
+BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool
-BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
