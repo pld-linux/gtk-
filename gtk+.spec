@@ -1,13 +1,13 @@
 Summary:	The Gimp Toolkit
 Summary(cs):	Sada nástrojù pro Gimp
 Summary(de):	Der Gimp-Toolkit
+Summary(es):	Conjunto de herramientas Gimp
 Summary(fi):	Gimp-työkalukokoelma
 Summary(fr):	Le toolkit de Gimp
 Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
-Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Summary(pt_BR):	Kit de ferramentas Gimp
-Summary(es):	Conjunto de herramientas Gimp
+Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
 Release:	6
@@ -78,26 +78,26 @@ zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na
 piksel). Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego
 rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
-%description -l tr
-Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka
-programlarca da kullanýlmaktadýr.
-
 %description -l pt_BR
 Bibliotecas X originalmente escritas para o GIMP, que agora estão
 sendo também usadas por vários outros programas.
+
+%description -l tr
+Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka
+programlarca da kullanýlmaktadýr.
 
 %package devel
 Summary:	Gtk+ header files and development documentation
 Summary(cs):	Sada nástrojù GIMP a kreslící kit GIMP
 Summary(da):	GIMP Toolkit og GIMP Tegnings-værktøj
 Summary(de):	GIMP Toolkit und GIMP Drawing Kit
+Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
 Summary(fi):	Gimp-työkalukokoelma ja Gimp-piirtotyökalut
 Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK).
 Summary(it):	GIMP Toolkit and GIMP Drawing Kit
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
-Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
-Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
+Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	glib-devel >= %{version}
@@ -118,13 +118,6 @@ structures, GDK is a drawing toolkit which provides a thin layer over
 Xlib to help automate things like dealing with different color depths,
 and GTK is a widget set for creating user interfaces.
 
-%description -l pt_BR devel
-Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
-bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é
-um kit de ferramentas que provê uma camada sobre a Xlib para ajudar a
-automatizar coisas como o uso de diferentes profundidades de cor; e
-GTK é um conjunto de widgets para criar interfaces de usuário.
-
 %description -l es devel
 Bibliotecas y archivos de inclusión del GIMP, que están disponibles
 como bibliotecas públicas. GLIB incluye estructuras de datos útiles; e
@@ -136,11 +129,18 @@ usuario.
 %description -l pl devel
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 
+%description -l pt_BR devel
+Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
+bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é
+um kit de ferramentas que provê uma camada sobre a Xlib para ajudar a
+automatizar coisas como o uso de diferentes profundidades de cor; e
+GTK é um conjunto de widgets para criar interfaces de usuário.
+
 %package static
 Summary:	Gtk+ static libraries
+Summary(es):	Bibliotecas estáticas del GIMP
 Summary(pl):	Biblioteki statyczne Gtk+
 Summary(pt_BR):	Bibliotecas estáticas do GIMP
-Summary(es):	Bibliotecas estáticas del GIMP
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}
 
@@ -148,16 +148,16 @@ Requires:	%{name}-devel = %{version}
 Static libraries for the GIMP's X libraries, which are available as
 public libraries.
 
-%description -l pt_BR static
-Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas
-públicas.
-
 %description -l es static
 Bibliotecas estáticas del GIMP, que están disponibles como bibliotecas
 públicas.
 
 %description -l pl static
-Biblioteki statyczne Gtk+
+Biblioteki statyczne Gtk+.
+
+%description -l pt_BR static
+Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas
+públicas.
 
 %prep
 %setup  -q -a1 -a2
@@ -190,8 +190,6 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
-
-gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang %{name}
 
@@ -263,7 +261,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz gtk/*.html gdk/*.html
+%doc AUTHORS ChangeLog NEWS README TODO gtk/*.html gdk/*.html
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
