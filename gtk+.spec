@@ -84,10 +84,12 @@ LDFLAGS="-s"; export LDFLAGS
 	--enable-shm \
 	--mandir=%{_mandir}
 
-make m4datadir=%{_datadir}/aclocal
+make m4datadir=/usr/share/aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
+
 make install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=/usr/share/aclocal \
@@ -131,7 +133,11 @@ fi
 %lang(sl) /etc/X11/gtk/gtkrc.sl
 %lang(cs,hr,hu,pl,sk,sl) /etc/X11/gtk/gtkrc.iso-8859-2
 
-%{_datadir}/themes/Default/gtk
+%dir %{_libdir}/gtk/themes
+%dir %{_libdir}/gtk/themes/engines
+%dir %{_datadir}/themes
+
+%{_datadir}/themes/Default
 
 %files devel
 %defattr(644,root,root,755)
