@@ -27,6 +27,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
+BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
