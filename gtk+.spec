@@ -18,7 +18,7 @@ Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.t
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-clistmerge.patch
-Patch3:		%{name}-shmimage.patch
+#Patch3:		%{name}-shmimage.patch
 PAtch4:		%{name}-theme.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
@@ -124,7 +124,7 @@ Biblioteki statyczne Gtk+
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%patch3 -p1
 %patch4 -p1
 
 %build
