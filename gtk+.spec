@@ -7,7 +7,7 @@ Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
-Version:	1.2.5
+Version:	1.2.6
 Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
