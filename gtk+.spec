@@ -95,7 +95,7 @@ Summary(da):	GIMP Toolkit og GIMP Tegnings-værktøj
 Summary(de):	GIMP Toolkit und GIMP Drawing Kit
 Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
 Summary(fi):	Gimp-työkalukokoelma ja Gimp-piirtotyökalut
-Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK).
+Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
 Summary(it):	GIMP Toolkit and GIMP Drawing Kit
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
