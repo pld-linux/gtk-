@@ -83,14 +83,14 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/sbin/install-info /usr/info/gdk.info.gz /usr/info-dir --entry \
+/sbin/install-info /usr/info/gdk.info.gz /etc/info-dir --entry \
 "* GDK: (gdk).                                   The General Drawing Kit"
-/sbin/install-info /usr/info/gtk.info.gz /usr/info-dir --entry \
+/sbin/install-info /usr/info/gtk.info.gz /etc/info-dir --entry \
 "* GTK: (gtk).                                   The GIMP Toolkit"
 
 %preun devel
-/sbin/install-info --delete /usr/info/gdk.info.gz /usr/info-dir
-/sbin/install-info --delete /usr/info/gtk.info.gz /usr/info-dir
+/sbin/install-info --delete /usr/info/gdk.info.gz /etc/info-dir
+/sbin/install-info --delete /usr/info/gtk.info.gz /etc/info-dir
 
 %files
 %attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
