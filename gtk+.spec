@@ -168,6 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
+%dir %{_sysconfdir}/gtk
 %lang(az) %{_sysconfdir}/gtk/gtkrc.az
 %lang(be) %{_sysconfdir}/gtk/gtkrc.be
 %lang(bg) %{_sysconfdir}/gtk/gtkrc.bg*
