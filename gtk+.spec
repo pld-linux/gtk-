@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(es):	Conjunto de herramientas Gimp
 Name:		gtk+
 Version:	1.2.10
-Release:	5
+Release:	6
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -21,6 +21,7 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-strip.patch
 Patch3:		%{name}-pkgconfig.patch
+Patch4:		%{name}-focus.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -164,6 +165,7 @@ Biblioteki statyczne Gtk+
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f missing
