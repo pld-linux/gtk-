@@ -7,25 +7,26 @@ Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
-Version:	1.2.8
-Release:	10
+Version:	1.2.9
+Release:	1
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(pl):	X11/Biblioteki
-Source0:	ftp.gtk.org:/pub/gtk/v1.2/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gtk.org:/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
-Patch2:		%{name}-clistmerge.patch
-Patch3:		%{name}-shmimage.patch
-PAtch4:		%{name}-theme.patch
+Patch2:		%{name}-strip.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	gettext-devel
+BuildRequires:	automake
+BuildRequires:	autoconf
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -124,12 +125,12 @@ Biblioteki statyczne Gtk+
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch3 -p1
-%patch4 -p1
 
 %build
-automake
 gettextize --copy --force
+aclocal
+automake -a -c
+autoconf
 %configure \
 	--enable-debug=no \
 	--enable-shm \
@@ -165,6 +166,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
+%lang(az) %{_sysconfdir}/gtk/gtkrc.az
+%lang(be) %{_sysconfdir}/gtk/gtkrc.be
 %lang(bg) %{_sysconfdir}/gtk/gtkrc.bg*
 %lang(cs) %{_sysconfdir}/gtk/gtkrc.cs
 %lang(cy) %{_sysconfdir}/gtk/gtkrc.cy
@@ -172,7 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(eo) %{_sysconfdir}/gtk/gtkrc.eo
 %lang(et) %{_sysconfdir}/gtk/gtkrc.et
 %lang(ga) %{_sysconfdir}/gtk/gtkrc.ga
-%lang(he) %{_sysconfdir}/gtk/gtkrc.he
+%lang(he) %{_sysconfdir}/gtk/gtkrc.he*
 %lang(hr) %{_sysconfdir}/gtk/gtkrc.hr
 %lang(hu) %{_sysconfdir}/gtk/gtkrc.hu
 %lang(hy) %{_sysconfdir}/gtk/gtkrc.hy
@@ -180,11 +183,14 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ka) %{_sysconfdir}/gtk/gtkrc.ka*
 %lang(ko) %{_sysconfdir}/gtk/gtkrc.ko
 %lang(lt) %{_sysconfdir}/gtk/gtkrc.lt
+%lang(lv) %{_sysconfdir}/gtk/gtkrc.lv
+%lang(mi) %{_sysconfdir}/gtk/gtkrc.mi
 %lang(mk) %{_sysconfdir}/gtk/gtkrc.mk
 %lang(pl) %{_sysconfdir}/gtk/gtkrc.pl
 %lang(ro) %{_sysconfdir}/gtk/gtkrc.ro
 %lang(ru) %{_sysconfdir}/gtk/gtkrc.ru*
 %lang(sk) %{_sysconfdir}/gtk/gtkrc.sk
+%lang(sp) %{_sysconfdir}/gtk/gtkrc.sp
 %lang(sl) %{_sysconfdir}/gtk/gtkrc.sl
 %lang(sq) %{_sysconfdir}/gtk/gtkrc.sq
 %lang(sr) %{_sysconfdir}/gtk/gtkrc.sr
@@ -192,10 +198,13 @@ rm -rf $RPM_BUILD_ROOT
 %lang(tr) %{_sysconfdir}/gtk/gtkrc.tr
 %lang(uk) %{_sysconfdir}/gtk/gtkrc.uk
 %lang(vi) %{_sysconfdir}/gtk/gtkrc.vi*
+%lang(yi) %{_sysconfdir}/gtk/gtkrc.yi
 %lang(zh) %{_sysconfdir}/gtk/gtkrc.zh*
+%lang(be,bg) %{_sysconfdir}/gtk/gtkrc.cp1251
+%lang(he,yi) %{_sysconfdir}/gtk/gtkrc.cp1255
 %lang(cs,hr,hu,pl,ro,sk,sl,sq) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
-%lang(bg,mk,ru,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
-%lang(lt) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
+%lang(bg,mk,ru,sp,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
+%lang(lt,lv,mi) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
 %lang(cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
 %lang(et) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
 
@@ -212,6 +221,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
+%{_libdir}/pkgconfig/*
 %{_includedir}/*
 %{_infodir}/*info*
 %{_aclocaldir}/*.m4
