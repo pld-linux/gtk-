@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(es):	Conjunto de herramientas Gimp
 Name:		gtk+
 Version:	1.2.10
-Release:	6
+Release:	7
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -27,17 +27,13 @@ Icon:		gtk+.xpm
 Requires:	glib >= %{version}
 Requires:	iconv
 BuildRequires:	XFree86-devel
-BuildRequires:	automake
-BuildRequires:	autoconf
-BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
-BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
 
 %define		_prefix		/usr/X11R6
 %define		_infodir	/usr/share/info
-%define		_mandir		/usr/X11R6/man
+%define		_mandir		%{_prefix}/man
 %define		_sysconfdir	%{_datadir}
 
 %description
@@ -168,13 +164,6 @@ Biblioteki statyczne Gtk+
 %patch4 -p1
 
 %build
-rm -f missing
-#ibtoolize --copy --force
-gettextize --copy --force
-#aclocal
-#autoconf
-#automake -a -c
-cp -f /usr/share/automake/config.* .
 %configure2_13 \
 	--enable-debug=no \
 	--enable-shm \
@@ -191,7 +180,8 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
-gzip -9nf AUTHORS ChangeLog NEWS README TODO
+mv -f gtk/index{,-gtk}.html
+mv -f gdk/index{,-gdk}.html 
 
 %find_lang %{name}
 
@@ -263,7 +253,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz gtk/*.html gdk/*.html
+%doc AUTHORS ChangeLog NEWS README TODO gtk/*.html gdk/*.html
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
