@@ -122,13 +122,13 @@ LDFLAGS="-s"; export LDFLAGS
 	--enable-debug=no \
 	--enable-shm
 
-make m4datadir=/usr/share/aclocal
+%{__make} m4datadir=/usr/share/aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 
-make install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=/usr/share/aclocal \
 	gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
