@@ -14,7 +14,6 @@ Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
 Patch0:		gtk+-info.patch
-Patch1:		gtk+-iso-8859-2_font.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib = %{version}
@@ -109,7 +108,6 @@ Biblioteki statyczne Gtk+
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
