@@ -149,9 +149,3 @@ fi
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
-
-%changelog
-* Fri May 21 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.2.3-1]
-- spec based on version included in tar ball,
-- spec rewrited in PLD coding style.
