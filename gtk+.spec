@@ -8,7 +8,7 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.8
-Release:	8
+Release:	10
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -19,6 +19,7 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-clistmerge.patch
 Patch3:		%{name}-shmimage.patch
+PAtch4:		%{name}-theme.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -124,6 +125,7 @@ Biblioteki statyczne Gtk+
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 automake
@@ -141,7 +143,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	m4datadir=/usr/share/aclocal
+	m4datadir=%{_aclocaldir}
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -206,15 +208,12 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc *.gz
-
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
-
 %{_includedir}/*
 %{_infodir}/*info*
-/usr/share/aclocal/*.m4
-
+%{_aclocaldir}/*.m4
 %{_mandir}/man1/gtk-config.1*
 
 %files static
