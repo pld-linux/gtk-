@@ -7,7 +7,7 @@ Copyright:   LGPL
 Group:       X11/Libraries
 Source:      ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
 URL:         http://www.gtk.org/
-Requires:    glib >= 1.1.5
+Requires:    glib = %{version}
 BuildRoot:   /tmp/%{name}-%{version}-root
 Obsoletes:   gtk
 
@@ -34,7 +34,7 @@ s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 Summary:     Gtk+ header files and development documentation
 Summary(pl): Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Group:       X11/Libraries
-Requires:    %{name} = %{version}
+Requires:    %{name} = %{version}, glib-devel = %{version}
 Obsoletes:   gtk-devel
 PreReq:      /sbin/install-info
 
@@ -60,19 +60,21 @@ Biblioteki statyczne Gtk+
 %setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure --prefix=/usr/X11R6 \
 	--infodir=/usr/info \
-	--datadir=/usr/share
-make
+	--enable-debug=no \
+	--enable-shm
+make m4datadir=/usr/share/aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-
-gzip -9n $RPM_BUILD_ROOT/usr/info/*info*
+make install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	m4datadir=/usr/share/aclocal
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
+gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -81,18 +83,20 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/sbin/install-info /usr/info/gdk.info.gz /usr/info/dir --entry \
+/sbin/install-info /usr/info/gdk.info.gz /usr/info-dir --entry \
 "* GDK: (gdk).                                   The General Drawing Kit"
-/sbin/install-info /usr/info/gtk.info.gz /usr/info/dir --entry \
+/sbin/install-info /usr/info/gtk.info.gz /usr/info-dir --entry \
 "* GTK: (gtk).                                   The GIMP Toolkit"
+
 %preun devel
-/sbin/install-info --delete /usr/info/gdk.info.gz /usr/info/dir --entry \
-"* GDK: (gdk).                                   The General Drawing Kit"
-/sbin/install-info --delete /usr/info/gtk.info.gz /usr/info/dir --entry \
-"* GTK: (gtk).                                   The GIMP Toolkit"
+/sbin/install-info --delete /usr/info/gdk.info.gz /usr/info-dir
+/sbin/install-info --delete /usr/info/gtk.info.gz /usr/info-dir
 
 %files
 %attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
+/usr/X11R6/share/themes
+%lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
+%lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/gtk+.mo
 
 %files devel
 %defattr(644, root, root, 755)
@@ -102,12 +106,21 @@ rm -rf $RPM_BUILD_ROOT
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
 %attr(755, root, root) /usr/X11R6/bin/*
-%attr(644, root,  man) /usr/X11R6/man/man1/gtk-config.1
+%attr(644, root,  man) /usr/X11R6/man/man1/gtk-config.1.gz
 
 %files static
 %attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Sat Dec 19 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.7-1]
+- added gzipping man pages,
+- added using LDFLAGS="-s" to ./configure enviroment,
+- changed dependencies to "Requires: glib = %%{version}" in main and
+  "Requires: glib-devel = %%{version}" in devel subpackage,
+- added --enable-debug=no and --enable-shm for ./configure parameters,
+- standarized {un}registering info pages.
+
 * Tue Nov 24 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.5-1]
 - rewrited Summary and %description,
