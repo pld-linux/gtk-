@@ -114,26 +114,40 @@ fi
 %defattr(644,root,root,755) 
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
+%lang(cs) /etc/X11/gtk/gtkrc.cs
+%lang(hr) /etc/X11/gtk/gtkrc.hr
+%lang(hu) /etc/X11/gtk/gtkrc.hu
+%lang(cs,hr,hu,pl,sk,sl) /etc/X11/gtk/gtkrc.iso-8859-2
 %lang(ja) /etc/X11/gtk/gtkrc.ja
 %lang(ko) /etc/X11/gtk/gtkrc.ko
+%lang(pl) /etc/X11/gtk/gtkrc.pl
 %lang(ru) /etc/X11/gtk/gtkrc.ru
+%lang(sk) /etc/X11/gtk/gtkrc.sk
+%lang(sl) /etc/X11/gtk/gtkrc.sl
 
-%lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
-%lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
-%lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/gtk+.mo
-%lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
-%lang(hu) /usr/X11R6/share/locale/hu/LC_MESSAGES/gtk+.mo
-%lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/gtk+.mo
-%lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
-%lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/gtk+.mo
-%lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/gtk+.mo
-%lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/gtk+.mo
-%lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/gtk+.mo
-%lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/gtk+.mo
-%lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/gtk+.mo
-%lang(sv) /usr/X11R6/share/locale/sv/LC_MESSAGES/gtk+.mo
+%lang(ca)         /usr/X11R6/share/locale/ca/LC_MESSAGES/gtk+.mo
+%lang(cs)         /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
+%lang(de)         /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
+%lang(es)         /usr/X11R6/share/locale/es/LC_MESSAGES/gtk+.mo
+%lang(fi)         /usr/X11R6/share/locale/fi/LC_MESSAGES/gtk+.mo
+%lang(fr)         /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
+%lang(hr)         /usr/X11R6/share/locale/hr/LC_MESSAGES/gtk+.mo
+%lang(hu)         /usr/X11R6/share/locale/hu/LC_MESSAGES/gtk+.mo
+%lang(it)         /usr/X11R6/share/locale/it/LC_MESSAGES/gtk+.mo
+%lang(ja)         /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
+%lang(ko)         /usr/X11R6/share/locale/ko/LC_MESSAGES/gtk+.mo
+%lang(nl)         /usr/X11R6/share/locale/nl/LC_MESSAGES/gtk+.mo
+%lang(no)         /usr/X11R6/share/locale/no/LC_MESSAGES/gtk+.mo
+%lang(pl)         /usr/X11R6/share/locale/pl/LC_MESSAGES/gtk+.mo
+%lang(pt)         /usr/X11R6/share/locale/pt/LC_MESSAGES/gtk+.mo
+%lang(ru)         /usr/X11R6/share/locale/ru/LC_MESSAGES/gtk+.mo
+%lang(sk)         /usr/X11R6/share/locale/sk/LC_MESSAGES/gtk+.mo
+%lang(sl)         /usr/X11R6/share/locale/sl/LC_MESSAGES/gtk+.mo
+%lang(sv)         /usr/X11R6/share/locale/sv/LC_MESSAGES/gtk+.mo
+%lang(wa)         /usr/X11R6/share/locale/wa/LC_MESSAGES/gtk+.mo
+%lang(zh_TW.Big5) /usr/X11R6/share/locale/zh_TW.Big5/LC_MESSAGES/gtk+.mo
 
-/usr/X11R6/share/themes
+/usr/X11R6/share/themes/gtk
 
 %files devel
 %defattr(644,root,root,755)
