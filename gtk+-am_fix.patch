@@ -1,0 +1,65 @@
+diff -urN gtk+-1.2.10.orig/docs/Makefile.am gtk+-1.2.10/docs/Makefile.am
+--- gtk+-1.2.10.orig/docs/Makefile.am	Fri Nov 15 18:14:52 2002
++++ gtk+-1.2.10/docs/Makefile.am	Fri Nov 15 18:20:57 2002
+@@ -166,7 +166,7 @@
+ 	  echo $$p; \
+ 	done
+ 
+-EXTRA_DIST += \
++EXTRA_DIST = \
+ 	Changes-1.2.txt			\
+ 	debugging.txt			\
+ 	developers.txt			\
+diff -urN gtk+-1.2.10.orig/gdk/Makefile.am gtk+-1.2.10/gdk/Makefile.am
+--- gtk+-1.2.10.orig/gdk/Makefile.am	Fri Nov 15 18:14:52 2002
++++ gtk+-1.2.10/gdk/Makefile.am	Fri Nov 15 18:21:56 2002
+@@ -79,10 +79,10 @@
+ #
+ libgdkinclude_HEADERS = $(gdk_public_h_sources)
+ libgdk_la_SOURCES = $(gdk_c_sources)
+-MAINTAINERCLEANFILES +=
+-EXTRA_HEADERS +=
+-EXTRA_DIST +=
+-EXTRA_DIST +=
++MAINTAINERCLEANFILES =
++EXTRA_HEADERS =
++EXTRA_DIST =
++EXTRA_DIST =
+ 
+ #
+ # rules to generate built sources
+diff -urN gtk+-1.2.10.orig/gtk/Makefile.am gtk+-1.2.10/gtk/Makefile.am
+--- gtk+-1.2.10.orig/gtk/Makefile.am	Fri Nov 15 18:14:52 2002
++++ gtk+-1.2.10/gtk/Makefile.am	Fri Nov 15 18:22:21 2002
+@@ -310,17 +310,17 @@
+ #
+ libgtkinclude_HEADERS = $(gtk_public_h_sources) $(gtk_built_public_sources) gtkfeatures.h
+ libgtk_la_SOURCES = $(gtk_c_sources)
+-MAINTAINERCLEANFILES += $(gtk_built_public_sources) $(gtk_built_sources)
+-EXTRA_HEADERS +=
+-EXTRA_DIST += $(gtk_private_h_sources)
+-EXTRA_DIST += $(gtk_built_sources) $(gtk_built_public_sources) $(gtk_extra_sources)
++MAINTAINERCLEANFILES = $(gtk_built_public_sources) $(gtk_built_sources)
++EXTRA_HEADERS =
++EXTRA_DIST = $(gtk_private_h_sources)
++EXTRA_DIST = $(gtk_built_sources) $(gtk_built_public_sources) $(gtk_extra_sources)
+ 
+ #
+ # rules to generate built sources
+ #
+ # setup autogeneration dependancies
+ gen_sources = xgen-gdef xgen-gtbh xgen-gtbvc xgen-gtbic xgen-gtbec xgen-gmh xgen-gmc
+-CLEANFILES += $(gen_sources)
++CLEANFILES = $(gen_sources)
+ COPYING: $(gtk_built_public_sources) $(gtk_built_sources)
+ $(OBJECTS): COPYING 	# this is our oldest-source-stamp
+ # initial creation of the real stamp-* files
+@@ -463,7 +463,7 @@
+ 	cd $$builddir; cd $(srcdir); \
+ 	$(SHELL) $$top_builddir/libtool --mode=execute gdb $$builddir/testgtk
+ 
+-EXTRA_DIST += @STRIP_BEGIN@ \
++EXTRA_DIST = @STRIP_BEGIN@ \
+ 	testgtk.1 		\
+ 	testgtkrc 		\
+ 	testgtkrc2 		\
