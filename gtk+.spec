@@ -37,7 +37,7 @@ s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 Summary:	Gtk+ header files and development documentation
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Group:		X11/Development/Libraries
-Group(pl):	X11/Programowanie/Programowanie
+Group(pl):	X11/Programowanie/Biblioteki
 PreReq:		/sbin/install-info
 Requires:	%{name} = %{version}
 Requires:	glib-devel = %{version}
@@ -56,7 +56,7 @@ Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 Summary:	Gtk+ static libraries
 Summary(pl):	Biblioteki statyczne Gtk+
 Group:		X11/Development/Libraries
-Group(pl):	X11/Programowanie/Programowanie
+Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
