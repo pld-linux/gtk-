@@ -10,21 +10,24 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(es):	Conjunto de herramientas Gimp
 Name:		gtk+
 Version:	1.2.10
-Release:	2
+Release:	3
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
+Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
 Group(pt_BR):	X11/Bibliotecas
-Group(es):	X11/Bibliotecas
+Group(ru):	X11/âÉÂÌÉÏÔÅËÉ
+Group(uk):	X11/â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 Source1:	http://developer.gnome.org/doc/API/gdk-docs.tar.gz
 Source2:	http://developer.gnome.org/doc/API/gtk-docs.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-strip.patch
+Patch3:		%{name}-pkgconfig.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -71,11 +74,11 @@ käytetään nyt myös useissa muissakin ohjelmissa.
 Libreria X scritta per GIMP. Viene usata da diversi programmi.
 
 %description -l pl
-Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp zawiera
-funkcje do tworzenia graficznego interfrjsu uzytkownika pod X Window.
+Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp, zawiera
+funkcje do tworzenia graficznego interfejsu u¿ytkownika pod X Window.
 By³a tworzona z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+
-jest napiane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
-(czê¶æ Gtk+) jest warsw± po¶redni± pomiêdzy Xlib i reszt± toolkit
+jest napisane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
+(czê¶æ Gtk+) jest warstw± po¶redni± pomiêdzy Xlib i reszt± toolkitu
 zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na
 piksel). Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego
 rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
@@ -85,8 +88,8 @@ Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka
 programlarca da kullanýlmaktadýr.
 
 %description -l pt_BR
-Bibliotecas X originalmente escritas para o GIMP, que agora estão sendo também
-usadas por vários outros programas.
+Bibliotecas X originalmente escritas para o GIMP, que agora estão
+sendo também usadas por vários outros programas.
 
 %package devel
 Summary:	Gtk+ header files and development documentation
@@ -102,9 +105,12 @@ Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
 Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
 Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(es):	X11/Desarrollo/Bibliotecas
+Group(ru):	X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 Requires:	glib-devel >= %{version}
 Requires:	autoconf >= 2.13
@@ -118,25 +124,25 @@ Requires:	glib-devel
 
 %description devel
 Libraries and header files for the GIMP's X libraries, which are
-available as public libraries.  GLIB includes generally useful data
+available as public libraries. GLIB includes generally useful data
 structures, GDK is a drawing toolkit which provides a thin layer over
 Xlib to help automate things like dealing with different color depths,
 and GTK is a widget set for creating user interfaces.
 
 %description -l pt_BR devel
 Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
-bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é um kit de
-ferramentas que provê uma camada sobre a Xlib para ajudar a automatizar coisas
-como o uso de diferentes profundidades de cor; e GTK é um conjunto de widgets
-para criar interfaces de usuário.
+bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é
+um kit de ferramentas que provê uma camada sobre a Xlib para ajudar a
+automatizar coisas como o uso de diferentes profundidades de cor; e
+GTK é um conjunto de widgets para criar interfaces de usuário.
 
 %description -l es devel
-Bibliotecas y archivos de inclusión del GIMP, que están
-disponibles como bibliotecas públicas. GLIB incluye estructuras de
-datos útiles; e GDK es un kit de herramientas que provee una camada
-sobre Xlib para ayudar a automatizar cosas como el uso de diferentes
-profundidades de color; y GTK es un conjunto de widgets para crear
-interfaces de usuario.
+Bibliotecas y archivos de inclusión del GIMP, que están disponibles
+como bibliotecas públicas. GLIB incluye estructuras de datos útiles; e
+GDK es un kit de herramientas que provee una camada sobre Xlib para
+ayudar a automatizar cosas como el uso de diferentes profundidades de
+color; y GTK es un conjunto de widgets para crear interfaces de
+usuario.
 
 %description -l pl devel
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
@@ -148,21 +154,25 @@ Summary(pt_BR):	Bibliotecas estáticas do GIMP
 Summary(es):	Bibliotecas estáticas del GIMP
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):   X11/Desenvolvimento/Bibliotecas
-Group(es):      X11/Desarrollo/Bibliotecas
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
-Static libraries for the GIMP's X libraries, which are
-available as public libraries.
+Static libraries for the GIMP's X libraries, which are available as
+public libraries.
 
 %description -l pt_BR static
-Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas públicas.
+Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas
+públicas.
 
 %description -l es static
-Bibliotecas estáticas del GIMP, que están disponibles como
-bibliotecas públicas.
+Bibliotecas estáticas del GIMP, que están disponibles como bibliotecas
+públicas.
 
 %description -l pl static
 Biblioteki statyczne Gtk+
@@ -172,9 +182,10 @@ Biblioteki statyczne Gtk+
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
-rm -rf missing
+rm -f missing
 #libtoolize --copy --force
 gettextize --copy --force
 aclocal

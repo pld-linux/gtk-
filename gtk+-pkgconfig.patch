@@ -1,0 +1,8 @@
+--- gtk+-1.2.10/gtk+.pc.in.orig	Thu Nov 30 02:18:35 2000
++++ gtk+-1.2.10/gtk+.pc.in	Sun Oct 21 20:30:14 2001
+@@ -8,4 +8,4 @@
+ Version: @VERSION@
+ Requires: gdk
+ Libs: -L${libdir} -lgtk
+-Cflags: 
++Cflags: -I${includedir}/gtk+-1.2 @x_cflags@
