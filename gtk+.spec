@@ -16,6 +16,7 @@ Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
+Patch2:		gtk+-libtool.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -119,8 +120,10 @@ Biblioteki statyczne Gtk+
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
+automake
 gettextize --copy --force
 %configure \
 	--enable-debug=no \
@@ -206,7 +209,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 
 %{_includedir}/*
-%{_infodir}/*info*gz
+%{_infodir}/*info*
 /usr/share/aclocal/*.m4
 
 %{_mandir}/man1/gtk-config.1*
