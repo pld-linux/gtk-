@@ -71,7 +71,8 @@ Biblioteki statyczne Gtk+
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure --prefix=/usr/X11R6 \
+./configure %{_target} \
+	--prefix=/usr/X11R6 \
 	--infodir=/usr/info \
 	--sysconfdir=/etc/X11 \
 	--enable-debug=no \
