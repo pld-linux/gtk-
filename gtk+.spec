@@ -11,7 +11,7 @@ Patch0:		gtk+-info.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.gif
 Requires:	glib = %{version}
-BuildPrereq:	glib-devel = %{version}
+BuildRequires:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define _prefix  /usr/X11R6
