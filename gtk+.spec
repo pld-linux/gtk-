@@ -8,7 +8,8 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.8
-Release:	4
+Release:	8
+Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
@@ -17,6 +18,8 @@ Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.t
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		gtk+-libtool.patch
+Patch3:		gtk+-clistmerge.patch
+Patch4:		gtk+-shmimage.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -121,6 +124,8 @@ Biblioteki statyczne Gtk+
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 automake
