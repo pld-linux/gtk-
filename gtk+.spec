@@ -1,42 +1,60 @@
-Summary:   The Gimp Toolkit
-Name:      gtk+
-Version:   1.1.3
-Release:   1
-Copyright: LGPL
-Group:     X11/Libraries
-Source:    ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
-URL:       http://www.gtk.org/
-Requires:  glib >= 1.1.4
-BuildRoot: /tmp/%{name}-%{version}-root
-Obsoletes: gtk
+Summary:     The Gimp Toolkit
+Summary(pl): Gimp Toolkit
+Name:        gtk+
+Version:     1.1.5
+Release:     1
+Copyright:   LGPL
+Group:       X11/Libraries
+Source:      ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
+URL:         http://www.gtk.org/
+Requires:    glib >= 1.1.5
+BuildRoot:   /tmp/%{name}-%{version}-root
+Obsoletes:   gtk
 
 %description
-The X libraries originally written for the GIMP, which are now used by
-several other programs as well.
+Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
+user interfaces for the X Window System. It is designed to be small,
+efficient, and flexible. Gtk+ is written in C with a very object-oriented
+approach.
+Gdk (part of Gtk+) is a drawing toolkit which provides a thin layer over
+Xlib to help automate things like dealing with different color depths, and
+Gtk is a widget set for creating user interfaces.
+
+%description -l pl
+Gtk+, któtra to biblioteka sta³a siê podstaw± programu Gimp zawiera funkcje
+do tworzenia graficznego interfrjsu uzytkownika pod X Window. By³a tworzona
+z za³o¿eniem ¿eby bya ma³a, efektywna i wygodna. Gtk+ jest napiane w C z
+podej¶ciem zorientowanym bardzo obiektowo.
+Gdk (czê¶æ Gtk+) jest warsw± po¶redni± pomiêdzy Xlib i reszt± toolkit
+zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na piksel).
+Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek
+s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
 %package devel
-Summary:   Gtk+ header files and development documentation
-Group:     X11/Libraries
-Requires:  %{name} = %{version}
-Obsoletes: gtk-devel
-PreReq:    /sbin/install-info
+Summary:     Gtk+ header files and development documentation
+Summary(pl): Pliki nag³ówkowe i dokumentacja do Gtk+ 
+Group:       X11/Libraries
+Requires:    %{name} = %{version}
+Obsoletes:   gtk-devel
+PreReq:      /sbin/install-info
 
 %description devel
-Header files and development documentation for the GIMP's X libraries, which
-are available as public libraries. GDK is a drawing toolkit which provides a
-thin layer over Xlib to help automate things like dealing with different
-color depths, and GTK is a widget set for creating user interfaces.
+Header files and development documentation for the Gtk+ libraries.
+
+%description devel -l pl
+Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 
 %package static
-Summary:   Gtk+ static librariess
-Group:     X11/Libraries
-Requires:  %{name}-devel = %{version}
+Summary:     Gtk+ static libraries
+Summary(pl): Biblioteki statyczne Gtk+
+Group:       X11/Libraries
+Requires:    %{name}-devel = %{version}
 
 %description static
-Static libraries ot the GIMP's X libraries, which are available as public
-libraries. GDK is a drawing toolkit which provides a thin layer over Xlib to
-help automate things like dealing with different color depths, and GTK is a
-widget set for creating user interfaces.
+Gtk+ static libraries.
+
+%description static -l pl
+Biblioteki statyczne Gtk+
 
 %prep
 %setup -q
@@ -63,14 +81,15 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/sbin/install-info /usr/info/gdk.info.gz /usr/info/dir
-/sbin/install-info /usr/info/gtk.info.gz /usr/info/dir
-
+/sbin/install-info /usr/info/gdk.info.gz /usr/info/dir --entry \
+"* GDK: (gdk).                                   The General Drawing Kit"
+/sbin/install-info /usr/info/gtk.info.gz /usr/info/dir --entry \
+"* GTK: (gtk).                                   The GIMP Toolkit"
 %preun devel
-if [ $1 = 0 ]; then
-    /sbin/install-info --delete /usr/info/gdk.info.gz /usr/info/dir
-    /sbin/install-info --delete /usr/info/gtk.info.gz /usr/info/dir
-fi
+/sbin/install-info --delete /usr/info/gdk.info.gz /usr/info/dir --entry \
+"* GDK: (gdk).                                   The General Drawing Kit"
+/sbin/install-info --delete /usr/info/gtk.info.gz /usr/info/dir --entry \
+"* GTK: (gtk).                                   The GIMP Toolkit"
 
 %files
 %attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
@@ -89,6 +108,14 @@ fi
 %attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Tue Nov 24 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.5-1]
+- rewrited Summary and %description,
+- added pl translation,
+- updated "Requires: glib >= 1.1.5",
+- fixed --entry text on {un}registering info page for ed in %post
+  %preun in devel.
+
 * Thu Sep 24  1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.2-1]
 - added man page for gtk-config in devel,
