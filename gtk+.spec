@@ -20,7 +20,7 @@ Icon:		gtk+.xpm
 Requires:	glib = %{version}
 Requires:	iconv
 BuildRequires:	glib-devel = %{version}
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_infodir	/usr/share/info
