@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	8
+Release:	9
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -24,6 +24,7 @@ Patch3:		%{name}-pkgconfig.patch
 Patch4:		%{name}-focus.patch
 Patch5:		%{name}-am_fix.patch
 Patch6:		%{name}-ac_fix.patch
+Patch7:		%{name}-localenames.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -160,7 +161,7 @@ Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas
 públicas.
 
 %prep
-%setup  -q -a1 -a2
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -168,6 +169,15 @@ públicas.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+
+mv -f po/{sp,sr@cyrillic}.po
+mv -f po/{zh_CN.GB2312,zh_CN}.po
+mv -f po/{zh_TW.Big5,zh_TW}.po
+
+mkdir gtk-doc
+tar xzf %{SOURCE1} -C gtk-doc
+tar xzf %{SOURCE2} -C gtk-doc
 
 %build
 rm -f missing aclocal.m4 acinclude.m4
@@ -176,7 +186,6 @@ rm -f missing aclocal.m4 acinclude.m4
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-#cp -f /usr/share/automake/config.* .
 %configure \
 	--enable-debug=no \
 	--enable-shm \
@@ -209,6 +218,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
+%doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %dir %{_sysconfdir}/gtk
@@ -236,8 +246,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ro) %{_sysconfdir}/gtk/gtkrc.ro
 %lang(ru) %{_sysconfdir}/gtk/gtkrc.ru*
 %lang(sk) %{_sysconfdir}/gtk/gtkrc.sk
-%lang(sp) %{_sysconfdir}/gtk/gtkrc.sp
 %lang(sl) %{_sysconfdir}/gtk/gtkrc.sl
+# "sp" was meant to be "sr@cyrillic"
+%lang(sr) %{_sysconfdir}/gtk/gtkrc.sp
 %lang(sq) %{_sysconfdir}/gtk/gtkrc.sq
 %lang(sr) %{_sysconfdir}/gtk/gtkrc.sr
 %lang(th) %{_sysconfdir}/gtk/gtkrc.th
@@ -249,7 +260,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(be,bg,mk,ru,sr,uk) %{_sysconfdir}/gtk/gtkrc.cp1251
 %lang(he,yi) %{_sysconfdir}/gtk/gtkrc.cp1255
 %lang(cs,hr,hu,pl,ro,sk,sl,sq,sr) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
-%lang(bg,mk,ru,sp,sr,uk) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
+%lang(bg,mk,ru,sr,uk) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
 %lang(et,lt,lv) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
 %lang(br,cy,ga) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
 %{_sysconfdir}/gtk/gtkrc.iso-8859-15
@@ -263,8 +274,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
-#%doc gtk gdk - somebody fix
+%doc ChangeLog gtk-doc/{gdk,gtk}
 %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
