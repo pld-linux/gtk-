@@ -34,7 +34,7 @@ URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.53
-BuildRequires:	automake >= 1.7
+BuildRequires:	automake >= 1:1.7
 BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool >= 1.4.2-9
