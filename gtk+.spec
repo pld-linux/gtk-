@@ -8,7 +8,7 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	1
+Release:	2
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -146,7 +146,8 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	m4datadir=%{_aclocaldir}
+	m4datadir=%{_aclocaldir} \
+	pkgconfigdir=%{_pkgconfigdir}
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -224,7 +225,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/pkgconfig/*
+%{_pkgconfigdir}/*
 %{_includedir}/*
 %{_infodir}/*info*
 %{_aclocaldir}/*.m4
