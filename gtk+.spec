@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	xlibs
+#
 Summary:	The Gimp Toolkit
 Summary(cs):	Sada nástrojù pro Gimp
 Summary(de):	Der Gimp-Toolkit
@@ -32,7 +36,12 @@ Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
+%if %{with xlibs}
+BuildRequires:	libXi-devel
+BuildRequires:	libXt-devel
+%else
 BuildRequires:	XFree86-devel
+%endif
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1.7
 BuildRequires:	gettext-devel
@@ -102,12 +111,17 @@ Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	glib-devel >= %{version}
 # Every program using gtk+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
 # this call, so they are required by every program compiled with gtk+.
+%if %{with xlibs}
+Requires:	libXi-devel
+Requires:	libXt-devel
+%else
 Requires:	XFree86-devel
+%endif
 Requires:	glib-devel
 Obsoletes:	libgtk+1.2-devel
 Conflicts:	autoconf < 2.13
@@ -145,7 +159,7 @@ Summary(es):	Bibliotecas estáticas del GIMP
 Summary(pl):	Biblioteki statyczne Gtk+
 Summary(pt_BR):	Bibliotecas estáticas do GIMP
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static libraries for the GIMP's X libraries, which are available as
@@ -196,6 +210,7 @@ rm -f missing aclocal.m4 acinclude.m4
 %configure \
 	--enable-debug=no \
 	--enable-shm \
+	--with-x \
 	--with-xinput=xfree
 
 %{__make} m4datadir=%{_aclocaldir}
