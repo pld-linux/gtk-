@@ -2,7 +2,7 @@ Summary:	The Gimp Toolkit
 Summary(cs):	Sada nástrojù pro Gimp
 Summary(de):	Der Gimp-Toolkit
 Summary(fi):	Gimp-työkalukokoelma
-Summary(fr):	Le toolkit de Gimp.
+Summary(fr):	Le toolkit de Gimp
 Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
@@ -14,11 +14,11 @@ License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(pl):	X11/Biblioteki
-Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
+Source0:	ftp.gtk.org:/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
 Patch2:		%{name}-clistmerge.patch
-#Patch3:		%{name}-shmimage.patch
+Patch3:		%{name}-shmimage.patch
 PAtch4:		%{name}-theme.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
