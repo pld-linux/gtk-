@@ -14,13 +14,6 @@ Release:	5
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
-Group(de):	X11/Libraries
-Group(es):	X11/Bibliotecas
-Group(fr):	X11/Librairies
-Group(pl):	X11/Biblioteki
-Group(pt_BR):	X11/Bibliotecas
-Group(ru):	X11/Библиотеки
-Group(uk):	X11/Б╕бл╕отеки
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 Source1:	http://developer.gnome.org/doc/API/gdk-docs.tar.gz
 Source2:	http://developer.gnome.org/doc/API/gtk-docs.tar.gz
@@ -105,13 +98,6 @@ Summary(tr):	GIMP araГ takЩmЩ ve Гizim takЩmЩ
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
 Summary(es):	Conjunto de herramienta y conjunto de diseЯo GIMP
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Requires:	glib-devel >= %{version}
 Requires:	autoconf >= 2.13
@@ -155,13 +141,6 @@ Summary(pl):	Biblioteki statyczne Gtk+
 Summary(pt_BR):	Bibliotecas estАticas do GIMP
 Summary(es):	Bibliotecas estАticas del GIMP
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
