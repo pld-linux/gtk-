@@ -1,8 +1,8 @@
 Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
-Version:	1.2.3
-Release:	3
+Version:	1.2.4
+Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -117,16 +117,16 @@ fi
 %defattr(644,root,root,755) 
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
-%lang(cs) /etc/X11/gtk/gtkrc.cs
-%lang(hr) /etc/X11/gtk/gtkrc.hr
-%lang(hu) /etc/X11/gtk/gtkrc.hu
-%lang(ja) /etc/X11/gtk/gtkrc.ja
-%lang(ko) /etc/X11/gtk/gtkrc.ko
-%lang(pl) /etc/X11/gtk/gtkrc.pl
-%lang(ru) /etc/X11/gtk/gtkrc.ru
-%lang(sk) /etc/X11/gtk/gtkrc.sk
-%lang(sl) /etc/X11/gtk/gtkrc.sl
-%lang(cs,hr,hu,pl,sk,sl) /etc/X11/gtk/gtkrc.iso-8859-2
+%lang(cs) %{_sysconfdir}/gtk/gtkrc.cs
+%lang(hr) %{_sysconfdir}/gtk/gtkrc.hr
+%lang(hu) %{_sysconfdir}/gtk/gtkrc.hu
+%lang(ja) %{_sysconfdir}/gtk/gtkrc.ja
+%lang(ko) %{_sysconfdir}/gtk/gtkrc.ko
+%lang(pl) %{_sysconfdir}/gtk/gtkrc.pl
+%lang(ru) %{_sysconfdir}/gtk/gtkrc.ru
+%lang(sk) %{_sysconfdir}/gtk/gtkrc.sk
+%lang(sl) %{_sysconfdir}/gtk/gtkrc.sl
+%lang(cs,hr,hu,pl,sk,sl) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
 
 %dir %{_libdir}/gtk/themes
 %dir %{_libdir}/gtk/themes/engines
@@ -145,7 +145,7 @@ fi
 %{_infodir}/*info*gz
 /usr/share/aclocal/*.m4
 
-%{_mandir}/man1/gtk-config.1.gz
+%{_mandir}/man1/gtk-config.1*
 
 %files static
 %defattr(644,root,root,755)
