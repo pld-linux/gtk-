@@ -8,7 +8,7 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.4
-Release:	3
+Release:	4
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %post devel
 /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%preun devel
+%postun devel
 /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files -f %{name}.lang
