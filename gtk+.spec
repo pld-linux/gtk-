@@ -1,8 +1,8 @@
 Summary:     The Gimp Toolkit
 Summary(pl): Gimp Toolkit
 Name:        gtk+
-Version:     1.1.7
-Release:     2
+Version:     1.1.9
+Release:     1
 Copyright:   LGPL
 Group:       X11/Libraries
 Source:      ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
