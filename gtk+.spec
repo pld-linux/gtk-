@@ -170,7 +170,7 @@ públicas.
 %build
 rm -f missing
 #ibtoolize --copy --force
-gettextize --copy --force
+%{__gettextize}
 #aclocal
 #autoconf
 #automake -a -c
