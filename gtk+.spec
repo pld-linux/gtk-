@@ -1,11 +1,13 @@
 Summary:     The Gimp Toolkit
 Summary(pl): Gimp Toolkit
 Name:        gtk+
-Version:     1.1.9
+Version:     1.1.11
 Release:     1
 Copyright:   LGPL
 Group:       X11/Libraries
+Group(pl):   X11/Biblioteki
 Source:      ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
+Patch0:      gtk+-info.patch
 URL:         http://www.gtk.org/
 Requires:    glib = %{version}
 BuildRoot:   /tmp/%{name}-%{version}-root
@@ -34,6 +36,7 @@ s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 Summary:     Gtk+ header files and development documentation
 Summary(pl): Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Group:       X11/Libraries
+Group(pl):   X11/Biblioteki
 Requires:    %{name} = %{version}, glib-devel = %{version}
 Obsoletes:   gtk-devel
 PreReq:      /sbin/install-info
@@ -48,6 +51,7 @@ Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 Summary:     Gtk+ static libraries
 Summary(pl): Biblioteki statyczne Gtk+
 Group:       X11/Libraries
+Group(pl):   X11/Biblioteki
 Requires:    %{name}-devel = %{version}
 
 %description static
@@ -58,6 +62,7 @@ Biblioteki statyczne Gtk+
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
@@ -84,20 +89,26 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/sbin/install-info /usr/info/gdk.info.gz /etc/info-dir --entry \
-"* GDK: (gdk).                                   The General Drawing Kit"
-/sbin/install-info /usr/info/gtk.info.gz /etc/info-dir --entry \
-"* GTK: (gtk).                                   The GIMP Toolkit"
+/sbin/install-info /usr/info/gdk.info.gz /etc/info-dir
+/sbin/install-info /usr/info/gtk.info.gz /etc/info-dir
 
 %preun devel
-/sbin/install-info --delete /usr/info/gdk.info.gz /etc/info-dir
-/sbin/install-info --delete /usr/info/gtk.info.gz /etc/info-dir
+if [ $1 = 0 ]; then
+	/sbin/install-info --delete /usr/info/gdk.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/gtk.info.gz /etc/info-dir
+fi
 
 %files
 %attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
 /usr/X11R6/share/themes
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
+%lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
+%lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
+%lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/gtk+.mo
+%lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/gtk+.mo
+%lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/gtk+.mo
 %lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/gtk+.mo
+%lang(sv) /usr/X11R6/share/locale/sv/LC_MESSAGES/gtk+.mo
 
 %files devel
 %defattr(644, root, root, 755)
@@ -107,12 +118,19 @@ rm -rf $RPM_BUILD_ROOT
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
 %attr(755, root, root) /usr/X11R6/bin/*
+
 %attr(644, root,  man) /usr/X11R6/man/man1/gtk-config.1.gz
 
 %files static
 %attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Sat Jan 01 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.11-1]
+- standarized {un}registering info pages (added gtk+-info.patch),
+- added Group(pl),
+- more locales (fr, ja, nl, no, pl, sv).
+
 * Sat Dec 19 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.7-2]
 - added gzipping man pages,
