@@ -91,7 +91,7 @@ make install \
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
-gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/share/man/man1/*} \
+gzip -9n $RPM_BUILD_ROOT/usr/{share/info/*info*,X11R6/share/man/man1/*} \
 	AUTHORS ChangeLog NEWS README TODO
 
 %clean
