@@ -2,7 +2,7 @@ Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
 Version:	1.2.3
-Release:	2
+Release:	3
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -14,9 +14,10 @@ Requires:	glib = %{version}
 BuildRequires:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define _prefix  /usr/X11R6
-%define _infodir /usr/share/info
-%define _mandir  /usr/X11R6/man
+%define		_prefix		/usr/X11R6
+%define		_infodir	/usr/share/info
+%define		_mandir		/usr/X11R6/man
+%define		_sysconfdir	/etc/X11
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
@@ -37,7 +38,7 @@ zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na piksel).
 Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek
 s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
-%package	devel
+%package devel
 Summary:	Gtk+ header files and development documentation
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Group:		X11/Development/Libraries
@@ -55,7 +56,7 @@ Header files and development documentation for the Gtk+ libraries.
 %description -l pl devel
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 
-%package	static
+%package static
 Summary:	Gtk+ static libraries
 Summary(pl):	Biblioteki statyczne Gtk+
 Group:		X11/Development/Libraries
@@ -73,16 +74,10 @@ Biblioteki statyczne Gtk+
 %patch -p1
 
 %build
-aclocal && autoconf
-CFLAGS="$RPM_OPT_FLAGS"; export CFLAGS
 LDFLAGS="-s"; export LDFLAGS
 %configure \
-	--prefix=%{_prefix} \
-	--infodir=%{_infodir} \
-	--sysconfdir=/etc/X11 \
 	--enable-debug=no \
-	--enable-shm \
-	--mandir=%{_mandir}
+	--enable-shm
 
 make m4datadir=/usr/share/aclocal
 
