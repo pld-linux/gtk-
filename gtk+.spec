@@ -1,11 +1,12 @@
 Summary:   The Gimp Toolkit
 Name:      gtk+
-Version:   1.1.1
-Release:   2
+Version:   1.1.2
+Release:   1
 Copyright: LGPL
 Group:     X11/Libraries
 Source:    ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
 URL:       http://www.gtk.org/
+Requires:  glib >= 1.1.3
 BuildRoot: /tmp/%{name}-%{version}-root
 Obsoletes: gtk
 
@@ -82,11 +83,17 @@ fi
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
 %attr(755, root, root) /usr/X11R6/bin/*
+%attr(644, root,  man) /usr/X11R6/man/man1/gtk-config.1
 
 %files static
 %attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Thu Sep 24  1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.2-1]
+- added man page for gtk-config in devel,
+- added "Requires: glib >= 1.1.3" for main package.
+
 * Fri Sep 18 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.1-2]
 - changed prefix to /usr/X11R6.
