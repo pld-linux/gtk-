@@ -117,7 +117,7 @@ fi
 %lang(cs) /etc/X11/gtk/gtkrc.cs
 %lang(hr) /etc/X11/gtk/gtkrc.hr
 %lang(hu) /etc/X11/gtk/gtkrc.hu
-%lang(cs,hr,hu,pl,sk,sl) /etc/X11/gtk/gtkrc.iso-8859-2
+/etc/X11/gtk/gtkrc.iso-8859-2
 %lang(ja) /etc/X11/gtk/gtkrc.ja
 %lang(ko) /etc/X11/gtk/gtkrc.ko
 %lang(pl) /etc/X11/gtk/gtkrc.pl
