@@ -17,9 +17,8 @@ Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.gimp.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
-Patch2:		gtk+-libtool.patch
-Patch3:		gtk+-clistmerge.patch
-Patch4:		gtk+-shmimage.patch
+Patch2:		%{name}-clistmerge.patch
+Patch3:		%{name}-shmimage.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib >= %{version}
@@ -125,7 +124,6 @@ Biblioteki statyczne Gtk+
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 automake
