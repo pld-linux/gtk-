@@ -15,7 +15,7 @@ Group(pl):	X11/Biblioteki
 Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
 Patch0:		gtk+-info.patch
 URL:		http://www.gtk.org/
-Icon:		gtk+.gif
+Icon:		gtk+.xpm
 Requires:	glib = %{version}
 BuildRequires:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
