@@ -98,7 +98,7 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 gzip -9n $RPM_BUILD_ROOT{%{_infodir}/*info*,%{_mandir}/man1/*} \
 	AUTHORS ChangeLog NEWS README TODO
 
-%find_lang gtk+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -116,7 +116,7 @@ if [ "$1" = "0" ]; then
 	/sbin/install-info --delete %{_infodir}/gtk.info.gz /etc/info-dir
 fi
 
-%files -f gtk+.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755) 
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
