@@ -1,7 +1,7 @@
 Summary:   The Gimp Toolkit
 Name:      gtk+
 Version:   1.1.1
-Release:   1
+Release:   2
 Copyright: LGPL
 Group:     X11/Libraries
 Source:    ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
@@ -41,16 +41,19 @@ widget set for creating user interfaces.
 %setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr
+CFLAGS="$RPM_OPT_FLAGS" \
+./configure --prefix=/usr/X11R6 \
+	--infodir=/usr/info \
+	--datadir=/usr/share
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make prefix=$RPM_BUILD_ROOT/usr install
+make install DESTDIR=$RPM_BUILD_ROOT
 
 gzip -9n $RPM_BUILD_ROOT/usr/info/*info*
 
-strip $RPM_BUILD_ROOT/usr/lib/lib*so.*.*
+strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,21 +72,25 @@ if [ $1 = 0 ]; then
 fi
 
 %files
-%attr(755, root, root) /usr/lib/lib*.so.*.*
+%attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
 
 %files devel
 %defattr(644, root, root, 755)
 %doc AUTHORS ChangeLog NEWS README TODO
-/usr/lib/lib*.so
-/usr/include/*
+/usr/X11R6/lib/lib*.so
+/usr/X11R6/include/*
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
-%attr(755, root, root) /usr/bin/*
+%attr(755, root, root) /usr/X11R6/bin/*
 
 %files static
-%attr(644, root, root) /usr/lib/lib*a
+%attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Fri Sep 18 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.1-2]
+- changed prefix to /usr/X11R6.
+
 * Thu Aug  6 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.1-1]
 - removed glib stuff (nowe in separated package),
