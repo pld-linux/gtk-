@@ -169,7 +169,7 @@ fi
 %changelog
 * Mon May 10 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.2.2-2]
-- now package is FHS 2.0 compliat,
+- now package is FHS 2.0 compliant,
 - added package icon.
 
 * Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
