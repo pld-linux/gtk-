@@ -9,7 +9,7 @@ Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.6
 Release:	5
-Copyright:	LGPL
+License:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
@@ -28,13 +28,13 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 %define		_sysconfdir	%{_datadir}
 
 %description
-Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
-user interfaces for the X Window System. It is designed to be small,
-efficient, and flexible. Gtk+ is written in C with a very object-oriented
-approach.
-Gdk (part of Gtk+) is a drawing toolkit which provides a thin layer over
-Xlib to help automate things like dealing with different color depths, and
-Gtk is a widget set for creating user interfaces.
+Gtk+, which stands for the Gimp ToolKit, is a library for creating
+graphical user interfaces for the X Window System. It is designed to be
+small, efficient, and flexible. Gtk+ is written in C with a very
+object-oriented approach. Gdk (part of Gtk+) is a drawing toolkit which
+provides a thin layer over Xlib to help automate things like dealing with
+different color depths, and Gtk is a widget set for creating user
+interfaces.
 
 %description -l cs
 Knihovny X pùvodnì psané pro GIMP, které nyní pou¾ívá také øada jiných
@@ -59,15 +59,15 @@ Libreria X scritta per GIMP. Viene usata da diversi programmi.
 Gtk+, która to biblioteka sta³a siê podstaw± programu Gimp zawiera funkcje
 do tworzenia graficznego interfrjsu uzytkownika pod X Window. By³a tworzona
 z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. Gtk+ jest napiane w C z
-podej¶ciem zorientowanym bardzo obiektowo.
-Gdk (czê¶æ Gtk+) jest warsw± po¶redni± pomiêdzy Xlib i reszt± toolkit
-zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na piksel).
-Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek
-s³u¿±cych do tworzenia interfejsu u¿ytkownika.
+podej¶ciem zorientowanym bardzo obiektowo. Gdk (czê¶æ Gtk+) jest warsw±
+po¶redni± pomiêdzy Xlib i reszt± toolkit zapewniaj±c± pracê niezale¿nie od
+g³êbi koloru (ilo¶ci bitów na piksel). Gtk (druga czê¶æ Gtk+) jest
+natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek s³u¿±cych do tworzenia
+interfejsu u¿ytkownika.
 
 %description -l tr
-Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka programlarca da
-kullanýlmaktadýr.
+Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka programlarca
+da kullanýlmaktadýr.
 
 %package devel
 Summary:	Gtk+ header files and development documentation
