@@ -1,7 +1,7 @@
 Summary:     The Gimp Toolkit
 Summary(pl): Gimp Toolkit
 Name:        gtk+
-Version:     1.1.11
+Version:     1.1.12
 Release:     1
 Copyright:   LGPL
 Group:       X11/Libraries
@@ -104,6 +104,7 @@ fi
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
 %lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
 %lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
+%lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/gtk+.mo
 %lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/gtk+.mo
 %lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/gtk+.mo
 %lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/gtk+.mo
@@ -125,6 +126,10 @@ fi
 %attr(644, root, root) /usr/X11R6/lib/lib*a
 
 %changelog
+* Mon Jan 04 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.12-1]
+- more locales (ko).
+
 * Sat Jan 01 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.11-1]
 - standarized {un}registering info pages (added gtk+-info.patch),
