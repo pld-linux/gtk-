@@ -75,7 +75,7 @@ Biblioteki statyczne Gtk+
 
 %build
 autoconf
-CFLAGS="$RPM_OPT_FLAGS -g"; export CFLAGS
+CFLAGS="$RPM_OPT_FLAGS"; export CFLAGS
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--prefix=%{_prefix} \
