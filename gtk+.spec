@@ -80,13 +80,13 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 	--enable-debug=no \
 	--enable-shm
 
-make m4datadir=/usr/share/aclocal
+make m4datadir=%{_datadir}/aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	m4datadir=/usr/share/aclocal \
+	m4datadir=%{_datadir}/aclocal \
 	gnulocaledir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
@@ -158,7 +158,7 @@ fi
 
 /usr/X11R6/include/*
 %{_infodir}/*info*gz
-/usr/share/aclocal/*.m4
+%{_datadir}/aclocal/*.m4
 
 /usr/X11R6/share/man/man1/gtk-config.1.gz
 
