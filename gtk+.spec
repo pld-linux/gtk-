@@ -146,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 - simplification in %build and %install,
 - added installing glib info page in info indeks,
 - changesed dependences for devel to "Requires: %%{name} = %%{version}"
-- added striping shared libs.
+- added stripping shared libs.
 
 * Mon May 04 1998 Michael Fulbright <msf@redhat.com>
 - updated to latest CVS gtk-1-0 - version 1.0.1
