@@ -115,8 +115,6 @@ fi
 %lang(ko) /etc/X11/gtk/gtkrc.ko
 %lang(ru) /etc/X11/gtk/gtkrc.ru
 
-/usr/X11R6/share/themes
-
 %lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
 %lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/gtk+.mo
@@ -132,6 +130,8 @@ fi
 %lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/gtk+.mo
 %lang(sv) /usr/X11R6/share/locale/sv/LC_MESSAGES/gtk+.mo
 
+/usr/X11R6/share/themes
+
 %files devel
 %defattr(644,root,root,755)
 %doc *.gz
@@ -146,7 +146,8 @@ fi
 /usr/X11R6/man/man1/gtk-config.1.gz
 
 %files static
-%attr(644,root,root) /usr/X11R6/lib/lib*.a
+%defattr(644,root,root,755)
+/usr/X11R6/lib/lib*.a
 
 %changelog
 * Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
