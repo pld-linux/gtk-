@@ -74,6 +74,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 	--infodir=/usr/info \
 	--enable-debug=no \
 	--enable-shm
+
 make m4datadir=/usr/share/aclocal
 
 %install
@@ -84,9 +85,10 @@ make install \
 	gnulocaledir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
-gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*}
+gzip -9n $RPM_BUILD_ROOT/usr/info/*info*
 
 bzip2 -9 AUTHORS ChangeLog NEWS README TODO
+bzip2 -9 $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -107,6 +109,7 @@ fi
 %files
 %defattr(644,root,root,755) 
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+
 /usr/X11R6/share/themes
 
 %lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
@@ -125,17 +128,20 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %doc {AUTHORS,ChangeLog,NEWS,README,TODO}.bz2
-/usr/X11R6/lib/lib*.so
+
+%attr(755,root,root) /usr/X11R6/lib/lib*.so
 %attr(755,root,root) /usr/X11R6/bin/*
 
 /usr/X11R6/include/*
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
 
-%attr(644,root, man) /usr/X11R6/man/man1/gtk-config.1.gz
+%attr(644,root, man) /usr/X11R6/man/man1/gtk-config.1.bz2
 
 %files static
-%attr(644,root,root) /usr/X11R6/lib/lib*a
+%attr(644,root,root,755) 
+
+/usr/X11R6/lib/lib*a
 
 %changelog
 * Tue Jan 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
