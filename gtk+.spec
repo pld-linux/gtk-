@@ -1,5 +1,11 @@
 Summary:	The Gimp Toolkit
+Summary(cs):	Sada nástrojù pro Gimp
+Summary(de):	Der Gimp-Toolkit
+Summary(fi):	Gimp-työkalukokoelma
+Summary(fr):	Le toolkit de Gimp.
+Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
+Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.4
 Release:	1
@@ -28,6 +34,25 @@ Gdk (part of Gtk+) is a drawing toolkit which provides a thin layer over
 Xlib to help automate things like dealing with different color depths, and
 Gtk is a widget set for creating user interfaces.
 
+%description -l cs
+Knihovny X pùvodnì psané pro GIMP, které nyní pou¾ívá také øada jiných
+programù.
+
+%description -l da
+X biblioteker, oprindeligt udviklet til GIMP, men anvendes nu af flere
+forskellige programmer.
+
+%description -l de
+Die X-Libraries, die ursprünglich für GIMP geschrieben wurden und
+mittlerweile für eine ganze Reihe anderer Programme benutzt werden.
+
+%description -l fr
+X-kirjastot, jotka alunperin kirjoitettiin GIMP:lle, mutta joita käytetään
+nyt myös useissa muissakin ohjelmissa.
+
+%description -l it
+Libreria X scritta per GIMP. Viene usata da diversi programmi.
+
 %description -l pl
 Gtk+, któtra to biblioteka sta³a siê podstaw± programu Gimp zawiera funkcje
 do tworzenia graficznego interfrjsu uzytkownika pod X Window. By³a tworzona
@@ -38,9 +63,20 @@ zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na piksel).
 Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek
 s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
+%description -l tr
+Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka programlarca da
+kullanýlmaktadýr.
+
 %package devel
 Summary:	Gtk+ header files and development documentation
+Summary(cs):	Sada nástrojù GIMP a kreslící kit GIMP
+Summary(da):	GIMP Toolkit og GIMP Tegnings-værktøj
+Summary(de):	GIMP Toolkit und GIMP Drawing Kit
+Summary(fi):	Gimp-työkalukokoelma ja Gimp-piirtotyökalut
+Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK).
+Summary(it):	GIMP Toolkit and GIMP Drawing Kit
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
+Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 PreReq:		/sbin/install-info
