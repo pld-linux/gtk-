@@ -71,7 +71,8 @@ make m4datadir=/usr/share/aclocal
 rm -rf $RPM_BUILD_ROOT
 make install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	m4datadir=/usr/share/aclocal
+	m4datadir=/usr/share/aclocal \
+	gnulocaledir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*}
