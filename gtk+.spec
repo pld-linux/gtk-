@@ -75,7 +75,7 @@ autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--prefix=/usr/X11R6 \
-	--infodir=/usr/info \
+	--infodir=/usr/share/info \
 	--sysconfdir=/etc/X11 \
 	--enable-debug=no \
 	--enable-shm
