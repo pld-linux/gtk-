@@ -120,7 +120,8 @@ Biblioteki statyczne Gtk+
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-debug=no \
-	--enable-shm
+	--enable-shm \
+	--with-xinput=xfree
 
 %{__make} m4datadir=/usr/share/aclocal
 
