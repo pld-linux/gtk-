@@ -75,7 +75,7 @@ autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--prefix=/usr/X11R6 \
-	--infodir=/usr/share/info \
+	--infodir=%{_infodir} \
 	--sysconfdir=/etc/X11 \
 	--enable-debug=no \
 	--enable-shm
@@ -101,13 +101,13 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-/sbin/install-info /usr/share/info/gdk.info.gz /etc/info-dir
-/sbin/install-info /usr/share/info/gtk.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/gdk.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/gtk.info.gz /etc/info-dir
 
 %preun devel
 if [ "$1" = "0" ]; then
-	/sbin/install-info --delete /usr/share/info/gdk.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/share/info/gtk.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/gdk.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/gtk.info.gz /etc/info-dir
 fi
 
 %files
@@ -157,7 +157,7 @@ fi
 %attr(755,root,root) /usr/X11R6/bin/*
 
 /usr/X11R6/include/*
-/usr/share/info/*info*gz
+%{_infodir}/*info*gz
 /usr/share/aclocal/*.m4
 
 /usr/X11R6/share/man/man1/gtk-config.1.gz
