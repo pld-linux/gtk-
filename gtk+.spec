@@ -38,7 +38,6 @@ BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libgtk+1.2
 
-%define		_infodir	/usr/share/info
 %define		_sysconfdir	%{_datadir}
 
 %description
@@ -102,15 +101,15 @@ Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	glib-devel >= %{version}
-Requires:	autoconf >= 2.13
-Requires:	automake >= 1.4
-Requires:	libtool  >= 1.3.2
 # Every program using gtk+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
 # this call, so they are required by every program compiled with gtk+.
 Requires:	XFree86-devel
 Requires:	glib-devel
 Obsoletes:	libgtk+1.2-devel
+Conflicts:	autoconf < 2.13
+Conflicts:	automake < 1.4
+Conflicts:	libtool < 1.3.2
 
 %description devel
 Libraries and header files for the GIMP's X libraries, which are
@@ -119,7 +118,7 @@ structures, GDK is a drawing toolkit which provides a thin layer over
 Xlib to help automate things like dealing with different color depths,
 and GTK is a widget set for creating user interfaces.
 
-%description -l es devel
+%description devel -l es
 Bibliotecas y archivos de inclusión del GIMP, que están disponibles
 como bibliotecas públicas. GLIB incluye estructuras de datos útiles; e
 GDK es un kit de herramientas que provee una camada sobre Xlib para
@@ -127,10 +126,10 @@ ayudar a automatizar cosas como el uso de diferentes profundidades de
 color; y GTK es un conjunto de widgets para crear interfaces de
 usuario.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
 bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é
 um kit de ferramentas que provê uma camada sobre a Xlib para ajudar a
@@ -149,14 +148,14 @@ Requires:	%{name}-devel = %{version}
 Static libraries for the GIMP's X libraries, which are available as
 public libraries.
 
-%description -l es static
+%description static -l es
 Bibliotecas estáticas del GIMP, que están disponibles como bibliotecas
 públicas.
 
-%description -l pl static
+%description static -l pl
 Biblioteki statyczne Gtk+.
 
-%description -l pt_BR static
+%description static -l pt_BR
 Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas
 públicas.
 
@@ -268,9 +267,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gtk
 %dir %{_libdir}/gtk/themes
 %dir %{_libdir}/gtk/themes/engines
-%dir %{_datadir}/themes
 
-%{_datadir}/themes/Default
+%{_datadir}/themes/Default/gtk
 
 %files devel
 %defattr(644,root,root,755)
@@ -280,7 +278,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_pkgconfigdir}/*
 %{_includedir}/*
-%{_infodir}/*info*
+%{_infodir}/*.info*
 %{_aclocaldir}/*.m4
 %{_mandir}/man1/gtk-config.1*
 
