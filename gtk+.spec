@@ -8,7 +8,7 @@ Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.4
-Release:	1
+Release:	2
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
