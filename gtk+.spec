@@ -99,8 +99,10 @@ if [ $1 = 0 ]; then
 fi
 
 %files
+%defattr(644, root, root, 755) 
 %attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
 /usr/X11R6/share/themes
+
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
 %lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
 %lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
