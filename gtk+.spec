@@ -121,6 +121,7 @@ fi
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/gtk+.mo
 %lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/gtk+.mo
 %lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/gtk+.mo
+%lang(hu) /usr/X11R6/share/locale/hu/LC_MESSAGES/gtk+.mo
 %lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/gtk+.mo
 %lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/gtk+.mo
 %lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/gtk+.mo
