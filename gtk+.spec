@@ -6,6 +6,8 @@ Summary(fr):	Le toolkit de Gimp
 Summary(it):	Il toolkit per Gimp
 Summary(pl):	Gimp Toolkit
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
+Summary(pt_BR):	Kit de ferramentas Gimp
+Summary(es):	Conjunto de herramientas Gimp
 Name:		gtk+
 Version:	1.2.10
 Release:	2
@@ -15,6 +17,8 @@ Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
 Group(pl):	X11/Biblioteki
+Group(pt_BR):	X11/Bibliotecas
+Group(es):	X11/Bibliotecas
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ahiguti.patch
@@ -78,6 +82,10 @@ rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 Baþlangýçta GIMP için yazýlmýþ X kitaplýklarý. Þu anda baþka
 programlarca da kullanýlmaktadýr.
 
+%description -l pt_BR
+Bibliotecas X originalmente escritas para o GIMP, que agora estão sendo também
+usadas por vários outros programas.
+
 %package devel
 Summary:	Gtk+ header files and development documentation
 Summary(cs):	Sada nástrojù GIMP a kreslící kit GIMP
@@ -88,9 +96,13 @@ Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK).
 Summary(it):	GIMP Toolkit and GIMP Drawing Kit
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
+Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
+Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(es):	X11/Desarrollo/Bibliotecas
 Requires:	%{name} = %{version}
 Requires:	glib-devel >= %{version}
 Requires:	autoconf >= 2.13
@@ -103,7 +115,26 @@ Requires:	XFree86-devel
 Requires:	glib-devel
 
 %description devel
-Header files and development documentation for the Gtk+ libraries.
+Libraries and header files for the GIMP's X libraries, which are
+available as public libraries.  GLIB includes generally useful data
+structures, GDK is a drawing toolkit which provides a thin layer over
+Xlib to help automate things like dealing with different color depths,
+and GTK is a widget set for creating user interfaces.
+
+%description -l pt_BR devel
+Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
+bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é um kit de
+ferramentas que provê uma camada sobre a Xlib para ajudar a automatizar coisas
+como o uso de diferentes profundidades de cor; e GTK é um conjunto de widgets
+para criar interfaces de usuário.
+
+%description -l es devel
+Bibliotecas y archivos de inclusión del GIMP, que están
+disponibles como bibliotecas públicas. GLIB incluye estructuras de
+datos útiles; e GDK es un kit de herramientas que provee una camada
+sobre Xlib para ayudar a automatizar cosas como el uso de diferentes
+profundidades de color; y GTK es un conjunto de widgets para crear
+interfaces de usuario.
 
 %description -l pl devel
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
@@ -111,13 +142,25 @@ Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 %package static
 Summary:	Gtk+ static libraries
 Summary(pl):	Biblioteki statyczne Gtk+
+Summary(pt_BR):	Bibliotecas estáticas do GIMP
+Summary(es):	Bibliotecas estáticas del GIMP
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):   X11/Desenvolvimento/Bibliotecas
+Group(es):      X11/Desarrollo/Bibliotecas
 Requires:	%{name}-devel = %{version}
 
 %description static
-Gtk+ static libraries.
+Static libraries for the GIMP's X libraries, which are
+available as public libraries.
+
+%description -l pt_BR static
+Bibliotecas estáticas do GIMP, que estão disponíveis como bibliotecas públicas.
+
+%description -l es static
+Bibliotecas estáticas del GIMP, que están disponibles como
+bibliotecas públicas.
 
 %description -l pl static
 Biblioteki statyczne Gtk+
@@ -129,11 +172,13 @@ Biblioteki statyczne Gtk+
 %patch2 -p1
 
 %build
+rm -rf missing
+#libtoolize --copy --force
 gettextize --copy --force
 aclocal
+#autoconf
 automake -a -c
-autoconf
-%configure \
+%configure2_13 \
 	--enable-debug=no \
 	--enable-shm \
 	--with-xinput=xfree
