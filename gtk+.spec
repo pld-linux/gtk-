@@ -18,6 +18,7 @@ Patch1:		gtk+-ahiguti.patch
 URL:		http://www.gtk.org/
 Icon:		gtk+.xpm
 Requires:	glib = %{version}
+Requires:	iconv
 BuildRequires:	glib-devel = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
