@@ -49,7 +49,7 @@ graphical user interfaces for the X Window System. It is designed to
 be small, efficient, and flexible. GTK+ is written in C with a very
 object-oriented approach. Gdk (part of GTK+) is a drawing toolkit
 which provides a thin layer over Xlib to help automate things like
-dealing with different color depths, and GTK is a widget set for
+dealing with different color depths, and GTK+ is a widget set for
 creating user interfaces.
 
 %description -l cs
@@ -78,7 +78,7 @@ By³a tworzona z za³o¿eniem ¿eby by³a ma³a, efektywna i wygodna. GTK+
 jest napisane w C z podej¶ciem zorientowanym bardzo obiektowo. Gdk
 (czê¶æ GTK+) jest warstw± po¶redni± pomiêdzy Xlib i reszt± toolkitu
 zapewniaj±c± pracê niezale¿nie od g³êbi koloru (ilo¶ci bitów na
-piksel). GTK (druga czê¶æ GTK+) jest natomiast ju¿ zbiorem ró¿nego
+piksel). GTK+ (druga czê¶æ GTK+) jest natomiast ju¿ zbiorem ró¿nego
 rodzaju kontrolek s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
 %description -l pt_BR
@@ -119,14 +119,14 @@ Libraries and header files for the GIMP's X libraries, which are
 available as public libraries. GLIB includes generally useful data
 structures, GDK is a drawing toolkit which provides a thin layer over
 Xlib to help automate things like dealing with different color depths,
-and GTK is a widget set for creating user interfaces.
+and GTK+ is a widget set for creating user interfaces.
 
 %description devel -l es
 Bibliotecas y archivos de inclusión del GIMP, que están disponibles
 como bibliotecas públicas. GLIB incluye estructuras de datos útiles; e
 GDK es un kit de herramientas que provee una camada sobre Xlib para
 ayudar a automatizar cosas como el uso de diferentes profundidades de
-color; y GTK es un conjunto de widgets para crear interfaces de
+color; y GTK+ es un conjunto de widgets para crear interfaces de
 usuario.
 
 %description devel -l pl
@@ -137,7 +137,7 @@ Bibliotecas e arquivos de inclusão do GIMP, que estão disponíveis como
 bibliotecas públicas. A GLIB inclui estruturas de dados úteis; o GDK é
 um kit de ferramentas que provê uma camada sobre a Xlib para ajudar a
 automatizar coisas como o uso de diferentes profundidades de cor; e
-GTK é um conjunto de widgets para criar interfaces de usuário.
+GTK+ é um conjunto de widgets para criar interfaces de usuário.
 
 %package static
 Summary:	GTK+ static libraries
