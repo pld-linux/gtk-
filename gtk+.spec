@@ -1,8 +1,8 @@
 Summary:	The Gimp Toolkit
 Summary(pl):	Gimp Toolkit
 Name:		gtk+
-Version:	1.1.15
-Release:	1d
+Version:	1.1.16
+Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -42,7 +42,7 @@ Requires:	%{name} = %{version}
 Requires:	glib-devel = %{version}
 Requires:	autoconf >= 2.13
 Requires:	automake >= 1.4
-Requires:	libtool >= 1.2d
+Requires:	libtool  >= 1.2d
 Obsoletes:	gtk-devel
 
 %description devel
@@ -107,7 +107,7 @@ fi
 
 %files
 %defattr(644,root,root,755) 
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
 /usr/X11R6/share/themes
 
@@ -122,6 +122,7 @@ fi
 %lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/gtk+.mo
 %lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/gtk+.mo
 %lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/gtk+.mo
+%lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/gtk+.mo
 %lang(sv) /usr/X11R6/share/locale/sv/LC_MESSAGES/gtk+.mo
 
 %files devel
@@ -135,13 +136,17 @@ fi
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
 
-%attr(644,root, man) /usr/X11R6/man/man1/gtk-config.1.gz
+/usr/X11R6/man/man1/gtk-config.1.gz
 
 %files static
-%defattr(644,root,root,755) 
-/usr/X11R6/lib/lib*a
+%attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %changelog
+* Wed Feb 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.1.16-1]
+- more locales (ru),
+- removed man group from man pages.
+
 * Tue Jan 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.1.13-1d]
 - more locales (cs, es, it),
