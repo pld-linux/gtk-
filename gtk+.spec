@@ -1,17 +1,17 @@
-Summary:     The Gimp Toolkit
-Summary(pl): Gimp Toolkit
-Name:        gtk+
-Version:     1.1.13
-Release:     1
-Copyright:   LGPL
-Group:       X11/Libraries
-Group(pl):   X11/Biblioteki
-Source:      ftp://ftp.gimp.org/pub/gtk/v1.0/%{name}-%{version}.tar.gz
-Patch0:      gtk+-info.patch
-URL:         http://www.gtk.org/
-Requires:    glib = %{version}
-BuildRoot:   /tmp/%{name}-%{version}-root
-Obsoletes:   gtk
+Summary:	The Gimp Toolkit
+Summary(pl):	Gimp Toolkit
+Name:		gtk+
+Version:	1.1.13
+Release:	1d
+Copyright:	LGPL
+Group:		X11/Libraries
+Group(pl):	X11/Biblioteki
+Source:		ftp://ftp.gimp.org/pub/gtk/v1.1/%{name}-%{version}.tar.gz
+Patch0:		gtk+-info.patch
+URL:		http://www.gtk.org/
+Requires:	glib = %{version}
+BuildRoot:	/tmp/%{name}-%{version}-root
+Obsoletes:	gtk
 
 %description
 Gtk+, which stands for the Gimp ToolKit, is a library for creating graphical
@@ -33,32 +33,35 @@ Gtk (druga czê¶æ Gtk+) jest natomiast ju¿ zbiorem ró¿nego rodzaju kontrolek
 s³u¿±cych do tworzenia interfejsu u¿ytkownika.
 
 %package devel
-Summary:     Gtk+ header files and development documentation
-Summary(pl): Pliki nag³ówkowe i dokumentacja do Gtk+ 
-Group:       X11/Libraries
-Group(pl):   X11/Biblioteki
-Requires:    %{name} = %{version}, glib-devel = %{version}
-Requires:    autoconf >= 2.13, automake >= 1.4, libtool >= 1.2d
-Obsoletes:   gtk-devel
-PreReq:      /sbin/install-info
+Summary:	Gtk+ header files and development documentation
+Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
+Group:		X11/Libraries/Development
+Group(pl):	X11/Biblioteki/Programowanie
+PreReq:		/sbin/install-info
+Requires:	%{name} = %{version}
+Requires:	glib-devel = %{version}
+Requires:	autoconf >= 2.13
+Requires:	automake >= 1.4
+Requires:	libtool >= 1.2d
+Obsoletes:	gtk-devel
 
 %description devel
 Header files and development documentation for the Gtk+ libraries.
 
-%description devel -l pl
+%description -l pl devel
 Pliki nag³ówkowe i dokumentacja do bibliotek Gtk+.
 
 %package static
-Summary:     Gtk+ static libraries
-Summary(pl): Biblioteki statyczne Gtk+
-Group:       X11/Libraries
-Group(pl):   X11/Biblioteki
-Requires:    %{name}-devel = %{version}
+Summary:	Gtk+ static libraries
+Summary(pl):	Biblioteki statyczne Gtk+
+Group:		X11/Libraries/Development
+Group(pl):	X11/Biblioteki/Programowanie
+Requires:	%{name}-devel = %{version}
 
 %description static
 Gtk+ static libraries.
 
-%description static -l pl
+%description -l pl static
 Biblioteki statyczne Gtk+
 
 %prep
@@ -83,6 +86,8 @@ make install \
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 gzip -9n $RPM_BUILD_ROOT/usr/{info/*info*,X11R6/man/man1/*}
 
+bzip2 -9 AUTHORS ChangeLog NEWS README TODO
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -94,14 +99,14 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/install-info /usr/info/gtk.info.gz /etc/info-dir
 
 %preun devel
-if [ $1 = 0 ]; then
+if [ "$1" = "0" ]; then
 	/sbin/install-info --delete /usr/info/gdk.info.gz /etc/info-dir
 	/sbin/install-info --delete /usr/info/gtk.info.gz /etc/info-dir
 fi
 
 %files
-%defattr(644, root, root, 755) 
-%attr(755, root, root) /usr/X11R6/lib/lib*.so.*.*
+%defattr(644,root,root,755) 
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 /usr/X11R6/share/themes
 
 %lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/gtk+.mo
@@ -118,23 +123,25 @@ fi
 %lang(sv) /usr/X11R6/share/locale/sv/LC_MESSAGES/gtk+.mo
 
 %files devel
-%defattr(644, root, root, 755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%defattr(644,root,root,755)
+%doc {AUTHORS,ChangeLog,NEWS,README,TODO}.bz2
 /usr/X11R6/lib/lib*.so
+%attr(755,root,root) /usr/X11R6/bin/*
+
 /usr/X11R6/include/*
 /usr/info/*info*gz
 /usr/share/aclocal/*.m4
-%attr(755, root, root) /usr/X11R6/bin/*
 
-%attr(644, root,  man) /usr/X11R6/man/man1/gtk-config.1.gz
+%attr(644,root, man) /usr/X11R6/man/man1/gtk-config.1.gz
 
 %files static
-%attr(644, root, root) /usr/X11R6/lib/lib*a
+%attr(644,root,root) /usr/X11R6/lib/lib*a
 
 %changelog
 * Tue Jan 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.1.13-1]
+  [1.1.13-1d]
 - more locales (cs, es, it),
+- adde Group(pl),
 - added "Requires: autoconf >= 2.13, automake >= 1.4, libtool >= 1.2d"
   for devel subpackage.
 
