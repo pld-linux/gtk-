@@ -97,7 +97,7 @@ Summary(es):	Conjunto de herramienta y conjunto de diseño GIMP
 Summary(fi):	Gimp-työkalukokoelma ja Gimp-piirtotyökalut
 Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
 Summary(it):	GIMP Toolkit and GIMP Drawing Kit
-Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+ 
+Summary(pl):	Pliki nag³ówkowe i dokumentacja do Gtk+
 Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
 Summary(tr):	GIMP araç takýmý ve çizim takýmý
 Group:		X11/Development/Libraries
@@ -265,7 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO 
+%doc AUTHORS ChangeLog NEWS README TODO
 #%doc gtk gdk - somebody fix
 %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/lib*.so
