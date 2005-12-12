@@ -232,30 +232,30 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %dir %{_sysconfdir}/gtk
-%lang(az) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.az
+%lang(az) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.az
 %lang(be) %{_sysconfdir}/gtk/gtkrc.be
 %lang(bg) %{_sysconfdir}/gtk/gtkrc.bg*
 %lang(cs) %{_sysconfdir}/gtk/gtkrc.cs
 %lang(cy) %{_sysconfdir}/gtk/gtkrc.cy
-%lang(el) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.el
-%lang(eo) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.eo
+%lang(el) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.el
+%lang(eo) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.eo
 %lang(et) %{_sysconfdir}/gtk/gtkrc.et
 %lang(ga) %{_sysconfdir}/gtk/gtkrc.ga
-%lang(he) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.he
+%lang(he) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.he
 %lang(he) %{_sysconfdir}/gtk/gtkrc.he_*
 %lang(hr) %{_sysconfdir}/gtk/gtkrc.hr
 %lang(hu) %{_sysconfdir}/gtk/gtkrc.hu
-%lang(hy) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.hy
-%lang(ja) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.ja
+%lang(hy) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.hy
+%lang(ja) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.ja
 %lang(ka) %{_sysconfdir}/gtk/gtkrc.ka*
-%lang(ko) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.ko
+%lang(ko) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.ko
 %lang(lt) %{_sysconfdir}/gtk/gtkrc.lt
 %lang(lv) %{_sysconfdir}/gtk/gtkrc.lv
 %lang(mi) %{_sysconfdir}/gtk/gtkrc.mi
 %lang(mk) %{_sysconfdir}/gtk/gtkrc.mk
 %lang(pl) %{_sysconfdir}/gtk/gtkrc.pl
 %lang(ro) %{_sysconfdir}/gtk/gtkrc.ro
-%lang(ru) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.ru
+%lang(ru) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.ru
 %lang(ru) %{_sysconfdir}/gtk/gtkrc.ru_RU.iso88595
 %lang(sk) %{_sysconfdir}/gtk/gtkrc.sk
 %lang(sl) %{_sysconfdir}/gtk/gtkrc.sl
@@ -263,23 +263,23 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sr) %{_sysconfdir}/gtk/gtkrc.sp
 %lang(sq) %{_sysconfdir}/gtk/gtkrc.sq
 %lang(sr) %{_sysconfdir}/gtk/gtkrc.sr
-%lang(th) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.th
-%lang(tr) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.tr
-%lang(uk) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.uk
+%lang(th) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.th
+%lang(tr) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.tr
+%lang(uk) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.uk
 %lang(vi) %{_sysconfdir}/gtk/gtkrc.vi
-%lang(vi) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.vi_VN.tcvn
-%lang(vi) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.vi_VN.viscii
+%lang(vi) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.vi_VN.tcvn
+%lang(vi) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.vi_VN.viscii
 %lang(vi) %{_sysconfdir}/gtk/gtkrc.vi_VN.viscii111
 %lang(yi) %{_sysconfdir}/gtk/gtkrc.yi
-%lang(zh) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.zh_CN
-%lang(zh) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.zh_TW.big5
-%lang(be,bg,mk,ru,sr,uk) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.cp1251
-%lang(he,yi) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.cp1255
-%lang(cs,hr,hu,pl,ro,sk,sl,sq,sr) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
-%lang(bg,mk,ru,sr,uk) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
-%lang(et,lt,lv) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
-%lang(br,cy,ga) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
+%lang(zh) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.zh_CN
+%lang(zh) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.zh_TW.big5
+%lang(be,bg,mk,ru,sr,uk) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.cp1251
+%lang(he,yi) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.cp1255
+%lang(cs,hr,hu,pl,ro,sk,sl,sq,sr) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.iso-8859-2
+%lang(bg,mk,ru,sr,uk) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.iso-8859-5
+%lang(et,lt,lv) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.iso-8859-13
+%lang(br,cy,ga) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.iso-8859-14
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.iso-8859-15
 
 %dir %{_libdir}/gtk
 %dir %{_libdir}/gtk/themes
