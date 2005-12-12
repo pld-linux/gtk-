@@ -1,0 +1,4 @@
+- Removed klockish %{_sysconfdir} redefinition
+  Wow - Now we can even see pl letters in gtk+ apps under KDE
+  without having ~/.gtkrc !!!
+- Release 13
