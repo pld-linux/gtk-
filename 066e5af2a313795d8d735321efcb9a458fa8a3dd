@@ -1,0 +1,2 @@
+- use %_pkgconfigdir macro instead of /usr/X11R6/lib/pkgconfig
+- release 2
