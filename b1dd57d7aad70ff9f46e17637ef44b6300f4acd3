@@ -1,0 +1,2 @@
+- %{_datadir}/themes{,/Default} dirs moved to XFree86-libs
+- "Requires ... >=" for ac/am/lt in -devel changed to "Conflicts ... <"
