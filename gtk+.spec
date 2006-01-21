@@ -31,7 +31,6 @@ Patch7:		%{name}-localenames.patch
 Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
 URL:		http://www.gtk.org/
-Icon:		gtk+.xpm
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.7
