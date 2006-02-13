@@ -10,7 +10,7 @@ Summary(pt_BR):	Kit de ferramentas Gimp
 Summary(tr):	Gimp ToolKit arayüz kitaplýðý
 Name:		gtk+
 Version:	1.2.10
-Release:	17
+Release:	18
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -31,7 +31,7 @@ Patch7:		%{name}-localenames.patch
 Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
 URL:		http://www.gtk.org/
-BuildRequires:	XFree86-devel
+BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.7
 BuildRequires:	gettext-devel
@@ -107,7 +107,7 @@ Requires:	glib-devel >= %{version}
 # Every program using GTK+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
 # this call, so they are required by every program compiled with GTK+.
-Requires:	XFree86-devel
+Requires:	xorg-lib-libXi-devel
 Requires:	glib-devel
 Obsoletes:	libgtk+1.2-devel
 Conflicts:	autoconf < 2.13
