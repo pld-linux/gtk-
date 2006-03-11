@@ -31,13 +31,14 @@ Patch7:		%{name}-localenames.patch
 Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
 URL:		http://www.gtk.org/
-BuildRequires:	xorg-lib-libXi-devel
-BuildRequires:	autoconf >= 2.53
+BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.7
 BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool >= 1.4.2-9
 BuildRequires:	texinfo
+# libXext already implied by libXi
+BuildRequires:	xorg-lib-libXi-devel
 Requires:	glib >= %{version}
 Requires:	iconv
 Obsoletes:	libgtk+1.2
@@ -107,8 +108,8 @@ Requires:	glib-devel >= %{version}
 # Every program using GTK+ should get a list of libraries to link with by
 # executing `gtk-config --libs`. All libraries listed below are returned by
 # this call, so they are required by every program compiled with GTK+.
+Requires:	glib-devel >= %{version}
 Requires:	xorg-lib-libXi-devel
-Requires:	glib-devel
 Obsoletes:	libgtk+1.2-devel
 Conflicts:	autoconf < 2.13
 Conflicts:	automake < 1.4
