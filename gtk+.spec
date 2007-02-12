@@ -1,13 +1,13 @@
 Summary:	The Gimp Toolkit
-Summary(cs):	Sada n·stroj˘ pro Gimp
-Summary(de):	Der Gimp-Toolkit
-Summary(es):	Conjunto de herramientas Gimp
-Summary(fi):	Gimp-tyˆkalukokoelma
-Summary(fr):	Le toolkit de Gimp
-Summary(it):	Il toolkit per Gimp
-Summary(pl):	Gimp Toolkit
-Summary(pt_BR):	Kit de ferramentas Gimp
-Summary(tr):	Gimp ToolKit aray¸z kitapl˝˝
+Summary(cs.UTF-8):   Sada n√°stroj≈Ø pro Gimp
+Summary(de.UTF-8):   Der Gimp-Toolkit
+Summary(es.UTF-8):   Conjunto de herramientas Gimp
+Summary(fi.UTF-8):   Gimp-ty√∂kalukokoelma
+Summary(fr.UTF-8):   Le toolkit de Gimp
+Summary(it.UTF-8):   Il toolkit per Gimp
+Summary(pl.UTF-8):   Gimp Toolkit
+Summary(pt_BR.UTF-8):   Kit de ferramentas Gimp
+Summary(tr.UTF-8):   Gimp ToolKit aray√ºz kitaplƒ±ƒüƒ±
 Name:		gtk+
 Version:	1.2.10
 Release:	19
@@ -53,55 +53,55 @@ which provides a thin layer over Xlib to help automate things like
 dealing with different color depths, and GTK is a widget set for
 creating user interfaces.
 
-%description -l cs
-Knihovny X p˘vodnÏ psanÈ pro GIMP, kterÈ nynÌ pouæÌv· takÈ ¯ada jin˝ch
-program˘.
+%description -l cs.UTF-8
+Knihovny X p≈Øvodnƒõ psan√© pro GIMP, kter√© nyn√≠ pou≈æ√≠v√° tak√© ≈ôada jin√Ωch
+program≈Ø.
 
-%description -l da
+%description -l da.UTF-8
 X biblioteker, oprindeligt udviklet til GIMP, men anvendes nu af flere
 forskellige programmer.
 
-%description -l de
-Die X-Libraries, die urspr¸nglich f¸r GIMP geschrieben wurden und
-mittlerweile f¸r eine ganze Reihe anderer Programme benutzt werden.
+%description -l de.UTF-8
+Die X-Libraries, die urspr√ºnglich f√ºr GIMP geschrieben wurden und
+mittlerweile f√ºr eine ganze Reihe anderer Programme benutzt werden.
 
-%description -l fr
+%description -l fr.UTF-8
 X-kirjastot, jotka alunperin kirjoitettiin GIMP:lle, mutta joita
-k‰ytet‰‰n nyt myˆs useissa muissakin ohjelmissa.
+k√§ytet√§√§n nyt my√∂s useissa muissakin ohjelmissa.
 
-%description -l it
+%description -l it.UTF-8
 Libreria X scritta per GIMP. Viene usata da diversi programmi.
 
-%description -l pl
-GTK+, ktÛra to biblioteka sta≥a siÍ podstaw± programu Gimp, zawiera
-funkcje do tworzenia graficznego interfejsu uøytkownika pod X Window.
-By≥a tworzona z za≥oøeniem øeby by≥a ma≥a, efektywna i wygodna. GTK+
-jest napisane w C z podej∂ciem zorientowanym bardzo obiektowo. GDK
-(czÍ∂Ê GTK+) jest warstw± po∂redni± pomiÍdzy Xlib i reszt± toolkitu
-zapewniaj±c± pracÍ niezaleønie od g≥Íbi koloru (ilo∂ci bitÛw na
-piksel). GTK (druga czÍ∂Ê GTK+) jest natomiast juø zbiorem rÛønego
-rodzaju kontrolek s≥uø±cych do tworzenia interfejsu uøytkownika.
+%description -l pl.UTF-8
+GTK+, kt√≥ra to biblioteka sta≈Ça siƒô podstawƒÖ programu Gimp, zawiera
+funkcje do tworzenia graficznego interfejsu u≈ºytkownika pod X Window.
+By≈Ça tworzona z za≈Ço≈ºeniem ≈ºeby by≈Ça ma≈Ça, efektywna i wygodna. GTK+
+jest napisane w C z podej≈õciem zorientowanym bardzo obiektowo. GDK
+(czƒô≈õƒá GTK+) jest warstwƒÖ po≈õredniƒÖ pomiƒôdzy Xlib i resztƒÖ toolkitu
+zapewniajƒÖcƒÖ pracƒô niezale≈ºnie od g≈Çƒôbi koloru (ilo≈õci bit√≥w na
+piksel). GTK (druga czƒô≈õƒá GTK+) jest natomiast ju≈º zbiorem r√≥≈ºnego
+rodzaju kontrolek s≈Çu≈ºƒÖcych do tworzenia interfejsu u≈ºytkownika.
 
-%description -l pt_BR
-Bibliotecas X originalmente escritas para o GIMP, que agora est„o
-sendo tambÈm usadas por v·rios outros programas.
+%description -l pt_BR.UTF-8
+Bibliotecas X originalmente escritas para o GIMP, que agora est√£o
+sendo tamb√©m usadas por v√°rios outros programas.
 
-%description -l tr
-Ba˛lang˝Áta GIMP iÁin yaz˝lm˝˛ X kitapl˝klar˝. ﬁu anda ba˛ka
-programlarca da kullan˝lmaktad˝r.
+%description -l tr.UTF-8
+Ba≈ülangƒ±√ßta GIMP i√ßin yazƒ±lmƒ±≈ü X kitaplƒ±klarƒ±. ≈ûu anda ba≈üka
+programlarca da kullanƒ±lmaktadƒ±r.
 
 %package devel
 Summary:	GTK+ header files and development documentation
-Summary(cs):	Sada n·stroj˘ GIMP a kreslÌcÌ kit GIMP
-Summary(da):	GIMP Toolkit og GIMP Tegnings-vÊrkt¯j
-Summary(de):	GIMP Toolkit und GIMP Drawing Kit
-Summary(es):	Conjunto de herramienta y conjunto de diseÒo GIMP
-Summary(fi):	Gimp-tyˆkalukokoelma ja Gimp-piirtotyˆkalut
-Summary(fr):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
-Summary(it):	GIMP Toolkit and GIMP Drawing Kit
-Summary(pl):	Pliki nag≥Ûwkowe i dokumentacja do GTK+
-Summary(pt_BR):	Kit de ferramenta e kit de desenho GIMP
-Summary(tr):	GIMP araÁ tak˝m˝ ve Áizim tak˝m˝
+Summary(cs.UTF-8):   Sada n√°stroj≈Ø GIMP a kresl√≠c√≠ kit GIMP
+Summary(da.UTF-8):   GIMP Toolkit og GIMP Tegnings-v√¶rkt√∏j
+Summary(de.UTF-8):   GIMP Toolkit und GIMP Drawing Kit
+Summary(es.UTF-8):   Conjunto de herramienta y conjunto de dise√±o GIMP
+Summary(fi.UTF-8):   Gimp-ty√∂kalukokoelma ja Gimp-piirtoty√∂kalut
+Summary(fr.UTF-8):   Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
+Summary(it.UTF-8):   GIMP Toolkit and GIMP Drawing Kit
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i dokumentacja do GTK+
+Summary(pt_BR.UTF-8):   Kit de ferramenta e kit de desenho GIMP
+Summary(tr.UTF-8):   GIMP ara√ß takƒ±mƒ± ve √ßizim takƒ±mƒ±
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	glib-devel >= %{version}
@@ -122,29 +122,29 @@ structures, GDK is a drawing toolkit which provides a thin layer over
 Xlib to help automate things like dealing with different color depths,
 and GTK is a widget set for creating user interfaces.
 
-%description devel -l es
-Bibliotecas y archivos de inclusiÛn del GIMP, que est·n disponibles
-como bibliotecas p˙blicas. GLIB incluye estructuras de datos ˙tiles; e
+%description devel -l es.UTF-8
+Bibliotecas y archivos de inclusi√≥n del GIMP, que est√°n disponibles
+como bibliotecas p√∫blicas. GLIB incluye estructuras de datos √∫tiles; e
 GDK es un kit de herramientas que provee una camada sobre Xlib para
 ayudar a automatizar cosas como el uso de diferentes profundidades de
 color; y GTK es un conjunto de widgets para crear interfaces de
 usuario.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe i dokumentacja do bibliotek GTK+.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i dokumentacja do bibliotek GTK+.
 
-%description devel -l pt_BR
-Bibliotecas e arquivos de inclus„o do GIMP, que est„o disponÌveis como
-bibliotecas p˙blicas. A GLIB inclui estruturas de dados ˙teis; o GDK È
-um kit de ferramentas que provÍ uma camada sobre a Xlib para ajudar a
+%description devel -l pt_BR.UTF-8
+Bibliotecas e arquivos de inclus√£o do GIMP, que est√£o dispon√≠veis como
+bibliotecas p√∫blicas. A GLIB inclui estruturas de dados √∫teis; o GDK √©
+um kit de ferramentas que prov√™ uma camada sobre a Xlib para ajudar a
 automatizar coisas como o uso de diferentes profundidades de cor; e
-GTK È um conjunto de widgets para criar interfaces de usu·rio.
+GTK √© um conjunto de widgets para criar interfaces de usu√°rio.
 
 %package static
 Summary:	GTK+ static libraries
-Summary(es):	Bibliotecas est·ticas del GIMP
-Summary(pl):	Biblioteki statyczne GTK+
-Summary(pt_BR):	Bibliotecas est·ticas do GIMP
+Summary(es.UTF-8):   Bibliotecas est√°ticas del GIMP
+Summary(pl.UTF-8):   Biblioteki statyczne GTK+
+Summary(pt_BR.UTF-8):   Bibliotecas est√°ticas do GIMP
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -152,16 +152,16 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Static libraries for the GIMP's X libraries, which are available as
 public libraries.
 
-%description static -l es
-Bibliotecas est·ticas del GIMP, que est·n disponibles como bibliotecas
-p˙blicas.
+%description static -l es.UTF-8
+Bibliotecas est√°ticas del GIMP, que est√°n disponibles como bibliotecas
+p√∫blicas.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne GTK+.
 
-%description static -l pt_BR
-Bibliotecas est·ticas do GIMP, que est„o disponÌveis como bibliotecas
-p˙blicas.
+%description static -l pt_BR.UTF-8
+Bibliotecas est√°ticas do GIMP, que est√£o dispon√≠veis como bibliotecas
+p√∫blicas.
 
 %prep
 %setup -q
