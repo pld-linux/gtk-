@@ -1,13 +1,13 @@
 Summary:	The Gimp Toolkit
-Summary(cs.UTF-8):   Sada nástrojů pro Gimp
-Summary(de.UTF-8):   Der Gimp-Toolkit
-Summary(es.UTF-8):   Conjunto de herramientas Gimp
-Summary(fi.UTF-8):   Gimp-työkalukokoelma
-Summary(fr.UTF-8):   Le toolkit de Gimp
-Summary(it.UTF-8):   Il toolkit per Gimp
-Summary(pl.UTF-8):   Gimp Toolkit
-Summary(pt_BR.UTF-8):   Kit de ferramentas Gimp
-Summary(tr.UTF-8):   Gimp ToolKit arayüz kitaplığı
+Summary(cs.UTF-8):	Sada nástrojů pro Gimp
+Summary(de.UTF-8):	Der Gimp-Toolkit
+Summary(es.UTF-8):	Conjunto de herramientas Gimp
+Summary(fi.UTF-8):	Gimp-työkalukokoelma
+Summary(fr.UTF-8):	Le toolkit de Gimp
+Summary(it.UTF-8):	Il toolkit per Gimp
+Summary(pl.UTF-8):	Gimp Toolkit
+Summary(pt_BR.UTF-8):	Kit de ferramentas Gimp
+Summary(tr.UTF-8):	Gimp ToolKit arayüz kitaplığı
 Name:		gtk+
 Version:	1.2.10
 Release:	19
@@ -92,16 +92,16 @@ programlarca da kullanılmaktadır.
 
 %package devel
 Summary:	GTK+ header files and development documentation
-Summary(cs.UTF-8):   Sada nástrojů GIMP a kreslící kit GIMP
-Summary(da.UTF-8):   GIMP Toolkit og GIMP Tegnings-værktøj
-Summary(de.UTF-8):   GIMP Toolkit und GIMP Drawing Kit
-Summary(es.UTF-8):   Conjunto de herramienta y conjunto de diseño GIMP
-Summary(fi.UTF-8):   Gimp-työkalukokoelma ja Gimp-piirtotyökalut
-Summary(fr.UTF-8):   Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
-Summary(it.UTF-8):   GIMP Toolkit and GIMP Drawing Kit
-Summary(pl.UTF-8):   Pliki nagłówkowe i dokumentacja do GTK+
-Summary(pt_BR.UTF-8):   Kit de ferramenta e kit de desenho GIMP
-Summary(tr.UTF-8):   GIMP araç takımı ve çizim takımı
+Summary(cs.UTF-8):	Sada nástrojů GIMP a kreslící kit GIMP
+Summary(da.UTF-8):	GIMP Toolkit og GIMP Tegnings-værktøj
+Summary(de.UTF-8):	GIMP Toolkit und GIMP Drawing Kit
+Summary(es.UTF-8):	Conjunto de herramienta y conjunto de diseño GIMP
+Summary(fi.UTF-8):	Gimp-työkalukokoelma ja Gimp-piirtotyökalut
+Summary(fr.UTF-8):	Toolkit de GIMP (GTK) et Kit de dessin de GIMP (GDK)
+Summary(it.UTF-8):	GIMP Toolkit and GIMP Drawing Kit
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do GTK+
+Summary(pt_BR.UTF-8):	Kit de ferramenta e kit de desenho GIMP
+Summary(tr.UTF-8):	GIMP araç takımı ve çizim takımı
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	glib-devel >= %{version}
@@ -142,9 +142,9 @@ GTK é um conjunto de widgets para criar interfaces de usuário.
 
 %package static
 Summary:	GTK+ static libraries
-Summary(es.UTF-8):   Bibliotecas estáticas del GIMP
-Summary(pl.UTF-8):   Biblioteki statyczne GTK+
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas do GIMP
+Summary(es.UTF-8):	Bibliotecas estáticas del GIMP
+Summary(pl.UTF-8):	Biblioteki statyczne GTK+
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas do GIMP
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
