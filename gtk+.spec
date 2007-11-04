@@ -10,7 +10,7 @@ Summary(pt_BR.UTF-8):	Kit de ferramentas Gimp
 Summary(tr.UTF-8):	Gimp ToolKit arayüz kitaplığı
 Name:		gtk+
 Version:	1.2.10
-Release:	19
+Release:	20
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -42,6 +42,8 @@ BuildRequires:	xorg-lib-libXi-devel
 Requires:	glib >= %{version}
 Requires:	iconv
 Obsoletes:	libgtk+1.2
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -212,6 +214,8 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
+[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name}
 
 %clean
