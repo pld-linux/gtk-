@@ -1,3 +1,5 @@
+# TODO
+# - some nice patches: http://www.acm.uiuc.edu/sigunix/projects/bugfixes/
 Summary:	The Gimp Toolkit
 Summary(cs.UTF-8):	Sada nástrojů pro Gimp
 Summary(de.UTF-8):	Der Gimp-Toolkit
