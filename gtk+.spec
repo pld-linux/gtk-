@@ -12,7 +12,7 @@ Summary(pt_BR.UTF-8):	Kit de ferramentas Gimp
 Summary(tr.UTF-8):	Gimp ToolKit arayüz kitaplığı
 Name:		gtk+
 Version:	1.2.10
-Release:	20
+Release:	21
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
