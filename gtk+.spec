@@ -12,7 +12,7 @@ Summary(pt_BR.UTF-8):	Kit de ferramentas Gimp
 Summary(tr.UTF-8):	Gimp ToolKit arayüz kitaplığı
 Name:		gtk+
 Version:	1.2.10
-Release:	21
+Release:	22
 Epoch:		1
 License:	LGPL
 Group:		X11/Libraries
@@ -216,9 +216,11 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
+[ -d $RPM_BUILD_ROOT%{_localedir}/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_localedir}/sr@{Latn,latin}
 %find_lang %{name}
+
+%{__rm} -f $RPM_BUILD_ROOT%{_infodir}/dir
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -235,7 +237,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libgdk-1.2.so.*.*
+%ghost %{_libdir}/libgdk-1.2.so.0
+%attr(755,root,root) %{_libdir}/libgtk-1.2.so.*.*
+%ghost %{_libdir}/libgtk-1.2.so.0
 
 %dir %{_sysconfdir}/gtk
 %lang(az) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.az
