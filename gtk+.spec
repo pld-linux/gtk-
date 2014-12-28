@@ -35,7 +35,7 @@ Patch9:		%{name}-am18.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.7
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool >= 1.4.2-9
 BuildRequires:	texinfo
