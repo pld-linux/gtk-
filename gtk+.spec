@@ -32,6 +32,7 @@ Patch6:		%{name}-ac_fix.patch
 Patch7:		%{name}-localenames.patch
 Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
+Patch10:	format-security.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.7
@@ -179,6 +180,7 @@ públicas.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 mv -f po/{no,nb}.po
 mv -f po/{sr,sr@Latn}.po
