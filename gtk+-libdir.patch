@@ -1,0 +1,11 @@
+--- gtk+-1.2.10/gtk-config.in.orig	2000-10-21 20:20:40.000000000 +0200
++++ gtk+-1.2.10/gtk-config.in	2017-12-22 22:12:30.884734061 +0100
+@@ -96,7 +96,7 @@
+ 
+ if test "$echo_libs" = "yes"; then
+       my_glib_libs=
+-      libdirs=-L@libdir@
++      libdirs=
+       for i in $glib_libs ; do
+         if test $i != -L@libdir@ ; then
+           if test -z "$my_glib_libs" ; then

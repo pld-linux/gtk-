@@ -12,9 +12,9 @@ Summary(pt_BR.UTF-8):	Kit de ferramentas Gimp
 Summary(tr.UTF-8):	Gimp ToolKit arayüz kitaplığı
 Name:		gtk+
 Version:	1.2.10
-Release:	23
+Release:	24
 Epoch:		1
-License:	LGPL
+License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 # Source0-md5:	4d5cb2fc7fb7830e4af9747a36bfce20
@@ -33,12 +33,14 @@ Patch7:		%{name}-localenames.patch
 Patch8:		%{name}-link.patch
 Patch9:		%{name}-am18.patch
 Patch10:	format-security.patch
+Patch11:	%{name}-libdir.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.7
 BuildRequires:	gettext-tools
 BuildRequires:	glib-devel >= %{version}
 BuildRequires:	libtool >= 1.4.2-9
+BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
 # libXext already implied by libXi
 BuildRequires:	xorg-lib-libXi-devel
@@ -181,24 +183,31 @@ públicas.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
-mv -f po/{no,nb}.po
-mv -f po/{sr,sr@Latn}.po
-mv -f po/{sp,sr}.po
-mv -f po/{zh_CN.GB2312,zh_CN}.po
-mv -f po/{zh_TW.Big5,zh_TW}.po
-rm -f po/{no,sp,sr,zh*}.gmo
+%{__mv} po/{no,nb}.po
+%{__mv} po/{sr,sr@Latn}.po
+%{__mv} po/{sp,sr}.po
+%{__mv} po/{zh_CN.GB2312,zh_CN}.po
+%{__mv} po/{zh_TW.Big5,zh_TW}.po
+%{__rm} po/{no,sp,sr,zh*}.gmo
 
 mkdir gtk-doc
 tar xzf %{SOURCE1} -C gtk-doc
 tar xzf %{SOURCE2} -C gtk-doc
 
+%if "%{?_x_libraries}%{!?_x_libraries:%{_libdir}}" == "%{_libdir}"
+# eliminate -L%{_libdir} from libtool files and gtk-config
+%{__sed} -i -e 's/ \$X_LIBS//' configure.in
+%endif
+
 %build
-rm -f missing aclocal.m4 acinclude.m4
+%{__rm} acinclude.m4
 %{__libtoolize}
 %{__gettextize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--enable-debug=no \
@@ -219,7 +228,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/gtk/themes/engines
 	pkgconfigdir=%{_pkgconfigdir}
 
 [ -d $RPM_BUILD_ROOT%{_localedir}/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_localedir}/sr@{Latn,latin}
+	%{__mv} $RPM_BUILD_ROOT%{_localedir}/sr@{Latn,latin}
 %find_lang %{name}
 
 %{__rm} -f $RPM_BUILD_ROOT%{_infodir}/dir
@@ -230,19 +239,19 @@ rm -rf $RPM_BUILD_ROOT
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%post devel	-p	/sbin/postshell
+%post	devel -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun devel	-p	/sbin/postshell
+%postun	devel -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
-%attr(755,root,root) %{_libdir}/libgdk-1.2.so.*.*
-%ghost %{_libdir}/libgdk-1.2.so.0
-%attr(755,root,root) %{_libdir}/libgtk-1.2.so.*.*
-%ghost %{_libdir}/libgtk-1.2.so.0
+%attr(755,root,root) %{_libdir}/libgdk-1.2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgdk-1.2.so.0
+%attr(755,root,root) %{_libdir}/libgtk-1.2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgtk-1.2.so.0
 
 %dir %{_sysconfdir}/gtk
 %lang(az) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gtk/gtkrc.az
@@ -303,15 +312,20 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc ChangeLog gtk-doc/{gdk,gtk}
-%{_libdir}/lib*.la
-%attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_bindir}/*
-%{_pkgconfigdir}/*
-%{_includedir}/*
-%{_infodir}/*.info*
-%{_aclocaldir}/*.m4
+%attr(755,root,root) %{_bindir}/gtk-config
+%attr(755,root,root) %{_libdir}/libgdk.so
+%attr(755,root,root) %{_libdir}/libgtk.so
+%{_libdir}/libgdk.la
+%{_libdir}/libgtk.la
+%{_includedir}/gtk-1.2
+%{_pkgconfigdir}/gdk.pc
+%{_pkgconfigdir}/gtk+.pc
+%{_aclocaldir}/gtk.m4
+%{_infodir}/gdk.info*
+%{_infodir}/gtk.info*
 %{_mandir}/man1/gtk-config.1*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libgdk.a
+%{_libdir}/libgtk.a
